@@ -204,7 +204,7 @@
     "status": "完整",
     "statusClass": "",
     "entries": 0,
-    "videoUrl": "",
+    "videoUrl": "https://www.bilibili.com/video/BV1USPvz6EhH/?vd_source=73e550a3569a193e56d345c2b1e1a721",
     "note": "模组模组已经废弃改为3427091746，然后低版本的比如B41还可以继续使用。",
     "offline": false
   },
@@ -221,7 +221,7 @@
   },
   {
     "name": "ArcherLib",
-    "chineseName": "",
+    "chineseName": "弓箭制作工具库",
     "id": "3408337281",
     "status": "待处理",
     "statusClass": "",
@@ -4494,7 +4494,7 @@
     "status": "完整",
     "statusClass": "",
     "entries": 0,
-    "videoUrl": "",
+    "videoUrl": "https://www.bilibili.com/video/BV1mQPvzuE13/?vd_source=73e550a3569a193e56d345c2b1e1a721",
     "note": "",
     "offline": false
   },
@@ -4505,7 +4505,7 @@
     "status": "完整",
     "statusClass": "",
     "entries": 0,
-    "videoUrl": "",
+    "videoUrl": "https://www.bilibili.com/video/BV1tQPvzuELv/?vd_source=73e550a3569a193e56d345c2b1e1a721",
     "note": "",
     "offline": false
   },
