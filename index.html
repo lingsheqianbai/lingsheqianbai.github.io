@@ -98,13 +98,17 @@
             margin-top: 2px;
         }
         
-        /* 列宽分配（6列） */
+        /* 列宽分配（6列）用于模组表 */
         .mod-table th:nth-child(1) { width: 25%; }
         .mod-table th:nth-child(2) { width: 20%; }
         .mod-table th:nth-child(3) { width: 12%; }
         .mod-table th:nth-child(4) { width: 10%; }
         .mod-table th:nth-child(5) { width: 23%; }
         .mod-table th:nth-child(6) { width: 10%; }
+        
+        /* 攻略表列宽（2列） */
+        .guide-table th:nth-child(1) { width: 70%; }
+        .guide-table th:nth-child(2) { width: 30%; }
         
         /* 状态标签基础样式 */
         .status-badge {
@@ -384,6 +388,12 @@
         .contact-item details .mod-table * {
             font-size: 14px;
         }
+        .guide-table {
+            min-width: 600px; /* 适应两列表格 */
+        }
+        .guide-table td, .guide-table th {
+            padding: 10px 8px;
+        }
     </style>
 </head>
 <body>
@@ -594,6 +604,33 @@
                             </table>
                         </div>
                         <div class="pagination" id="pagination"></div>
+                    </div>
+                </details>
+
+                <!-- ========== 新增：我制作的游戏攻略卡片 ========== -->
+                <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
+                    <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
+                        <span style="font-size: 24px;">🎮</span> 我制作的游戏攻略
+                        <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
+                    </summary>
+                    <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
+                        <!-- 搜索框 -->
+                        <div class="search-box">
+                            <input type="text" id="guideSearch" placeholder="搜索攻略名称...">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="mod-table guide-table" id="guideTable">
+                                <thead>
+                                    <tr>
+                                        <th>攻略名称</th>
+                                        <th>视频</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="guideTableBody"><tr><td colspan="2" class="loading">加载中...</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div class="pagination" id="guidePagination"></div>
                     </div>
                 </details>
             </div>
@@ -929,6 +966,116 @@
             searchInput.addEventListener('input', function() {
                 searchQuery = this.value;
                 applyFilters();
+            });
+        })();
+    </script>
+
+    <!-- ========== 攻略数据加载脚本 ========== -->
+    <script>
+        (function() {
+            const PAGE_SIZE = 10;
+            let allGuides = [];
+            let filteredGuides = [];
+            let currentPage = 1;
+
+            const searchInput = document.getElementById('guideSearch');
+            const tbody = document.getElementById('guideTableBody');
+            const paginationDiv = document.getElementById('guidePagination');
+
+            fetch('data/guides.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('加载失败');
+                    return response.json();
+                })
+                .then(data => {
+                    allGuides = data;
+                    filteredGuides = [...allGuides];
+                    renderTable();
+                    renderPagination();
+                })
+                .catch(error => {
+                    console.error('加载 guides.json 失败:', error);
+                    tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`;
+                });
+
+            function renderTable() {
+                const start = (currentPage - 1) * PAGE_SIZE;
+                const end = start + PAGE_SIZE;
+                const pageGuides = filteredGuides.slice(start, end);
+
+                if (pageGuides.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的攻略</td></tr>`;
+                    return;
+                }
+
+                let html = '';
+                pageGuides.forEach(guide => {
+                    html += `<tr>
+                        <td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">${guide.name}</a></td>
+                        <td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">🔗 观看</a></td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+            }
+
+            function renderPagination() {
+                const totalPages = Math.ceil(filteredGuides.length / PAGE_SIZE);
+                if (totalPages <= 1) {
+                    paginationDiv.innerHTML = '';
+                    return;
+                }
+
+                let html = '<button id="guidePrevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
+                html += '<div class="page-numbers">';
+
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + 4);
+                if (endPage - startPage < 4) {
+                    startPage = Math.max(1, endPage - 4);
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
+                }
+
+                html += '</div>';
+                html += `<button id="guideNextPage" ${currentPage === totalPages ? 'disabled' : ''}>下一页 ›</button>`;
+                paginationDiv.innerHTML = html;
+
+                document.querySelectorAll('.page-number').forEach(span => {
+                    span.addEventListener('click', function() {
+                        const page = parseInt(this.dataset.page, 10);
+                        if (page !== currentPage) {
+                            currentPage = page;
+                            renderTable();
+                            renderPagination();
+                        }
+                    });
+                });
+
+                document.getElementById('guidePrevPage')?.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTable();
+                        renderPagination();
+                    }
+                });
+
+                document.getElementById('guideNextPage')?.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderTable();
+                        renderPagination();
+                    }
+                });
+            }
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                filteredGuides = allGuides.filter(guide => guide.name.toLowerCase().includes(query));
+                currentPage = 1;
+                renderTable();
+                renderPagination();
             });
         })();
     </script>
