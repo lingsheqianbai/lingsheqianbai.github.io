@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="千白分享主页 - 个人分享与作品展示">
     <title>千白分享主页</title>
-    <!-- 不蒜子统计脚本 -->
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!-- 51.LA 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"3PEh97IIsQ2zJUR2",ck:"3PEh97IIsQ2zJUR2"})</script>
     <style>
         @font-face {
             font-family: 'ZQKNNY';
@@ -473,7 +474,7 @@
     </div>
     <div class="bg-blur"></div>
     <div class="container">
-        <!-- 左侧栏 -->
+        <!-- 左侧栏（无统计卡片） -->
         <aside class="sidebar">
             <div class="radio-container" style="--total-radio: 4;">
                 <input type="radio" name="nav" id="nav-about" checked>
@@ -486,22 +487,6 @@
                 <label for="nav-thanks">致谢</label>
                 <div class="glider-container">
                     <div class="glider"></div>
-                </div>
-            </div>
-
-            <!-- 左下角访问统计卡片 -->
-            <div style="margin-top: 20px; padding: 16px; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); border-radius: 14px; border: 1px solid rgba(255,255,255,0.1);">
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 16px;">👥</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.8);">不同IP访问：</span>
-                        <span id="busuanzi_value_site_uv" style="font-size: 16px; font-weight: 600; color: #3B82F6;">0</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 16px;">📊</span>
-                        <span style="font-size: 14px; color: rgba(255,255,255,0.8);">总访问量：</span>
-                        <span id="busuanzi_value_site_pv" style="font-size: 16px; font-weight: 600; color: #3B82F6;">0</span>
-                    </div>
                 </div>
             </div>
         </aside>
@@ -522,7 +507,7 @@
                 </h2>
             </div>
 
-            <!-- ========== 简介卡片（使用完整优化版） ========== -->
+            <!-- ========== 简介卡片 ========== -->
             <div class="intro-card" id="about">
                 <h3 class="section-title">简介</h3>
                 <p class="intro-text">这个静态网页最初是为了展示个人作品、分享技术经验，以及提供模组的离线安装包。</p>
@@ -826,7 +811,7 @@
         </main>
     </div>
 
-    <!-- ========== 图片放大脚本 ========== -->
+    <!-- 图片放大功能脚本 -->
     <script>
         (function() {
             var modal = document.getElementById("imageModal");
