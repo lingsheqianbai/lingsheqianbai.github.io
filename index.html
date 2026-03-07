@@ -389,7 +389,7 @@
             font-size: 14px;
         }
         .guide-table {
-            min-width: 600px; /* 适应两列表格 */
+            min-width: 600px;
         }
         .guide-table td, .guide-table th {
             padding: 10px 8px;
@@ -423,34 +423,6 @@
         .stats-pending { color: #3498db; }
         .stats-unneeded { color: #9b59b6; }
         .stats-todo { color: #ff8c00; }
-
-        /* 赞助卡片样式 */
-        .sponsor-card {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(8px);
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .sponsor-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .sponsor-qrcode {
-            text-align: center;
-        }
-        .sponsor-qrcode img {
-            max-width: 200px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: white;
-            padding: 8px;
-        }
     </style>
 </head>
 <body>
@@ -529,19 +501,20 @@
                 <p class="intro-text">我目前制作了许多的游戏攻略还没有发出来我会慢慢的发的。</p>
                 <p class="intro-text">很高兴认识大家！尽管您没有关注我，我也是无所谓的。</p>
                 <p class="intro-text">发这么多视频我只是当个人网盘使用，之后我会在下方添加帖子功能，有疑问什么的可以点击下方帖子跳转。</p>
-                <!-- 新增赞助说明 -->
+                <!-- 赞助说明 -->
                 <p class="intro-text" style="margin-top: 16px; color: #ffd93d;">如果您通过下方的“支持一下”给予我赞助，我十分感谢。目前一条视频的收入往往不足一元，难以支撑我持续创作的动力。我渴望通过互联网视频记录和分享更多内容，证明自己的努力与热爱。您的每一份支持，都是对我莫大的鼓励，谢谢您！</p>
             </div>
 
-            <!-- ========== 赞赏码卡片 ========== -->
-            <div class="sponsor-card">
-                <div class="sponsor-title">
-                    <span>💖</span> 支持一下
+            <!-- ========== 支持一下（可折叠卡片） ========== -->
+            <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
+                <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
+                    <span style="font-size: 24px;">💖</span> 支持一下
+                    <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
+                </summary>
+                <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); text-align: center;">
+                    <img src="sponsor.png" alt="赞赏码" style="max-width: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: white; padding: 8px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#999;\'>请放置 sponsor.png 到根目录</span>'">
                 </div>
-                <div class="sponsor-qrcode">
-                    <img src="sponsor.png" alt="赞赏码" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#999;\'>请放置 sponsor.png 到根目录</span>'">
-                </div>
-            </div>
+            </details>
 
             <!-- ========== 项目卡片区域 ========== -->
             <div class="projects-card" id="projects">
@@ -939,7 +912,7 @@
                     '无需翻译': 'status-unneeded',
                     '待处理': 'status-todo'
                 };
-                return map[status] || ''; // 若未定义，返回空字符串（使用默认灰色）
+                return map[status] || '';
             }
 
             function applyFilters() {
@@ -998,7 +971,6 @@
                 pageMods.forEach(mod => {
                     const videoLink = mod.videoUrl ? `<a href="${mod.videoUrl}" target="_blank" style="color:#3B82F6;">🔗</a>` : '-';
                     const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>';
-                    // 自动获取状态类名
                     const statusClass = getStatusClass(mod.status);
                     const chineseName = mod.chineseName || '-';
                     
