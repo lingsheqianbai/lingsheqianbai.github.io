@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="千白分享主页 - 个人分享与作品展示">
     <title>千白分享主页</title>
-    <!-- 不蒜子统计脚本 (异步加载) -->
+    <!-- 不蒜子统计脚本 -->
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <style>
         @font-face {
@@ -15,7 +15,13 @@
             font-style: normal;
             font-display: swap;
         }
-
+    </style>
+    <link rel="stylesheet" href="style/word.css">
+    <link rel="stylesheet" href="style/new.css">
+    <link rel="stylesheet" href="style/lan.css">
+    <link rel="stylesheet" href="style/icon.css">
+    <link rel="stylesheet" href="style/aoo.css">
+    <style>
         /* ===== 左侧栏完全靠左 ===== */
         .sidebar {
             align-items: flex-start;
@@ -820,9 +826,8 @@
         </main>
     </div>
 
-    <!-- 合并后的 JavaScript 脚本 -->
+    <!-- ========== 图片放大脚本 ========== -->
     <script>
-        // 图片放大功能
         (function() {
             var modal = document.getElementById("imageModal");
             var modalImg = document.getElementById("modalImage");
@@ -848,8 +853,10 @@
                 };
             }
         })();
+    </script>
 
-        // 模组数据加载（包含统计）
+    <!-- ========== 模组数据加载脚本 ========== -->
+    <script>
         (function() {
             const PAGE_SIZE = 10;
             let allMods = [];
@@ -879,7 +886,7 @@
             if (filterToggle) {
                 filterToggle.addEventListener('click', function() {
                     filterCollapsed = !filterCollapsed;
-                    filterContent.classList.toggle('collapsed', filterCollapsed);
+                    if (filterContent) filterContent.classList.toggle('collapsed', filterCollapsed);
                     filterToggle.classList.toggle('collapsed', filterCollapsed);
                 });
             }
@@ -1083,8 +1090,10 @@
                 });
             }
         })();
+    </script>
 
-        // 攻略数据加载
+    <!-- ========== 攻略数据加载脚本 ========== -->
+    <script>
         (function() {
             const PAGE_SIZE = 10;
             let allGuides = [];
@@ -1186,17 +1195,19 @@
                 });
             }
         })();
+    </script>
 
-        // 导航滚动脚本
-        (function () {
-            const navMap = { 'nav-about': 'about', 'nav-projects': 'projects', 'nav-contact': 'contact', 'nav-thanks': 'thanks' };
-            document.querySelectorAll('.radio-container input[name="nav"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    const el = document.getElementById(navMap[this.id]);
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
+    <!-- 导航滚动脚本 -->
+    <script>
+    (function () {
+        const navMap = { 'nav-about': 'about', 'nav-projects': 'projects', 'nav-contact': 'contact', 'nav-thanks': 'thanks' };
+        document.querySelectorAll('.radio-container input[name="nav"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const el = document.getElementById(navMap[this.id]);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-        })();
+        });
+    })();
     </script>
 </body>
 </html>
