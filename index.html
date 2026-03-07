@@ -394,6 +394,63 @@
         .guide-table td, .guide-table th {
             padding: 10px 8px;
         }
+
+        /* 统计信息样式 */
+        .stats-bar {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+        .stats-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stats-item .icon {
+            font-size: 16px;
+        }
+        .stats-number {
+            font-weight: 600;
+        }
+        .stats-complete { color: #2ecc71; }
+        .stats-incomplete { color: #f1c40f; }
+        .stats-pending { color: #3498db; }
+        .stats-unneeded { color: #9b59b6; }
+        .stats-todo { color: #ff8c00; }
+
+        /* 赞助卡片样式 */
+        .sponsor-card {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .sponsor-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sponsor-qrcode {
+            text-align: center;
+        }
+        .sponsor-qrcode img {
+            max-width: 200px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: white;
+            padding: 8px;
+        }
     </style>
 </head>
 <body>
@@ -461,7 +518,7 @@
                 </h2>
             </div>
 
-            <!-- ========== 简介卡片（多段落） ========== -->
+            <!-- ========== 简介卡片（含赞助说明） ========== -->
             <div class="intro-card" id="about">
                 <h3 class="section-title">简介</h3>
                 <p class="intro-text">这个是一个静态网页制作之初是为了展示个人作品和分享技术经验，还有模组的离线安装包。</p>
@@ -472,6 +529,18 @@
                 <p class="intro-text">我目前制作了许多的游戏攻略还没有发出来我会慢慢的发的。</p>
                 <p class="intro-text">很高兴认识大家！尽管您没有关注我，我也是无所谓的。</p>
                 <p class="intro-text">发这么多视频我只是当个人网盘使用，之后我会在下方添加帖子功能，有疑问什么的可以点击下方帖子跳转。</p>
+                <!-- 新增赞助说明 -->
+                <p class="intro-text" style="margin-top: 16px; color: #ffd93d;">如果您通过下方的“支持一下”给予我赞助，我十分感谢。目前一条视频的收入往往不足一元，难以支撑我持续创作的动力。我渴望通过互联网视频记录和分享更多内容，证明自己的努力与热爱。您的每一份支持，都是对我莫大的鼓励，谢谢您！</p>
+            </div>
+
+            <!-- ========== 赞赏码卡片 ========== -->
+            <div class="sponsor-card">
+                <div class="sponsor-title">
+                    <span>💖</span> 支持一下
+                </div>
+                <div class="sponsor-qrcode">
+                    <img src="sponsor.png" alt="赞赏码" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#999;\'>请放置 sponsor.png 到根目录</span>'">
+                </div>
             </div>
 
             <!-- ========== 项目卡片区域 ========== -->
@@ -542,6 +611,9 @@
                         <span id="updateDate" style="font-size: 12px; color: rgba(255,255,255,0.4); margin-left: 10px;">更新: 加载中...</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
+                        <!-- 统计信息（动态生成） -->
+                        <div id="modStats" class="stats-bar">加载统计中...</div>
+
                         <!-- 搜索框 -->
                         <div class="search-box">
                             <input type="text" id="modSearch" placeholder="搜索模组名称、中文名或ID...">
@@ -620,6 +692,9 @@
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
+                        <!-- 攻略总数统计 -->
+                        <div id="guideStats" class="stats-bar">📚 加载中...</div>
+
                         <!-- 搜索框 -->
                         <div class="search-box">
                             <input type="text" id="guideSearch" placeholder="搜索攻略名称...">
@@ -741,7 +816,7 @@
         </main>
     </div>
 
-    <!-- ========== 模组数据加载脚本（自动颜色匹配） ========== -->
+    <!-- ========== 模组数据加载脚本（包含统计） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -767,6 +842,7 @@
             const filterToggle = document.getElementById('filterToggle');
             const filterContent = document.getElementById('filterContent');
             const updateDateSpan = document.getElementById('updateDate');
+            const modStatsDiv = document.getElementById('modStats');
 
             filterToggle.addEventListener('click', function() {
                 filterCollapsed = !filterCollapsed;
@@ -783,6 +859,26 @@
                     const day = String(today.getDate()).padStart(2, '0');
                     updateDateSpan.textContent = `更新: ${year}-${month}-${day}`;
                 }
+            }
+
+            // 更新模组统计信息
+            function updateModStats() {
+                if (!modStatsDiv || !allMods.length) return;
+                const total = allMods.length;
+                const countComplete = allMods.filter(m => m.status === '完整').length;
+                const countIncomplete = allMods.filter(m => m.status === '非完整').length;
+                const countPending = allMods.filter(m => m.status === '待检测').length;
+                const countUnneeded = allMods.filter(m => m.status === '无需翻译').length;
+                const countTodo = allMods.filter(m => m.status === '待处理').length;
+
+                modStatsDiv.innerHTML = `
+                    <div class="stats-item"><span class="icon">📊</span> 总模组: <span class="stats-number">${total}</span></div>
+                    <div class="stats-item stats-complete"><span class="icon">✅</span> 完整: <span class="stats-number">${countComplete}</span></div>
+                    <div class="stats-item stats-todo"><span class="icon">⏳</span> 待处理: <span class="stats-number">${countTodo}</span></div>
+                    <div class="stats-item stats-pending"><span class="icon">🔍</span> 待检测: <span class="stats-number">${countPending}</span></div>
+                    <div class="stats-item stats-incomplete"><span class="icon">🟡</span> 非完整: <span class="stats-number">${countIncomplete}</span></div>
+                    <div class="stats-item stats-unneeded"><span class="icon">🟣</span> 无需翻译: <span class="stats-number">${countUnneeded}</span></div>
+                `;
             }
 
             fetch('data/mods.json')
@@ -825,12 +921,13 @@
                     });
 
                     setUpdateDate(); // 数据加载成功后更新时间
+                    updateModStats(); // 更新统计信息
                     applyFilters();
                 })
                 .catch(error => {
                     console.error('加载 mods.json 失败:', error);
                     tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
-                    setUpdateDate(); // 即使失败也显示当天日期
+                    setUpdateDate();
                 });
 
             // 根据状态文本返回对应的 CSS 类名
@@ -976,7 +1073,7 @@
         })();
     </script>
 
-    <!-- ========== 攻略数据加载脚本 ========== -->
+    <!-- ========== 攻略数据加载脚本（包含总数统计） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -987,6 +1084,13 @@
             const searchInput = document.getElementById('guideSearch');
             const tbody = document.getElementById('guideTableBody');
             const paginationDiv = document.getElementById('guidePagination');
+            const guideStatsDiv = document.getElementById('guideStats');
+
+            function updateGuideStats() {
+                if (guideStatsDiv) {
+                    guideStatsDiv.innerHTML = `📚 总攻略: <span class="stats-number">${allGuides.length}</span>`;
+                }
+            }
 
             fetch('data/guides.json')
                 .then(response => {
@@ -996,12 +1100,14 @@
                 .then(data => {
                     allGuides = data;
                     filteredGuides = [...allGuides];
+                    updateGuideStats();
                     renderTable();
                     renderPagination();
                 })
                 .catch(error => {
                     console.error('加载 guides.json 失败:', error);
                     tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`;
+                    if (guideStatsDiv) guideStatsDiv.innerHTML = '📚 加载失败';
                 });
 
             function renderTable() {
