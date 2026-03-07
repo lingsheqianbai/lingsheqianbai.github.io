@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="千白分享主页 - 个人分享与作品展示">
     <title>千白分享主页</title>
-    <!-- 不蒜子统计脚本 -->
+    <!-- 不蒜子统计脚本 (异步加载) -->
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <style>
         @font-face {
@@ -15,13 +15,7 @@
             font-style: normal;
             font-display: swap;
         }
-    </style>
-    <link rel="stylesheet" href="style/word.css">
-    <link rel="stylesheet" href="style/new.css">
-    <link rel="stylesheet" href="style/lan.css">
-    <link rel="stylesheet" href="style/icon.css">
-    <link rel="stylesheet" href="style/aoo.css">
-    <style>
+
         /* ===== 左侧栏完全靠左 ===== */
         .sidebar {
             align-items: flex-start;
@@ -533,7 +527,7 @@
                 <p class="intro-text">我目前制作了许多游戏攻略，但还没有发布，后续会慢慢更新。</p>
                 <p class="intro-text">很高兴认识大家！即使您没有关注我，我也很高兴能为您提供帮助。</p>
                 <p class="intro-text">我发布这些视频主要是当作个人网盘使用。之后我还会在下方添加帖子功能，如有疑问可点击跳转。</p>
-                <p class="intro-text" style="margin-top: 16px; color: #ffd93d;">如果您通过下方的“支持一下”给予我赞助，我十分感谢。目前一条视频的收入往往不足一元，难以支撑我持续创作的动力。我渴望通过互联网视频记录和分享更多内容，证明自己的努力与热爱。您的每一份支持，都是对我莫大的鼓励，谢谢您！</p>
+                <p class="intro-text" style="margin-top: 16px; color: #ffd93d;">如果您通过下方的“支持一下”给予我赞助，我十分感谢。您的每一次鼓励，都是我继续创作的重要动力。我渴望通过视频记录和分享更多内容，也希望能一直做下去。谢谢您的支持！</p>
             </div>
 
             <!-- ========== 支持一下（可折叠卡片，图片可点击放大） ========== -->
@@ -826,37 +820,36 @@
         </main>
     </div>
 
-    <!-- 图片放大功能脚本 -->
+    <!-- 合并后的 JavaScript 脚本 -->
     <script>
-        // 获取模态框元素
-        var modal = document.getElementById("imageModal");
-        var modalImg = document.getElementById("modalImage");
-        var sponsorImg = document.getElementById("sponsorImg");
-        var closeBtn = document.getElementsByClassName("close-modal")[0];
+        // 图片放大功能
+        (function() {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            var sponsorImg = document.getElementById("sponsorImg");
+            var closeBtn = document.getElementsByClassName("close-modal")[0];
 
-        // 点击图片打开模态框
-        if (sponsorImg) {
-            sponsorImg.onclick = function() {
-                modal.style.display = "flex";
-                modalImg.src = this.src;
-            };
-        }
-
-        // 点击关闭按钮关闭模态框
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        // 点击模态框背景关闭
-        modal.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+            if (sponsorImg) {
+                sponsorImg.onclick = function() {
+                    modal.style.display = "flex";
+                    modalImg.src = this.src;
+                };
             }
-        };
-    </script>
+            if (closeBtn) {
+                closeBtn.onclick = function() {
+                    modal.style.display = "none";
+                };
+            }
+            if (modal) {
+                modal.onclick = function(event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                };
+            }
+        })();
 
-    <!-- ========== 模组数据加载脚本（包含统计） ========== -->
-    <script>
+        // 模组数据加载（包含统计）
         (function() {
             const PAGE_SIZE = 10;
             let allMods = [];
@@ -883,13 +876,14 @@
             const updateDateSpan = document.getElementById('updateDate');
             const modStatsDiv = document.getElementById('modStats');
 
-            filterToggle.addEventListener('click', function() {
-                filterCollapsed = !filterCollapsed;
-                filterContent.classList.toggle('collapsed', filterCollapsed);
-                filterToggle.classList.toggle('collapsed', filterCollapsed);
-            });
+            if (filterToggle) {
+                filterToggle.addEventListener('click', function() {
+                    filterCollapsed = !filterCollapsed;
+                    filterContent.classList.toggle('collapsed', filterCollapsed);
+                    filterToggle.classList.toggle('collapsed', filterCollapsed);
+                });
+            }
 
-            // 设置更新日期为当天（自动）
             function setUpdateDate() {
                 if (updateDateSpan) {
                     const today = new Date();
@@ -900,7 +894,6 @@
                 }
             }
 
-            // 更新模组统计信息
             function updateModStats() {
                 if (!modStatsDiv || !allMods.length) return;
                 const total = allMods.length;
@@ -930,17 +923,19 @@
                     const statusSet = new Set();
                     data.forEach(mod => { if (mod.status) statusSet.add(mod.status); });
                     const statusList = ['全部', ...Array.from(statusSet).sort()];
-                    statusFilterGroup.innerHTML = statusList.map(status => 
-                        `<span class="filter-btn ${status === '全部' ? 'active' : ''}" data-value="${status}">${status}</span>`
-                    ).join('');
-                    statusFilterGroup.querySelectorAll('.filter-btn').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            statusFilterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                            this.classList.add('active');
-                            statusFilter = this.dataset.value;
-                            applyFilters();
+                    if (statusFilterGroup) {
+                        statusFilterGroup.innerHTML = statusList.map(status => 
+                            `<span class="filter-btn ${status === '全部' ? 'active' : ''}" data-value="${status}">${status}</span>`
+                        ).join('');
+                        statusFilterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                statusFilterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                statusFilter = this.dataset.value;
+                                applyFilters();
+                            });
                         });
-                    });
+                    }
 
                     const filterGroups = [
                         { group: offlineFilterGroup, setter: (val) => offlineFilter = val },
@@ -949,27 +944,28 @@
                         { group: videoFilterGroup, setter: (val) => videoFilter = val }
                     ];
                     filterGroups.forEach(item => {
-                        item.group.querySelectorAll('.filter-btn').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                item.group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                item.setter(this.dataset.value);
-                                applyFilters();
+                        if (item.group) {
+                            item.group.querySelectorAll('.filter-btn').forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    item.group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                                    this.classList.add('active');
+                                    item.setter(this.dataset.value);
+                                    applyFilters();
+                                });
                             });
-                        });
+                        }
                     });
 
-                    setUpdateDate(); // 数据加载成功后更新时间
-                    updateModStats(); // 更新统计信息
+                    setUpdateDate();
+                    updateModStats();
                     applyFilters();
                 })
                 .catch(error => {
                     console.error('加载 mods.json 失败:', error);
-                    tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
+                    if (tbody) tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
                     setUpdateDate();
                 });
 
-            // 根据状态文本返回对应的 CSS 类名
             function getStatusClass(status) {
                 const map = {
                     '完整': 'status-complete',
@@ -983,7 +979,6 @@
 
             function applyFilters() {
                 let filtered = allMods;
-
                 if (searchQuery.trim()) {
                     const q = searchQuery.toLowerCase();
                     filtered = filtered.filter(mod => 
@@ -992,31 +987,25 @@
                         (mod.chineseName && mod.chineseName.toLowerCase().includes(q))
                     );
                 }
-
                 if (statusFilter !== '全部') {
                     filtered = filtered.filter(mod => mod.status === statusFilter);
                 }
-
                 if (offlineFilter !== 'all') {
                     const wantOffline = offlineFilter === 'yes';
                     filtered = filtered.filter(mod => mod.offline === wantOffline);
                 }
-
                 if (noteFilter !== 'all') {
                     const hasNote = noteFilter === 'yes';
                     filtered = filtered.filter(mod => hasNote ? (mod.note && mod.note.trim()) : (!mod.note || !mod.note.trim()));
                 }
-
                 if (chineseFilter !== 'all') {
                     const hasChinese = chineseFilter === 'yes';
                     filtered = filtered.filter(mod => hasChinese ? (mod.chineseName && mod.chineseName.trim()) : (!mod.chineseName || !mod.chineseName.trim()));
                 }
-
                 if (videoFilter !== 'all') {
                     const hasVideo = videoFilter === 'yes';
                     filtered = filtered.filter(mod => hasVideo ? (mod.videoUrl && mod.videoUrl.trim() !== '') : (!mod.videoUrl || mod.videoUrl.trim() === ''));
                 }
-
                 filteredMods = filtered;
                 currentPage = 1;
                 renderTable();
@@ -1024,22 +1013,20 @@
             }
 
             function renderTable() {
+                if (!tbody) return;
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const end = start + PAGE_SIZE;
                 const pageMods = filteredMods.slice(start, end);
-
                 if (pageMods.length === 0) {
                     tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`;
                     return;
                 }
-
                 let html = '';
                 pageMods.forEach(mod => {
                     const videoLink = mod.videoUrl ? `<a href="${mod.videoUrl}" target="_blank" style="color:#3B82F6;">🔗</a>` : '-';
                     const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>';
                     const statusClass = getStatusClass(mod.status);
                     const chineseName = mod.chineseName || '-';
-                    
                     html += `<tr>
                         <td><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.id}" target="_blank">${mod.name}</a><span class="mod-id">${mod.id}</span></td>
                         <td>${chineseName}</td>
@@ -1053,25 +1040,20 @@
             }
 
             function renderPagination() {
+                if (!paginationDiv) return;
                 const totalPages = Math.ceil(filteredMods.length / PAGE_SIZE);
                 if (totalPages <= 1) {
                     paginationDiv.innerHTML = '';
                     return;
                 }
-
                 let html = '<button id="prevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
                 html += '<div class="page-numbers">';
-
                 let startPage = Math.max(1, currentPage - 2);
                 let endPage = Math.min(totalPages, startPage + 4);
-                if (endPage - startPage < 4) {
-                    startPage = Math.max(1, endPage - 4);
-                }
-
+                if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
                 for (let i = startPage; i <= endPage; i++) {
                     html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
                 }
-
                 html += '</div>';
                 html += `<button id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>下一页 ›</button>`;
                 paginationDiv.innerHTML = html;
@@ -1086,33 +1068,23 @@
                         }
                     });
                 });
-
                 document.getElementById('prevPage')?.addEventListener('click', () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        renderTable();
-                        renderPagination();
-                    }
+                    if (currentPage > 1) { currentPage--; renderTable(); renderPagination(); }
                 });
-
                 document.getElementById('nextPage')?.addEventListener('click', () => {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        renderTable();
-                        renderPagination();
-                    }
+                    if (currentPage < totalPages) { currentPage++; renderTable(); renderPagination(); }
                 });
             }
 
-            searchInput.addEventListener('input', function() {
-                searchQuery = this.value;
-                applyFilters();
-            });
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    searchQuery = this.value;
+                    applyFilters();
+                });
+            }
         })();
-    </script>
 
-    <!-- ========== 攻略数据加载脚本（包含总数统计） ========== -->
-    <script>
+        // 攻略数据加载
         (function() {
             const PAGE_SIZE = 10;
             let allGuides = [];
@@ -1144,20 +1116,19 @@
                 })
                 .catch(error => {
                     console.error('加载 guides.json 失败:', error);
-                    tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`;
+                    if (tbody) tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`;
                     if (guideStatsDiv) guideStatsDiv.innerHTML = '📚 加载失败';
                 });
 
             function renderTable() {
+                if (!tbody) return;
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const end = start + PAGE_SIZE;
                 const pageGuides = filteredGuides.slice(start, end);
-
                 if (pageGuides.length === 0) {
                     tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的攻略</td></tr>`;
                     return;
                 }
-
                 let html = '';
                 pageGuides.forEach(guide => {
                     html += `<tr>
@@ -1169,25 +1140,20 @@
             }
 
             function renderPagination() {
+                if (!paginationDiv) return;
                 const totalPages = Math.ceil(filteredGuides.length / PAGE_SIZE);
                 if (totalPages <= 1) {
                     paginationDiv.innerHTML = '';
                     return;
                 }
-
                 let html = '<button id="guidePrevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
                 html += '<div class="page-numbers">';
-
                 let startPage = Math.max(1, currentPage - 2);
                 let endPage = Math.min(totalPages, startPage + 4);
-                if (endPage - startPage < 4) {
-                    startPage = Math.max(1, endPage - 4);
-                }
-
+                if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
                 for (let i = startPage; i <= endPage; i++) {
                     html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
                 }
-
                 html += '</div>';
                 html += `<button id="guideNextPage" ${currentPage === totalPages ? 'disabled' : ''}>下一页 ›</button>`;
                 paginationDiv.innerHTML = html;
@@ -1202,45 +1168,35 @@
                         }
                     });
                 });
-
                 document.getElementById('guidePrevPage')?.addEventListener('click', () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        renderTable();
-                        renderPagination();
-                    }
+                    if (currentPage > 1) { currentPage--; renderTable(); renderPagination(); }
                 });
-
                 document.getElementById('guideNextPage')?.addEventListener('click', () => {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        renderTable();
-                        renderPagination();
-                    }
+                    if (currentPage < totalPages) { currentPage++; renderTable(); renderPagination(); }
                 });
             }
 
-            searchInput.addEventListener('input', function() {
-                const query = this.value.trim().toLowerCase();
-                filteredGuides = allGuides.filter(guide => guide.name.toLowerCase().includes(query));
-                currentPage = 1;
-                renderTable();
-                renderPagination();
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.trim().toLowerCase();
+                    filteredGuides = allGuides.filter(guide => guide.name.toLowerCase().includes(query));
+                    currentPage = 1;
+                    renderTable();
+                    renderPagination();
+                });
+            }
+        })();
+
+        // 导航滚动脚本
+        (function () {
+            const navMap = { 'nav-about': 'about', 'nav-projects': 'projects', 'nav-contact': 'contact', 'nav-thanks': 'thanks' };
+            document.querySelectorAll('.radio-container input[name="nav"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const el = document.getElementById(navMap[this.id]);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
             });
         })();
-    </script>
-
-    <!-- 导航滚动脚本 -->
-    <script>
-    (function () {
-        const navMap = { 'nav-about': 'about', 'nav-projects': 'projects', 'nav-contact': 'contact', 'nav-thanks': 'thanks' };
-        document.querySelectorAll('.radio-container input[name="nav"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const el = document.getElementById(navMap[this.id]);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    })();
     </script>
 </body>
 </html>
