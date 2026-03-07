@@ -423,6 +423,38 @@
         .stats-pending { color: #3498db; }
         .stats-unneeded { color: #9b59b6; }
         .stats-todo { color: #ff8c00; }
+
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-modal:hover {
+            color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -490,7 +522,7 @@
                 </h2>
             </div>
 
-            <!-- ========== 简介卡片（含赞助说明） ========== -->
+            <!-- ========== 简介卡片（使用完整优化版） ========== -->
             <div class="intro-card" id="about">
                 <h3 class="section-title">简介</h3>
                 <p class="intro-text">这个静态网页最初是为了展示个人作品、分享技术经验，以及提供模组的离线安装包。</p>
@@ -501,20 +533,25 @@
                 <p class="intro-text">我目前制作了许多游戏攻略，但还没有发布，后续会慢慢更新。</p>
                 <p class="intro-text">很高兴认识大家！即使您没有关注我，我也很高兴能为您提供帮助。</p>
                 <p class="intro-text">我发布这些视频主要是当作个人网盘使用。之后我还会在下方添加帖子功能，如有疑问可点击跳转。</p>
-                <!-- 赞助说明 -->
-                <p class="intro-text" style="margin-top: 16px; color: #ffd93d;">如果您通过下方的‘支持一下’给予我赞助，我十分感谢。您的每一次鼓励，都是我继续创作的重要动力。我渴望通过视频记录和分享更多内容，也希望能一直做下去。谢谢您的支持！</p>
+                <p class="intro-text" style="margin-top: 16px; color: #ffd93d;">如果您通过下方的“支持一下”给予我赞助，我十分感谢。目前一条视频的收入往往不足一元，难以支撑我持续创作的动力。我渴望通过互联网视频记录和分享更多内容，证明自己的努力与热爱。您的每一份支持，都是对我莫大的鼓励，谢谢您！</p>
             </div>
 
-            <!-- ========== 支持一下（可折叠卡片） ========== -->
+            <!-- ========== 支持一下（可折叠卡片，图片可点击放大） ========== -->
             <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                 <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                     <span style="font-size: 24px;">💖</span> 支持一下
                     <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                 </summary>
                 <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); text-align: center;">
-                    <img src="sponsor.png" alt="赞赏码" style="max-width: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: white; padding: 8px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#999;\'>请放置 sponsor.png 到根目录</span>'">
+                    <img src="sponsor.png" alt="赞赏码" id="sponsorImg" style="max-width: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: white; padding: 8px; cursor: pointer;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#999;\'>请放置 sponsor.png 到根目录</span>'">
                 </div>
             </details>
+
+            <!-- 图片放大模态框 -->
+            <div id="imageModal" class="modal">
+                <span class="close-modal">&times;</span>
+                <img class="modal-content" id="modalImage">
+            </div>
 
             <!-- ========== 项目卡片区域 ========== -->
             <div class="projects-card" id="projects">
@@ -788,6 +825,35 @@
             </div>
         </main>
     </div>
+
+    <!-- 图片放大功能脚本 -->
+    <script>
+        // 获取模态框元素
+        var modal = document.getElementById("imageModal");
+        var modalImg = document.getElementById("modalImage");
+        var sponsorImg = document.getElementById("sponsorImg");
+        var closeBtn = document.getElementsByClassName("close-modal")[0];
+
+        // 点击图片打开模态框
+        if (sponsorImg) {
+            sponsorImg.onclick = function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            };
+        }
+
+        // 点击关闭按钮关闭模态框
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // 点击模态框背景关闭
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 
     <!-- ========== 模组数据加载脚本（包含统计） ========== -->
     <script>
