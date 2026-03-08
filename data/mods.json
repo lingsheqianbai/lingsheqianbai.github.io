@@ -4576,6 +4576,17 @@
     "offline": false
   },
   {
+    "name": "The Peacekeeper Pack",
+    "chineseName": "维和部队装备包",
+    "id": "3680716987",
+    "status": "待检测",
+    "statusClass": "",
+    "entries": 0,
+    "videoUrl": "",
+    "note": "无法在游戏中看见物品",
+    "offline": false
+  },
+  {
     "name": "模板",
     "chineseName": "模板",
     "id": "1234567890",
