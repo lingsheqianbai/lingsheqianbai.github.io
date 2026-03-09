@@ -840,7 +840,7 @@
         })();
     </script>
 
-    <!-- ========== 模组数据加载脚本 ========== -->
+    <!-- ========== 模组数据加载脚本（已添加视频教程统计） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -894,6 +894,9 @@
                 const countPending = allMods.filter(m => m.status === '待检测').length;
                 const countUnneeded = allMods.filter(m => m.status === '无需翻译').length;
                 const countTodo = allMods.filter(m => m.status === '待处理').length;
+                // 新增：有视频教程的模组数量
+                const countHasVideo = allMods.filter(m => m.videoUrl && m.videoUrl.trim() !== '').length;
+                const countNoVideo = total - countHasVideo;
 
                 modStatsDiv.innerHTML = `
                     <div class="stats-item"><span class="icon">📊</span> 总模组: <span class="stats-number">${total}</span></div>
@@ -902,6 +905,8 @@
                     <div class="stats-item stats-pending"><span class="icon">🔍</span> 待检测: <span class="stats-number">${countPending}</span></div>
                     <div class="stats-item stats-incomplete"><span class="icon">🟡</span> 非完整: <span class="stats-number">${countIncomplete}</span></div>
                     <div class="stats-item stats-unneeded"><span class="icon">🟣</span> 无需翻译: <span class="stats-number">${countUnneeded}</span></div>
+                    <div class="stats-item"><span class="icon">📹</span> 已拥有视频教程: <span class="stats-number">${countHasVideo}</span></div>
+                    <div class="stats-item"><span class="icon">🚫</span> 未拥有视频教程: <span class="stats-number">${countNoVideo}</span></div>
                 `;
             }
 
