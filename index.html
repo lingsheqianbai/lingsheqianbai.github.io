@@ -65,7 +65,7 @@
             font-size: 14px;
             color: rgba(255,255,255,0.9);
             table-layout: fixed;
-            min-width: 1000px;
+            min-width: 1200px; /* 加宽以适应新列 */
         }
         .mod-table th {
             text-align: left;
@@ -99,13 +99,15 @@
             margin-top: 2px;
         }
         
-        /* 列宽分配（6列）用于模组表 */
-        .mod-table th:nth-child(1) { width: 25%; }
-        .mod-table th:nth-child(2) { width: 20%; }
-        .mod-table th:nth-child(3) { width: 12%; }
-        .mod-table th:nth-child(4) { width: 10%; }
-        .mod-table th:nth-child(5) { width: 23%; }
-        .mod-table th:nth-child(6) { width: 10%; }
+        /* 列宽分配（8列） */
+        .mod-table th:nth-child(1) { width: 20%; }  /* 模组名称/ID */
+        .mod-table th:nth-child(2) { width: 15%; }  /* 模组中文名 */
+        .mod-table th:nth-child(3) { width: 8%; }   /* 平台 */
+        .mod-table th:nth-child(4) { width: 15%; }  /* 标签 */
+        .mod-table th:nth-child(5) { width: 8%; }   /* 翻译进度 */
+        .mod-table th:nth-child(6) { width: 8%; }   /* 视频教程 */
+        .mod-table th:nth-child(7) { width: 16%; }  /* 备注 */
+        .mod-table th:nth-child(8) { width: 10%; }  /* 离线分享 */
         
         /* 攻略表列宽（2列） */
         .guide-table th:nth-child(1) { width: 70%; }
@@ -156,6 +158,29 @@
             color: rgba(255,255,255,0.3);
             font-size: 18px;
         }
+        
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #90caf9;
+            white-space: nowrap;
+        }
+        
+        /* 平台图标样式 */
+        .platform-icon {
+            font-size: 18px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .platform-steam { color: #1b2838; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        .platform-mcmod { color: #4caf50; }
+        .platform-custom { color: #ffd93d; }
         
         /* 筛选折叠面板 */
         .filter-section {
@@ -474,7 +499,7 @@
     </div>
     <div class="bg-blur"></div>
     <div class="container">
-        <!-- 左侧栏（无统计卡片） -->
+        <!-- 左侧栏 -->
         <aside class="sidebar">
             <div class="radio-container" style="--total-radio: 4;">
                 <input type="radio" name="nav" id="nav-about" checked>
@@ -597,10 +622,10 @@
                     </div>
                 </details>
 
-                <!-- 卡片 3：模组翻译进度（带筛选，默认关闭） -->
+                <!-- 卡片 3：模组信息统计（新版本，含平台、标签） -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
-                        <span style="font-size: 24px;">📊</span> 模组翻译进度
+                        <span style="font-size: 24px;">📊</span> 模组信息统计
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                         <!-- 更新时间（自动显示） -->
                         <span id="updateDate" style="font-size: 12px; color: rgba(255,255,255,0.4); margin-left: 10px;">更新: 加载中...</span>
@@ -611,7 +636,7 @@
 
                         <!-- 搜索框 -->
                         <div class="search-box">
-                            <input type="text" id="modSearch" placeholder="搜索模组名称、中文名或ID...">
+                            <input type="text" id="modSearch" placeholder="搜索模组名称、中文名、ID、备注或标签...">
                         </div>
 
                         <!-- 可折叠筛选面板 -->
@@ -624,6 +649,29 @@
                                 <div class="filter-group">
                                     <span class="filter-label">翻译状态</span>
                                     <div class="filter-buttons" id="statusFilterGroup"></div>
+                                </div>
+                                <div class="filter-group">
+                                    <span class="filter-label">平台</span>
+                                    <div class="filter-buttons" id="platformFilterGroup">
+                                        <span class="filter-btn active" data-value="all">全部</span>
+                                        <span class="filter-btn" data-value="steam">Steam</span>
+                                        <span class="filter-btn" data-value="mcmod">MC百科</span>
+                                        <span class="filter-btn" data-value="custom">自定义</span>
+                                    </div>
+                                </div>
+                                <div class="filter-group">
+                                    <span class="filter-label">分类</span>
+                                    <div class="filter-buttons" id="categoryFilterGroup">
+                                        <span class="filter-btn active" data-value="all">全部</span>
+                                        <!-- 分类按钮由 JS 动态生成 -->
+                                    </div>
+                                </div>
+                                <div class="filter-group">
+                                    <span class="filter-label">标签</span>
+                                    <div class="filter-buttons" id="tagFilterGroup">
+                                        <span class="filter-btn active" data-value="all">全部</span>
+                                        <!-- 标签按钮由 JS 动态生成 -->
+                                    </div>
                                 </div>
                                 <div class="filter-group">
                                     <span class="filter-label">离线分享</span>
@@ -667,13 +715,15 @@
                                     <tr>
                                         <th>模组名称 / ID</th>
                                         <th>模组中文名</th>
+                                        <th>平台</th>
+                                        <th>标签</th>
                                         <th>翻译进度</th>
                                         <th>视频教程</th>
                                         <th>备注</th>
                                         <th>离线分享</th>
                                     </tr>
                                 </thead>
-                                <tbody id="modTableBody"><tr><td colspan="6" class="loading">加载中...</td></tr></tbody>
+                                <tbody id="modTableBody"><tr><td colspan="8" class="loading">加载中...</td></tr></tbody>
                             </table>
                         </div>
                         <div class="pagination" id="pagination"></div>
@@ -761,7 +811,7 @@
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
-                        <!-- 原有内容：汉化组等 -->
+                        <!-- 原有内容：汉化组等（此处省略，保留你之前的完整内容） -->
                         <div class="thanks-section">
                             <h4>老版汉化组成员</h4>
                             <ul><li>Sky_Orc_Mm</li><li>Misha（紗紗）</li><li>HennyFishYu（江中小鱼）</li><li>Jeff</li></ul>
@@ -840,7 +890,7 @@
         })();
     </script>
 
-    <!-- ========== 模组数据加载脚本（已添加视频教程统计） ========== -->
+    <!-- ========== 模组数据加载脚本（支持平台、标签、分类） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -849,6 +899,9 @@
             let currentPage = 1;
             let searchQuery = '';
             let statusFilter = '全部';
+            let platformFilter = 'all';
+            let categoryFilter = 'all';
+            let tagFilter = 'all';
             let offlineFilter = 'all';
             let noteFilter = 'all';
             let chineseFilter = 'all';
@@ -859,6 +912,9 @@
             const tbody = document.getElementById('modTableBody');
             const paginationDiv = document.getElementById('pagination');
             const statusFilterGroup = document.getElementById('statusFilterGroup');
+            const platformFilterGroup = document.getElementById('platformFilterGroup');
+            const categoryFilterGroup = document.getElementById('categoryFilterGroup');
+            const tagFilterGroup = document.getElementById('tagFilterGroup');
             const offlineFilterGroup = document.getElementById('offlineFilterGroup');
             const noteFilterGroup = document.getElementById('noteFilterGroup');
             const chineseFilterGroup = document.getElementById('chineseFilterGroup');
@@ -894,7 +950,6 @@
                 const countPending = allMods.filter(m => m.status === '待检测').length;
                 const countUnneeded = allMods.filter(m => m.status === '无需翻译').length;
                 const countTodo = allMods.filter(m => m.status === '待处理').length;
-                // 新增：有视频教程的模组数量
                 const countHasVideo = allMods.filter(m => m.videoUrl && m.videoUrl.trim() !== '').length;
                 const countNoVideo = total - countHasVideo;
 
@@ -905,9 +960,39 @@
                     <div class="stats-item stats-pending"><span class="icon">🔍</span> 待检测: <span class="stats-number">${countPending}</span></div>
                     <div class="stats-item stats-incomplete"><span class="icon">🟡</span> 非完整: <span class="stats-number">${countIncomplete}</span></div>
                     <div class="stats-item stats-unneeded"><span class="icon">🟣</span> 无需翻译: <span class="stats-number">${countUnneeded}</span></div>
-                    <div class="stats-item"><span class="icon">📹</span> 已拥有视频教程: <span class="stats-number">${countHasVideo}</span></div>
-                    <div class="stats-item"><span class="icon">🚫</span> 未拥有视频教程: <span class="stats-number">${countNoVideo}</span></div>
+                    <div class="stats-item"><span class="icon">📹</span> 已拥有视频: <span class="stats-number">${countHasVideo}</span></div>
+                    <div class="stats-item"><span class="icon">🚫</span> 未拥有视频: <span class="stats-number">${countNoVideo}</span></div>
                 `;
+            }
+
+            // 生成模组链接
+            function getModLink(mod) {
+                if (mod.platform === 'steam' && mod.steamId) {
+                    return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.steamId}`;
+                } else if (mod.platform === 'mcmod' && mod.mcmodId) {
+                    return `https://www.mcmod.cn/class/${mod.mcmodId}.html`;
+                } else if (mod.platform === 'custom' && mod.customUrl) {
+                    return mod.customUrl;
+                } else {
+                    return '#';
+                }
+            }
+
+            // 获取平台图标
+            function getPlatformIcon(mod) {
+                if (mod.platform === 'steam') {
+                    return '<span class="platform-icon platform-steam" title="Steam 创意工坊">🟦</span>';
+                } else if (mod.platform === 'mcmod') {
+                    return '<span class="platform-icon platform-mcmod" title="MC百科">🗃️</span>';
+                } else {
+                    return '<span class="platform-icon platform-custom" title="自定义链接">🌐</span>';
+                }
+            }
+
+            // 渲染标签
+            function renderTags(tags) {
+                if (!tags || tags.length === 0) return '-';
+                return tags.map(tag => `<span class="tag">${tag}</span>`).join(' ');
             }
 
             fetch('data/mods.json')
@@ -917,6 +1002,8 @@
                 })
                 .then(data => {
                     allMods = data;
+                    
+                    // 生成状态筛选按钮
                     const statusSet = new Set();
                     data.forEach(mod => { if (mod.status) statusSet.add(mod.status); });
                     const statusList = ['全部', ...Array.from(statusSet).sort()];
@@ -934,6 +1021,59 @@
                         });
                     }
 
+                    // 生成分类筛选按钮
+                    const categorySet = new Set();
+                    data.forEach(mod => { if (mod.category) categorySet.add(mod.category); });
+                    const categoryList = ['全部', ...Array.from(categorySet).sort()];
+                    if (categoryFilterGroup) {
+                        categoryFilterGroup.innerHTML = categoryList.map(cat => 
+                            `<span class="filter-btn ${cat === '全部' ? 'active' : ''}" data-value="${cat}">${cat}</span>`
+                        ).join('');
+                        categoryFilterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                categoryFilterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                categoryFilter = this.dataset.value;
+                                applyFilters();
+                            });
+                        });
+                    }
+
+                    // 生成标签筛选按钮
+                    const tagSet = new Set();
+                    data.forEach(mod => { 
+                        if (mod.tags && Array.isArray(mod.tags)) {
+                            mod.tags.forEach(tag => tagSet.add(tag));
+                        }
+                    });
+                    const tagList = ['全部', ...Array.from(tagSet).sort()];
+                    if (tagFilterGroup) {
+                        tagFilterGroup.innerHTML = tagList.map(tag => 
+                            `<span class="filter-btn ${tag === '全部' ? 'active' : ''}" data-value="${tag}">${tag}</span>`
+                        ).join('');
+                        tagFilterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                tagFilterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                tagFilter = this.dataset.value;
+                                applyFilters();
+                            });
+                        });
+                    }
+
+                    // 平台筛选按钮事件
+                    if (platformFilterGroup) {
+                        platformFilterGroup.querySelectorAll('.filter-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                platformFilterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                platformFilter = this.dataset.value;
+                                applyFilters();
+                            });
+                        });
+                    }
+
+                    // 其他筛选组事件
                     const filterGroups = [
                         { group: offlineFilterGroup, setter: (val) => offlineFilter = val },
                         { group: noteFilterGroup, setter: (val) => noteFilter = val },
@@ -959,7 +1099,7 @@
                 })
                 .catch(error => {
                     console.error('加载 mods.json 失败:', error);
-                    if (tbody) tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
+                    if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
                     setUpdateDate();
                 });
 
@@ -976,33 +1116,64 @@
 
             function applyFilters() {
                 let filtered = allMods;
+                
+                // 搜索
                 if (searchQuery.trim()) {
                     const q = searchQuery.toLowerCase();
                     filtered = filtered.filter(mod => 
                         mod.name.toLowerCase().includes(q) || 
-                        mod.id.includes(q) ||
-                        (mod.chineseName && mod.chineseName.toLowerCase().includes(q))
+                        (mod.steamId && mod.steamId.includes(q)) ||
+                        (mod.mcmodId && mod.mcmodId.includes(q)) ||
+                        (mod.chineseName && mod.chineseName.toLowerCase().includes(q)) ||
+                        (mod.note && mod.note.toLowerCase().includes(q)) ||
+                        (mod.tags && mod.tags.some(tag => tag.toLowerCase().includes(q)))
                     );
                 }
+                
+                // 状态筛选
                 if (statusFilter !== '全部') {
                     filtered = filtered.filter(mod => mod.status === statusFilter);
                 }
+                
+                // 平台筛选
+                if (platformFilter !== 'all') {
+                    filtered = filtered.filter(mod => mod.platform === platformFilter);
+                }
+                
+                // 分类筛选
+                if (categoryFilter !== 'all') {
+                    filtered = filtered.filter(mod => mod.category === categoryFilter);
+                }
+                
+                // 标签筛选
+                if (tagFilter !== 'all') {
+                    filtered = filtered.filter(mod => mod.tags && mod.tags.includes(tagFilter));
+                }
+                
+                // 离线分享
                 if (offlineFilter !== 'all') {
                     const wantOffline = offlineFilter === 'yes';
                     filtered = filtered.filter(mod => mod.offline === wantOffline);
                 }
+                
+                // 备注
                 if (noteFilter !== 'all') {
                     const hasNote = noteFilter === 'yes';
                     filtered = filtered.filter(mod => hasNote ? (mod.note && mod.note.trim()) : (!mod.note || !mod.note.trim()));
                 }
+                
+                // 中文名
                 if (chineseFilter !== 'all') {
                     const hasChinese = chineseFilter === 'yes';
                     filtered = filtered.filter(mod => hasChinese ? (mod.chineseName && mod.chineseName.trim()) : (!mod.chineseName || !mod.chineseName.trim()));
                 }
+                
+                // 视频教程
                 if (videoFilter !== 'all') {
                     const hasVideo = videoFilter === 'yes';
                     filtered = filtered.filter(mod => hasVideo ? (mod.videoUrl && mod.videoUrl.trim() !== '') : (!mod.videoUrl || mod.videoUrl.trim() === ''));
                 }
+                
                 filteredMods = filtered;
                 currentPage = 1;
                 renderTable();
@@ -1014,19 +1185,27 @@
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const end = start + PAGE_SIZE;
                 const pageMods = filteredMods.slice(start, end);
+                
                 if (pageMods.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`;
                     return;
                 }
+                
                 let html = '';
                 pageMods.forEach(mod => {
                     const videoLink = mod.videoUrl ? `<a href="${mod.videoUrl}" target="_blank" style="color:#3B82F6;">🔗</a>` : '-';
                     const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>';
                     const statusClass = getStatusClass(mod.status);
                     const chineseName = mod.chineseName || '-';
+                    const modLink = getModLink(mod);
+                    const platformIcon = getPlatformIcon(mod);
+                    const tagsHtml = renderTags(mod.tags);
+                    
                     html += `<tr>
-                        <td><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.id}" target="_blank">${mod.name}</a><span class="mod-id">${mod.id}</span></td>
+                        <td><a href="${modLink}" target="_blank">${mod.name}</a>${mod.steamId ? `<span class="mod-id">${mod.steamId}</span>` : ''}${mod.mcmodId ? `<span class="mod-id">MC百科 ID: ${mod.mcmodId}</span>` : ''}</td>
                         <td>${chineseName}</td>
+                        <td>${platformIcon}</td>
+                        <td>${tagsHtml}</td>
                         <td><span class="status-badge ${statusClass}">${mod.status}</span></td>
                         <td>${videoLink}</td>
                         <td>${mod.note || '-'}</td>
