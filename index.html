@@ -623,7 +623,7 @@
                     </div>
                 </details>
 
-                <!-- 卡片 3：模组信息统计（简化版筛选） -->
+                <!-- 卡片 3：模组信息统计（简化版筛选 + 链接生成） -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">📊</span> 模组信息统计
@@ -640,7 +640,7 @@
                             <input type="text" id="modSearch" placeholder="搜索模组名称、中文名、ID或备注...">
                         </div>
 
-                        <!-- ========== 简化版高级筛选面板（只保留基础筛选） ========== -->
+                        <!-- ========== 简化版高级筛选面板 ========== -->
                         <div class="filter-section">
                             <div class="filter-header" id="filterToggle">
                                 <span><span>🔍</span> 高级筛选</span>
@@ -697,7 +697,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 视频教程组（新增） -->
+                                <!-- 视频教程组 -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▼</span>
@@ -906,7 +906,7 @@
         }
     </script>
 
-    <!-- ========== 模组数据加载脚本（简化版） ========== -->
+    <!-- ========== 模组数据加载脚本（简化版 + 链接生成） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -977,6 +977,22 @@
                     <div class="stats-item"><span class="icon">📹</span> 已拥有视频: <span class="stats-number">${countHasVideo}</span></div>
                     <div class="stats-item"><span class="icon">🚫</span> 未拥有视频: <span class="stats-number">${countNoVideo}</span></div>
                 `;
+            }
+
+            // 生成模组链接
+            function getModLink(mod) {
+                if (mod.platform === 'steam' && mod.steamId) {
+                    return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.steamId}`;
+                } else if (mod.platform === 'mcmod' && mod.mcmodId) {
+                    return `https://www.mcmod.cn/class/${mod.mcmodId}.html`;
+                } else if (mod.platform === 'custom' && mod.customUrl) {
+                    return mod.customUrl;
+                } else if (mod.id) {
+                    // 兼容旧数据：如果有 id 但没有 platform，假设为 steam
+                    return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.id}`;
+                } else {
+                    return '#';
+                }
             }
 
             fetch('data/mods.json')
@@ -1082,7 +1098,8 @@
                     const q = searchQuery.toLowerCase();
                     filtered = filtered.filter(mod => 
                         mod.name.toLowerCase().includes(q) || 
-                        mod.id?.includes(q) ||
+                        (mod.steamId && mod.steamId.includes(q)) ||
+                        (mod.mcmodId && mod.mcmodId.includes(q)) ||
                         (mod.chineseName && mod.chineseName.toLowerCase().includes(q)) ||
                         (mod.note && mod.note.toLowerCase().includes(q))
                     );
@@ -1140,10 +1157,9 @@
                     const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>';
                     const statusClass = getStatusClass(mod.status);
                     const chineseName = mod.chineseName || '-';
-                    // 兼容旧数据：如果有id字段，显示为ID；如果有steamId，也显示
+                    const modLink = getModLink(mod);
                     const idDisplay = mod.id ? `<span class="mod-id">${mod.id}</span>` : (mod.steamId ? `<span class="mod-id">${mod.steamId}</span>` : '');
-                    // 链接暂时用占位符，如果需要可改为根据平台生成
-                    const modLink = mod.link || '#';
+                    
                     html += `<tr>
                         <td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td>
                         <td>${chineseName}</td>
