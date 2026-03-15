@@ -536,7 +536,6 @@
             <!-- ========== 简介卡片 ========== -->
             <div class="intro-card" id="about">
                 <h3 class="section-title">简介</h3>
-                <p class="intro-text">3.15通知当前网站正在测试与更新！</p>
                 <p class="intro-text">这个静态网页最初是为了展示个人作品、分享技术经验，以及提供模组的离线安装包。</p>
                 <p class="intro-text">为了安全起见，请在安装模组离线安装包之前，确保您安装了杀毒软件或其他安全工具。</p>
                 <p class="intro-text">这里收录了我所有的教程和视频链接，既是为了防止我自己游玩时忘记大部分模组的运行方式，也顺便帮助其他人。</p>
@@ -624,7 +623,7 @@
                     </div>
                 </details>
 
-                <!-- 卡片 3：模组信息统计（带新筛选面板） -->
+                <!-- 卡片 3：模组信息统计（简化版筛选） -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">📊</span> 模组信息统计
@@ -641,7 +640,7 @@
                             <input type="text" id="modSearch" placeholder="搜索模组名称、中文名、ID或备注...">
                         </div>
 
-                        <!-- ========== 新高级筛选面板 ========== -->
+                        <!-- ========== 简化版高级筛选面板（只保留基础筛选） ========== -->
                         <div class="filter-section">
                             <div class="filter-header" id="filterToggle">
                                 <span><span>🔍</span> 高级筛选</span>
@@ -654,48 +653,7 @@
                                         <span class="group-arrow">▼</span>
                                         <span>翻译状态</span>
                                     </div>
-                                    <div class="filter-group-options">
-                                        <span class="filter-btn active" data-group="status" data-value="全部">全部</span>
-                                        <span class="filter-btn" data-group="status" data-value="完整">完整</span>
-                                        <span class="filter-btn" data-group="status" data-value="待处理">待处理</span>
-                                        <span class="filter-btn" data-group="status" data-value="待检测">待检测</span>
-                                        <span class="filter-btn" data-group="status" data-value="无需翻译">无需翻译</span>
-                                        <span class="filter-btn" data-group="status" data-value="非完整">非完整</span>
-                                    </div>
-                                </div>
-
-                                <!-- 平台组 -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
-                                        <span>平台</span>
-                                    </div>
-                                    <div class="filter-group-options">
-                                        <span class="filter-btn active" data-group="platform" data-value="all">全部</span>
-                                        <span class="filter-btn" data-group="platform" data-value="steam">Steam</span>
-                                        <span class="filter-btn" data-group="platform" data-value="mcmod">MC百科</span>
-                                        <span class="filter-btn" data-group="platform" data-value="custom">自定义</span>
-                                    </div>
-                                </div>
-
-                                <!-- 分类组（动态生成） -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
-                                        <span>分类</span>
-                                    </div>
-                                    <div class="filter-group-options" id="categoryFilterGroup">
-                                        <!-- 由 JS 动态生成 -->
-                                    </div>
-                                </div>
-
-                                <!-- 标签组（动态生成） -->
-                                <div class="filter-group">
-                                    <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
-                                        <span>标签</span>
-                                    </div>
-                                    <div class="filter-group-options" id="tagFilterGroup">
+                                    <div class="filter-group-options" id="statusFilterGroup">
                                         <!-- 由 JS 动态生成 -->
                                     </div>
                                 </div>
@@ -706,7 +664,7 @@
                                         <span class="group-arrow">▼</span>
                                         <span>离线分享</span>
                                     </div>
-                                    <div class="filter-group-options">
+                                    <div class="filter-group-options" id="offlineFilterGroup">
                                         <span class="filter-btn active" data-group="offline" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="offline" data-value="yes">已上传</span>
                                         <span class="filter-btn" data-group="offline" data-value="no">未上传</span>
@@ -719,7 +677,7 @@
                                         <span class="group-arrow">▼</span>
                                         <span>备注</span>
                                     </div>
-                                    <div class="filter-group-options">
+                                    <div class="filter-group-options" id="noteFilterGroup">
                                         <span class="filter-btn active" data-group="note" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="note" data-value="yes">有备注</span>
                                         <span class="filter-btn" data-group="note" data-value="no">无备注</span>
@@ -732,10 +690,23 @@
                                         <span class="group-arrow">▼</span>
                                         <span>中文名</span>
                                     </div>
-                                    <div class="filter-group-options">
+                                    <div class="filter-group-options" id="chineseFilterGroup">
                                         <span class="filter-btn active" data-group="chinese" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="chinese" data-value="yes">有中文名</span>
                                         <span class="filter-btn" data-group="chinese" data-value="no">无中文名</span>
+                                    </div>
+                                </div>
+
+                                <!-- 视频教程组（新增） -->
+                                <div class="filter-group">
+                                    <div class="filter-group-header" onclick="toggleGroup(this)">
+                                        <span class="group-arrow">▼</span>
+                                        <span>视频教程</span>
+                                    </div>
+                                    <div class="filter-group-options" id="videoFilterGroup">
+                                        <span class="filter-btn active" data-group="video" data-value="all">全部</span>
+                                        <span class="filter-btn" data-group="video" data-value="yes">有教程</span>
+                                        <span class="filter-btn" data-group="video" data-value="no">无教程</span>
                                     </div>
                                 </div>
                             </div>
@@ -935,7 +906,7 @@
         }
     </script>
 
-    <!-- ========== 模组数据加载脚本（支持新筛选） ========== -->
+    <!-- ========== 模组数据加载脚本（简化版） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -945,9 +916,6 @@
             let searchQuery = '';
             // 筛选状态
             let statusFilter = '全部';
-            let platformFilter = 'all';
-            let categoryFilter = 'all';
-            let tagFilter = 'all';
             let offlineFilter = 'all';
             let noteFilter = 'all';
             let chineseFilter = 'all';
@@ -962,14 +930,12 @@
             const updateDateSpan = document.getElementById('updateDate');
             const modStatsDiv = document.getElementById('modStats');
 
-            // 筛选组容器
-            const statusFilterGroup = document.querySelector('[data-group="status"]')?.parentElement;
-            const platformFilterGroup = document.querySelector('[data-group="platform"]')?.parentElement;
-            const categoryFilterGroup = document.getElementById('categoryFilterGroup');
-            const tagFilterGroup = document.getElementById('tagFilterGroup');
-            const offlineFilterGroup = document.querySelector('[data-group="offline"]')?.parentElement;
-            const noteFilterGroup = document.querySelector('[data-group="note"]')?.parentElement;
-            const chineseFilterGroup = document.querySelector('[data-group="chinese"]')?.parentElement;
+            // 获取筛选组容器
+            const statusFilterGroup = document.getElementById('statusFilterGroup');
+            const offlineFilterGroup = document.getElementById('offlineFilterGroup');
+            const noteFilterGroup = document.getElementById('noteFilterGroup');
+            const chineseFilterGroup = document.getElementById('chineseFilterGroup');
+            const videoFilterGroup = document.getElementById('videoFilterGroup');
 
             // 高级筛选整体折叠
             if (filterToggle) {
@@ -1013,55 +979,6 @@
                 `;
             }
 
-            // 绑定筛选按钮事件
-            function bindFilterButtons() {
-                // 翻译状态
-                document.querySelectorAll('[data-group="status"]').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('[data-group="status"]').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        statusFilter = this.dataset.value;
-                        applyFilters();
-                    });
-                });
-                // 平台
-                document.querySelectorAll('[data-group="platform"]').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('[data-group="platform"]').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        platformFilter = this.dataset.value;
-                        applyFilters();
-                    });
-                });
-                // 离线分享
-                document.querySelectorAll('[data-group="offline"]').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('[data-group="offline"]').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        offlineFilter = this.dataset.value;
-                        applyFilters();
-                    });
-                });
-                // 备注
-                document.querySelectorAll('[data-group="note"]').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('[data-group="note"]').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        noteFilter = this.dataset.value;
-                        applyFilters();
-                    });
-                });
-                // 中文名
-                document.querySelectorAll('[data-group="chinese"]').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('[data-group="chinese"]').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        chineseFilter = this.dataset.value;
-                        applyFilters();
-                    });
-                });
-            }
-
             fetch('data/mods.json')
                 .then(response => {
                     if (!response.ok) throw new Error('网络响应失败');
@@ -1069,50 +986,73 @@
                 })
                 .then(data => {
                     allMods = data;
-                    
-                    // 生成分类按钮
-                    const categorySet = new Set();
-                    data.forEach(mod => { if (mod.category) categorySet.add(mod.category); });
-                    const categoryList = ['全部', ...Array.from(categorySet).sort()];
-                    if (categoryFilterGroup) {
-                        categoryFilterGroup.innerHTML = categoryList.map(cat => 
-                            `<span class="filter-btn ${cat === '全部' ? 'active' : ''}" data-group="category" data-value="${cat}">${cat}</span>`
+
+                    // 生成状态筛选按钮
+                    const statusSet = new Set();
+                    data.forEach(mod => { if (mod.status) statusSet.add(mod.status); });
+                    const statusList = ['全部', ...Array.from(statusSet).sort()];
+                    if (statusFilterGroup) {
+                        statusFilterGroup.innerHTML = statusList.map(status => 
+                            `<span class="filter-btn ${status === '全部' ? 'active' : ''}" data-group="status" data-value="${status}">${status}</span>`
                         ).join('');
-                        // 绑定分类按钮事件
-                        document.querySelectorAll('[data-group="category"]').forEach(btn => {
+                        document.querySelectorAll('[data-group="status"]').forEach(btn => {
                             btn.addEventListener('click', function() {
-                                document.querySelectorAll('[data-group="category"]').forEach(b => b.classList.remove('active'));
+                                document.querySelectorAll('[data-group="status"]').forEach(b => b.classList.remove('active'));
                                 this.classList.add('active');
-                                categoryFilter = this.dataset.value;
+                                statusFilter = this.dataset.value;
                                 applyFilters();
                             });
                         });
                     }
 
-                    // 生成标签按钮
-                    const tagSet = new Set();
-                    data.forEach(mod => { 
-                        if (mod.tags && Array.isArray(mod.tags)) {
-                            mod.tags.forEach(tag => tagSet.add(tag));
-                        }
-                    });
-                    const tagList = ['全部', ...Array.from(tagSet).sort()];
-                    if (tagFilterGroup) {
-                        tagFilterGroup.innerHTML = tagList.map(tag => 
-                            `<span class="filter-btn ${tag === '全部' ? 'active' : ''}" data-group="tag" data-value="${tag}">${tag}</span>`
-                        ).join('');
-                        // 绑定标签按钮事件
-                        document.querySelectorAll('[data-group="tag"]').forEach(btn => {
+                    // 绑定离线分享筛选
+                    if (offlineFilterGroup) {
+                        offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(btn => {
                             btn.addEventListener('click', function() {
-                                document.querySelectorAll('[data-group="tag"]').forEach(b => b.classList.remove('active'));
+                                offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(b => b.classList.remove('active'));
                                 this.classList.add('active');
-                                tagFilter = this.dataset.value;
+                                offlineFilter = this.dataset.value;
                                 applyFilters();
                             });
                         });
                     }
 
-                    bindFilterButtons();
+                    // 绑定备注筛选
+                    if (noteFilterGroup) {
+                        noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                noteFilter = this.dataset.value;
+                                applyFilters();
+                            });
+                        });
+                    }
+
+                    // 绑定中文名筛选
+                    if (chineseFilterGroup) {
+                        chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                chineseFilter = this.dataset.value;
+                                applyFilters();
+                            });
+                        });
+                    }
+
+                    // 绑定视频教程筛选
+                    if (videoFilterGroup) {
+                        videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(b => b.classList.remove('active'));
+                                this.classList.add('active');
+                                videoFilter = this.dataset.value;
+                                applyFilters();
+                            });
+                        });
+                    }
+
                     setUpdateDate();
                     updateModStats();
                     applyFilters();
@@ -1153,21 +1093,6 @@
                     filtered = filtered.filter(mod => mod.status === statusFilter);
                 }
                 
-                // 平台筛选（如果有platform字段）
-                if (platformFilter !== 'all' && allMods.some(m => m.platform)) {
-                    filtered = filtered.filter(mod => mod.platform === platformFilter);
-                }
-                
-                // 分类筛选
-                if (categoryFilter !== '全部') {
-                    filtered = filtered.filter(mod => mod.category === categoryFilter);
-                }
-                
-                // 标签筛选
-                if (tagFilter !== '全部') {
-                    filtered = filtered.filter(mod => mod.tags && mod.tags.includes(tagFilter));
-                }
-                
                 // 离线分享
                 if (offlineFilter !== 'all') {
                     const wantOffline = offlineFilter === 'yes';
@@ -1184,6 +1109,12 @@
                 if (chineseFilter !== 'all') {
                     const hasChinese = chineseFilter === 'yes';
                     filtered = filtered.filter(mod => hasChinese ? (mod.chineseName && mod.chineseName.trim()) : (!mod.chineseName || !mod.chineseName.trim()));
+                }
+                
+                // 视频教程
+                if (videoFilter !== 'all') {
+                    const hasVideo = videoFilter === 'yes';
+                    filtered = filtered.filter(mod => hasVideo ? (mod.videoUrl && mod.videoUrl.trim() !== '') : (!mod.videoUrl || mod.videoUrl.trim() === ''));
                 }
                 
                 filteredMods = filtered;
@@ -1209,10 +1140,12 @@
                     const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>';
                     const statusClass = getStatusClass(mod.status);
                     const chineseName = mod.chineseName || '-';
-                    // 兼容旧数据：如果有id字段，显示为ID
-                    const idDisplay = mod.id ? `<span class="mod-id">${mod.id}</span>` : '';
+                    // 兼容旧数据：如果有id字段，显示为ID；如果有steamId，也显示
+                    const idDisplay = mod.id ? `<span class="mod-id">${mod.id}</span>` : (mod.steamId ? `<span class="mod-id">${mod.steamId}</span>` : '');
+                    // 链接暂时用占位符，如果需要可改为根据平台生成
+                    const modLink = mod.link || '#';
                     html += `<tr>
-                        <td><a href="${mod.link || '#'}" target="_blank">${mod.name}</a>${idDisplay}</td>
+                        <td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td>
                         <td>${chineseName}</td>
                         <td><span class="status-badge ${statusClass}">${mod.status}</span></td>
                         <td>${videoLink}</td>
