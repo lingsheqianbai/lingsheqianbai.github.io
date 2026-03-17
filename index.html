@@ -263,6 +263,25 @@
             color: white;
         }
         
+        /* 游戏搜索输入框样式 */
+        .game-search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
+        .game-search-input:focus {
+            border-color: #3B82F6;
+            background: rgba(0,0,0,0.5);
+        }
+        .game-search-input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        
         .search-box {
             margin-bottom: 20px;
             display: flex;
@@ -623,7 +642,7 @@
                     </div>
                 </details>
 
-                <!-- 卡片 3：模组信息统计（简化版筛选 + 链接生成） -->
+                <!-- 卡片 3：模组信息统计（简化版筛选 + 游戏搜索） -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">📊</span> 模组信息统计
@@ -640,70 +659,81 @@
                             <input type="text" id="modSearch" placeholder="搜索模组名称、中文名、ID或备注...">
                         </div>
 
-                        <!-- ========== 简化版高级筛选面板 ========== -->
+                        <!-- ========== 高级筛选面板（各组默认折叠） ========== -->
                         <div class="filter-section">
                             <div class="filter-header" id="filterToggle">
                                 <span><span>🔍</span> 高级筛选</span>
                                 <span class="arrow">▼</span>
                             </div>
                             <div class="filter-content" id="filterContent">
-                                <!-- 翻译状态组 -->
+                                <!-- 游戏组（新增，默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
+                                        <span class="group-arrow">▶</span>
+                                        <span>游戏</span>
+                                    </div>
+                                    <div class="filter-group-options collapsed">
+                                        <input type="text" id="gameSearchInput" class="game-search-input" placeholder="输入游戏名称...">
+                                    </div>
+                                </div>
+
+                                <!-- 翻译状态组（默认折叠） -->
+                                <div class="filter-group">
+                                    <div class="filter-group-header" onclick="toggleGroup(this)">
+                                        <span class="group-arrow">▶</span>
                                         <span>翻译状态</span>
                                     </div>
-                                    <div class="filter-group-options" id="statusFilterGroup">
+                                    <div class="filter-group-options collapsed" id="statusFilterGroup">
                                         <!-- 由 JS 动态生成 -->
                                     </div>
                                 </div>
 
-                                <!-- 离线分享组 -->
+                                <!-- 离线分享组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
+                                        <span class="group-arrow">▶</span>
                                         <span>离线分享</span>
                                     </div>
-                                    <div class="filter-group-options" id="offlineFilterGroup">
+                                    <div class="filter-group-options collapsed" id="offlineFilterGroup">
                                         <span class="filter-btn active" data-group="offline" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="offline" data-value="yes">已上传</span>
                                         <span class="filter-btn" data-group="offline" data-value="no">未上传</span>
                                     </div>
                                 </div>
 
-                                <!-- 备注组 -->
+                                <!-- 备注组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
+                                        <span class="group-arrow">▶</span>
                                         <span>备注</span>
                                     </div>
-                                    <div class="filter-group-options" id="noteFilterGroup">
+                                    <div class="filter-group-options collapsed" id="noteFilterGroup">
                                         <span class="filter-btn active" data-group="note" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="note" data-value="yes">有备注</span>
                                         <span class="filter-btn" data-group="note" data-value="no">无备注</span>
                                     </div>
                                 </div>
 
-                                <!-- 中文名组 -->
+                                <!-- 中文名组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
+                                        <span class="group-arrow">▶</span>
                                         <span>中文名</span>
                                     </div>
-                                    <div class="filter-group-options" id="chineseFilterGroup">
+                                    <div class="filter-group-options collapsed" id="chineseFilterGroup">
                                         <span class="filter-btn active" data-group="chinese" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="chinese" data-value="yes">有中文名</span>
                                         <span class="filter-btn" data-group="chinese" data-value="no">无中文名</span>
                                     </div>
                                 </div>
 
-                                <!-- 视频教程组 -->
+                                <!-- 视频教程组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
-                                        <span class="group-arrow">▼</span>
+                                        <span class="group-arrow">▶</span>
                                         <span>视频教程</span>
                                     </div>
-                                    <div class="filter-group-options" id="videoFilterGroup">
+                                    <div class="filter-group-options collapsed" id="videoFilterGroup">
                                         <span class="filter-btn active" data-group="video" data-value="all">全部</span>
                                         <span class="filter-btn" data-group="video" data-value="yes">有教程</span>
                                         <span class="filter-btn" data-group="video" data-value="no">无教程</span>
@@ -906,7 +936,7 @@
         }
     </script>
 
-    <!-- ========== 模组数据加载脚本（简化版 + 链接生成） ========== -->
+    <!-- ========== 模组数据加载脚本（支持游戏搜索、ID搜索、默认折叠） ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
@@ -914,7 +944,7 @@
             let filteredMods = [];
             let currentPage = 1;
             let searchQuery = '';
-            // 筛选状态
+            let gameQuery = ''; // 游戏搜索关键词
             let statusFilter = '全部';
             let offlineFilter = 'all';
             let noteFilter = 'all';
@@ -923,6 +953,7 @@
             let filterCollapsed = false;
 
             const searchInput = document.getElementById('modSearch');
+            const gameSearchInput = document.getElementById('gameSearchInput');
             const tbody = document.getElementById('modTableBody');
             const paginationDiv = document.getElementById('pagination');
             const filterToggle = document.getElementById('filterToggle');
@@ -1069,6 +1100,14 @@
                         });
                     }
 
+                    // 游戏搜索输入事件
+                    if (gameSearchInput) {
+                        gameSearchInput.addEventListener('input', function() {
+                            gameQuery = this.value.trim().toLowerCase();
+                            applyFilters();
+                        });
+                    }
+
                     setUpdateDate();
                     updateModStats();
                     applyFilters();
@@ -1093,7 +1132,7 @@
             function applyFilters() {
                 let filtered = allMods;
                 
-                // 搜索
+                // 搜索框（模组名称、ID、中文名、备注）
                 if (searchQuery.trim()) {
                     const q = searchQuery.toLowerCase();
                     filtered = filtered.filter(mod => 
@@ -1103,6 +1142,11 @@
                         (mod.chineseName && mod.chineseName.toLowerCase().includes(q)) ||
                         (mod.note && mod.note.toLowerCase().includes(q))
                     );
+                }
+                
+                // 游戏筛选
+                if (gameQuery) {
+                    filtered = filtered.filter(mod => mod.game && mod.game.toLowerCase().includes(gameQuery));
                 }
                 
                 // 状态筛选
@@ -1158,7 +1202,15 @@
                     const statusClass = getStatusClass(mod.status);
                     const chineseName = mod.chineseName || '-';
                     const modLink = getModLink(mod);
-                    const idDisplay = mod.id ? `<span class="mod-id">${mod.id}</span>` : (mod.steamId ? `<span class="mod-id">${mod.steamId}</span>` : '');
+                    // 显示ID：优先显示 steamId 或 mcmodId，如果都没有再尝试旧 id
+                    let idDisplay = '';
+                    if (mod.steamId) {
+                        idDisplay = `<span class="mod-id">${mod.steamId}</span>`;
+                    } else if (mod.mcmodId) {
+                        idDisplay = `<span class="mod-id">MC百科 ID: ${mod.mcmodId}</span>`;
+                    } else if (mod.id) {
+                        idDisplay = `<span class="mod-id">${mod.id}</span>`;
+                    }
                     
                     html += `<tr>
                         <td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td>
