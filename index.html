@@ -561,8 +561,9 @@
             line-height: 1.6;
             color: var(--text-muted);
             display: -webkit-box;
-            line-clamp: 3;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
+            line-clamp: 3;
             overflow: hidden;
         }
         /* 左右交替布局 */
@@ -1461,7 +1462,6 @@
                     posts.forEach(post => {
                         // 封面图：优先使用 post.image，否则使用占位图
                         let coverUrl = post.image || 'https://via.placeholder.com/400x200?text=No+Image';
-                        // 摘要截断
                         let summary = post.summary || '';
                         if (summary.length > 150) summary = summary.substring(0, 150) + '…';
                         

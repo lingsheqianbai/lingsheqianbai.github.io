@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style/word.css">
     <link rel="stylesheet" href="style/new.css">
     <style>
+        /* ===== 文章主体样式（舒适排版） ===== */
         .post-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -38,8 +39,8 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin: 2rem 0 1rem;
-            border-bottom: 1px solid var(--card-border);
             padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--card-border);
         }
         .post-content h3 {
             font-size: 1.25rem;
@@ -51,6 +52,7 @@
         }
         .post-content ul, .post-content ol {
             margin: 0 0 1rem 1.5rem;
+            padding-left: 0;
         }
         .post-content li {
             margin: 0.4rem 0;
@@ -60,13 +62,15 @@
             padding: 0.5rem 0 0.5rem 1rem;
             border-left: 4px solid rgba(255,255,255,0.3);
             color: var(--text-muted);
+            font-style: normal;
+            background: transparent;
         }
         .post-content pre {
             background: rgba(0,0,0,0.4);
             padding: 1rem;
             border-radius: 8px;
             overflow-x: auto;
-            font-family: monospace;
+            font-family: 'SF Mono', 'Cascadia Code', monospace;
             font-size: 0.85rem;
             margin: 1rem 0;
         }
@@ -76,6 +80,16 @@
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.9em;
+        }
+        .post-content pre code {
+            background: none;
+            padding: 0;
+        }
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
         }
         .post-content a {
             color: #3B82F6;
@@ -101,6 +115,15 @@
             }
             .post-title {
                 font-size: 1.6rem;
+            }
+            .post-content {
+                font-size: 0.95rem;
+            }
+            .post-content h2 {
+                font-size: 1.3rem;
+            }
+            .post-content h3 {
+                font-size: 1.1rem;
             }
         }
     </style>
