@@ -791,15 +791,15 @@
                     </div>
                 </details>
 
-                <!-- ========== 我的帖子（从 JSON 加载） ========== -->
+                <!-- ========== 我的帖子（列表样式，参照 Revincx 博客） ========== -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">📝</span> 我的帖子
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
-                        <div id="postsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-                            <div class="loading" style="text-align:center; grid-column:1/-1;">加载中...</div>
+                        <div id="postsList" style="display: flex; flex-direction: column; gap: 24px;">
+                            <div class="loading" style="text-align:center; padding:40px;">加载中...</div>
                         </div>
                     </div>
                 </details>
@@ -955,7 +955,7 @@
             let filteredMods = [];
             let currentPage = 1;
             let searchQuery = '';
-            let gameQuery = ''; // 游戏搜索关键词
+            let gameQuery = '';
             let statusFilter = '全部';
             let offlineFilter = 'all';
             let noteFilter = 'all';
@@ -972,14 +972,12 @@
             const updateDateSpan = document.getElementById('updateDate');
             const modStatsDiv = document.getElementById('modStats');
 
-            // 获取筛选组容器
             const statusFilterGroup = document.getElementById('statusFilterGroup');
             const offlineFilterGroup = document.getElementById('offlineFilterGroup');
             const noteFilterGroup = document.getElementById('noteFilterGroup');
             const chineseFilterGroup = document.getElementById('chineseFilterGroup');
             const videoFilterGroup = document.getElementById('videoFilterGroup');
 
-            // 高级筛选整体折叠
             if (filterToggle) {
                 filterToggle.addEventListener('click', function() {
                     filterCollapsed = !filterCollapsed;
@@ -1021,7 +1019,6 @@
                 `;
             }
 
-            // 生成模组链接
             function getModLink(mod) {
                 if (mod.platform === 'steam' && mod.steamId) {
                     return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.steamId}`;
@@ -1044,7 +1041,6 @@
                 .then(data => {
                     allMods = data;
 
-                    // 生成状态筛选按钮
                     const statusSet = new Set();
                     data.forEach(mod => { if (mod.status) statusSet.add(mod.status); });
                     const statusList = ['全部', ...Array.from(statusSet).sort()];
@@ -1062,7 +1058,6 @@
                         });
                     }
 
-                    // 绑定离线分享筛选
                     if (offlineFilterGroup) {
                         offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(btn => {
                             btn.addEventListener('click', function() {
@@ -1074,7 +1069,6 @@
                         });
                     }
 
-                    // 绑定备注筛选
                     if (noteFilterGroup) {
                         noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(btn => {
                             btn.addEventListener('click', function() {
@@ -1086,7 +1080,6 @@
                         });
                     }
 
-                    // 绑定中文名筛选
                     if (chineseFilterGroup) {
                         chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(btn => {
                             btn.addEventListener('click', function() {
@@ -1098,7 +1091,6 @@
                         });
                     }
 
-                    // 绑定视频教程筛选
                     if (videoFilterGroup) {
                         videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(btn => {
                             btn.addEventListener('click', function() {
@@ -1110,7 +1102,6 @@
                         });
                     }
 
-                    // 游戏搜索输入事件
                     if (gameSearchInput) {
                         gameSearchInput.addEventListener('input', function() {
                             gameQuery = this.value.trim().toLowerCase();
@@ -1141,7 +1132,6 @@
 
             function applyFilters() {
                 let filtered = allMods;
-                
                 if (searchQuery.trim()) {
                     const q = searchQuery.toLowerCase();
                     filtered = filtered.filter(mod => 
@@ -1152,35 +1142,28 @@
                         (mod.note && mod.note.toLowerCase().includes(q))
                     );
                 }
-                
                 if (gameQuery) {
                     filtered = filtered.filter(mod => mod.game && mod.game.toLowerCase().includes(gameQuery));
                 }
-                
                 if (statusFilter !== '全部') {
                     filtered = filtered.filter(mod => mod.status === statusFilter);
                 }
-                
                 if (offlineFilter !== 'all') {
                     const wantOffline = offlineFilter === 'yes';
                     filtered = filtered.filter(mod => mod.offline === wantOffline);
                 }
-                
                 if (noteFilter !== 'all') {
                     const hasNote = noteFilter === 'yes';
                     filtered = filtered.filter(mod => hasNote ? (mod.note && mod.note.trim()) : (!mod.note || !mod.note.trim()));
                 }
-                
                 if (chineseFilter !== 'all') {
                     const hasChinese = chineseFilter === 'yes';
                     filtered = filtered.filter(mod => hasChinese ? (mod.chineseName && mod.chineseName.trim()) : (!mod.chineseName || !mod.chineseName.trim()));
                 }
-                
                 if (videoFilter !== 'all') {
                     const hasVideo = videoFilter === 'yes';
                     filtered = filtered.filter(mod => hasVideo ? (mod.videoUrl && mod.videoUrl.trim() !== '') : (!mod.videoUrl || mod.videoUrl.trim() === ''));
                 }
-                
                 filteredMods = filtered;
                 currentPage = 1;
                 renderTable();
@@ -1192,12 +1175,10 @@
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const end = start + PAGE_SIZE;
                 const pageMods = filteredMods.slice(start, end);
-                
                 if (pageMods.length === 0) {
                     tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`;
                     return;
                 }
-                
                 let html = '';
                 pageMods.forEach(mod => {
                     const videoLink = mod.videoUrl ? `<a href="${mod.videoUrl}" target="_blank" style="color:#3B82F6;">🔗</a>` : '-';
@@ -1213,7 +1194,6 @@
                     } else if (mod.id) {
                         idDisplay = `<span class="mod-id">${mod.id}</span>`;
                     }
-                    
                     html += `<tr>
                         <td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td>
                         <td>${chineseName}</td>
@@ -1377,11 +1357,11 @@
         })();
     </script>
 
-    <!-- ========== 帖子数据加载脚本（从 JSON 读取） ========== -->
+    <!-- ========== 帖子数据加载脚本（列表样式） ========== -->
     <script>
         (function() {
-            const postsGrid = document.getElementById('postsGrid');
-            if (!postsGrid) return;
+            const postsList = document.getElementById('postsList');
+            if (!postsList) return;
 
             fetch('data/posts.json')
                 .then(response => {
@@ -1390,43 +1370,48 @@
                 })
                 .then(posts => {
                     if (posts.length === 0) {
-                        postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">暂无帖子，敬请期待～</div>';
+                        postsList.innerHTML = '<div style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">暂无帖子，敬请期待～</div>';
                         return;
                     }
+
+                    // 按日期倒序排列（最新的在前）
+                    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
                     let html = '';
                     posts.forEach(post => {
-                        // 限制摘要长度，防止溢出
                         let summary = post.summary || '';
-                        if (summary.length > 120) summary = summary.substring(0, 120) + '…';
+                        if (summary.length > 200) summary = summary.substring(0, 200) + '…';
                         html += `
-                            <div class="post-card" onclick="window.location.href='post.html?id=${post.id}'" style="cursor: pointer; background: rgba(255,255,255,0.05); border-radius: 14px; overflow: hidden; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1);">
-                                <div style="padding: 16px;">
-                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">${escapeHtml(post.title)}</div>
-                                    <div style="font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 8px;">📅 ${post.date}</div>
-                                    <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5;">${escapeHtml(summary)}</div>
+                            <div class="post-list-item" onclick="window.location.href='post.html?id=${post.id}'" style="cursor: pointer; padding: 8px 0; transition: all 0.2s;">
+                                <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; color: var(--text);">
+                                    ${escapeHtml(post.title)}
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">
+                                    📅 ${post.date}
+                                </div>
+                                <div style="font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.7);">
+                                    ${escapeHtml(summary)}
                                 </div>
                             </div>
                         `;
                     });
-                    postsGrid.innerHTML = html;
+                    postsList.innerHTML = html;
 
-                    // 悬停效果
-                    document.querySelectorAll('.post-card').forEach(card => {
-                        card.addEventListener('mouseenter', () => {
-                            card.style.transform = 'translateY(-4px)';
-                            card.style.boxShadow = '0 12px 28px rgba(0,0,0,0.3)';
-                            card.style.borderColor = 'rgba(255,255,255,0.25)';
+                    // 鼠标悬停效果
+                    document.querySelectorAll('.post-list-item').forEach(item => {
+                        item.addEventListener('mouseenter', () => {
+                            item.style.transform = 'translateX(4px)';
+                            item.style.opacity = '0.9';
                         });
-                        card.addEventListener('mouseleave', () => {
-                            card.style.transform = '';
-                            card.style.boxShadow = '';
-                            card.style.borderColor = '';
+                        item.addEventListener('mouseleave', () => {
+                            item.style.transform = '';
+                            item.style.opacity = '';
                         });
                     });
                 })
                 .catch(error => {
                     console.error('加载帖子失败:', error);
-                    postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>';
+                    postsList.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>';
                 });
 
             function escapeHtml(str) {

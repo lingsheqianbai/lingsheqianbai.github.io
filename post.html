@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style/word.css">
     <link rel="stylesheet" href="style/new.css">
     <style>
-        /* 帖子专用排版样式 */
         .post-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -18,9 +17,9 @@
             border: 1px solid var(--card-border);
         }
         .post-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.3;
         }
         .post-date {
@@ -31,41 +30,35 @@
             border-bottom: 1px solid var(--card-border);
         }
         .post-content {
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.7;
             color: var(--text);
         }
         .post-content h2 {
-            font-size: 1.6rem;
-            margin: 1.8rem 0 1rem;
+            font-size: 1.5rem;
             font-weight: 600;
+            margin: 2rem 0 1rem;
             border-bottom: 1px solid var(--card-border);
             padding-bottom: 0.3rem;
         }
         .post-content h3 {
-            font-size: 1.35rem;
-            margin: 1.5rem 0 0.8rem;
+            font-size: 1.25rem;
             font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
         }
-        .post-content h4 {
-            font-size: 1.2rem;
-            margin: 1.2rem 0 0.6rem;
-            font-weight: 600;
+        .post-content p {
+            margin: 0 0 1rem;
         }
         .post-content ul, .post-content ol {
-            margin: 1rem 0;
-            padding-left: 1.8rem;
+            margin: 0 0 1rem 1.5rem;
         }
         .post-content li {
             margin: 0.4rem 0;
         }
         .post-content blockquote {
-            margin: 1.2rem 0;
-            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            padding: 0.5rem 0 0.5rem 1rem;
             border-left: 4px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            font-style: italic;
             color: var(--text-muted);
         }
         .post-content pre {
@@ -74,8 +67,8 @@
             border-radius: 8px;
             overflow-x: auto;
             font-family: monospace;
-            font-size: 0.9rem;
-            margin: 1.2rem 0;
+            font-size: 0.85rem;
+            margin: 1rem 0;
         }
         .post-content code {
             background: rgba(0,0,0,0.3);
@@ -83,30 +76,6 @@
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.9em;
-        }
-        .post-content pre code {
-            background: none;
-            padding: 0;
-        }
-        .post-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            display: block;
-        }
-        .post-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.2rem 0;
-        }
-        .post-content th, .post-content td {
-            border: 1px solid var(--card-border);
-            padding: 0.6rem;
-            text-align: left;
-        }
-        .post-content th {
-            background: rgba(255,255,255,0.05);
         }
         .post-content a {
             color: #3B82F6;
@@ -121,11 +90,9 @@
             color: #3B82F6;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.2s;
         }
         .back-link:hover {
             text-decoration: underline;
-            transform: translateX(-4px);
         }
         @media (max-width: 640px) {
             .post-container {
@@ -133,16 +100,7 @@
                 padding: 1.2rem;
             }
             .post-title {
-                font-size: 1.8rem;
-            }
-            .post-content {
-                font-size: 1rem;
-            }
-            .post-content h2 {
-                font-size: 1.4rem;
-            }
-            .post-content h3 {
-                font-size: 1.2rem;
+                font-size: 1.6rem;
             }
         }
     </style>
