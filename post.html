@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>帖子详情 - 凌社千白</title>
+    <link rel="stylesheet" href="style/word.css">
+    <link rel="stylesheet" href="style/new.css">
+    <style>
+        /* 帖子专用排版样式 */
+        .post-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+        }
+        .post-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .post-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+        .post-content h2 {
+            font-size: 1.6rem;
+            margin: 1.8rem 0 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.3rem;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            margin: 1.5rem 0 0.8rem;
+            font-weight: 600;
+        }
+        .post-content h4 {
+            font-size: 1.2rem;
+            margin: 1.2rem 0 0.6rem;
+            font-weight: 600;
+        }
+        .post-content ul, .post-content ol {
+            margin: 1rem 0;
+            padding-left: 1.8rem;
+        }
+        .post-content li {
+            margin: 0.4rem 0;
+        }
+        .post-content blockquote {
+            margin: 1.2rem 0;
+            padding: 0.8rem 1.2rem;
+            border-left: 4px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        .post-content pre {
+            background: rgba(0,0,0,0.4);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 1.2rem 0;
+        }
+        .post-content code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .post-content pre code {
+            background: none;
+            padding: 0;
+        }
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            display: block;
+        }
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+        }
+        .post-content th, .post-content td {
+            border: 1px solid var(--card-border);
+            padding: 0.6rem;
+            text-align: left;
+        }
+        .post-content th {
+            background: rgba(255,255,255,0.05);
+        }
+        .post-content a {
+            color: #3B82F6;
+            text-decoration: none;
+        }
+        .post-content a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+            transform: translateX(-4px);
+        }
+        @media (max-width: 640px) {
+            .post-container {
+                margin: 1rem;
+                padding: 1.2rem;
+            }
+            .post-title {
+                font-size: 1.8rem;
+            }
+            .post-content {
+                font-size: 1rem;
+            }
+            .post-content h2 {
+                font-size: 1.4rem;
+            }
+            .post-content h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="pattern-bg">
+            <svg class="cube-svg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="cube" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+                        <path d="M30 0 L60 15 L60 41 L30 52 L0 41 L0 15 Z" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                        <path d="M30 26 L60 15 M30 26 L0 15 M30 26 L30 52" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#cube)"/>
+            </svg>
+        </div>
+    </div>
+    <div class="bg-blur"></div>
+    <div class="container" style="padding: 20px;">
+        <main class="post-container">
+            <div id="post-content">
+                <p>加载中...</p>
+            </div>
+            <a href="index.html" class="back-link">← 返回首页</a>
+        </main>
+    </div>
+
+    <script>
+        function getPostIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        async function loadPost() {
+            const postId = getPostIdFromUrl();
+            if (!postId) {
+                document.getElementById('post-content').innerHTML = '<p>未指定帖子 ID。</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch('data/posts.json');
+                if (!response.ok) throw new Error('网络响应失败');
+                const posts = await response.json();
+                const post = posts.find(p => p.id == postId);
+                if (!post) {
+                    document.getElementById('post-content').innerHTML = '<p>未找到该帖子。</p>';
+                    return;
+                }
+
+                const html = `
+                    <div class="post-header">
+                        <h1 class="post-title">${escapeHtml(post.title)}</h1>
+                        <div class="post-date">发布时间：${post.date}</div>
+                    </div>
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                `;
+                document.getElementById('post-content').innerHTML = html;
+                document.title = `${post.title} - 凌社千白`;
+            } catch (error) {
+                console.error('加载帖子失败：', error);
+                document.getElementById('post-content').innerHTML = '<p>加载失败，请稍后重试。</p>';
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        loadPost();
+    </script>
+</body>
+</html>
