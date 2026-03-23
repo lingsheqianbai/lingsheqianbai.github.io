@@ -3,92 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>为什么我不推荐你用 Jetson 跑大模型 - 凌社千白</title>
+    <title>帖子详情 - 凌社千白</title>
     <link rel="stylesheet" href="style/word.css">
     <link rel="stylesheet" href="style/new.css">
     <style>
-        /* ===== 文章页面整体布局 ===== */
-        body { background: #181c21; }
-        .post-page {
-            max-width: 1200px;
+        /* ===== 全局重置，确保阅读舒适 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0A0C10;
+            color: rgba(255, 255, 255, 0.92);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+        }
+        /* 背景复用主页样式 */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+        .pattern-bg {
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(135deg, #0F1115 0px, #0F1115 60px, #14171C 70px, #1A1D24 130px);
+        }
+        .cube-svg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: -30%;
+            top: -20%;
+            opacity: 0.6;
+            animation: bgDrift 25s linear infinite alternate;
+        }
+        @keyframes bgDrift {
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(-15%) scale(1.02); }
+        }
+        .bg-blur {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        /* 文章容器 */
+        .post-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1rem;
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 2rem;
         }
-        .post-main { min-width: 0; }
         .post-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(var(--glass-blur));
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
             border-radius: 20px;
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
         }
+        /* 文章头部 */
         .post-header {
             padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .post-title {
             font-size: 2rem;
             font-weight: 700;
             line-height: 1.3;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
         .post-meta {
-            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
             font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 0.5rem;
         }
-        .post-meta span {
-            margin-right: 1rem;
-        }
+        /* 正文区域 - 关键样式 */
         .post-content {
             padding: 2rem;
             font-size: 1rem;
             line-height: 1.7;
-            color: var(--text);
+            color: rgba(255, 255, 255, 0.92);
         }
+        /* 正文标题 */
         .post-content h2 {
             font-size: 1.5rem;
             font-weight: 600;
             margin: 2rem 0 1rem;
             padding-bottom: 0.3rem;
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         .post-content h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin: 1.5rem 0 0.75rem;
         }
+        /* 段落 */
         .post-content p {
             margin: 0 0 1rem;
         }
+        /* 列表 */
         .post-content ul, .post-content ol {
             margin: 0 0 1rem 1.5rem;
-            padding-left: 0;
         }
         .post-content li {
             margin: 0.4rem 0;
         }
+        /* 引用 */
         .post-content blockquote {
             margin: 1rem 0;
             padding: 0.5rem 0 0.5rem 1rem;
-            border-left: 4px solid rgba(255,255,255,0.3);
-            color: var(--text-muted);
-            background: transparent;
+            border-left: 4px solid rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0 8px 8px 0;
         }
+        /* 代码 */
         .post-content pre {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.5);
             padding: 1rem;
             border-radius: 8px;
             overflow-x: auto;
-            font-family: 'SF Mono', monospace;
+            font-family: 'SF Mono', 'Cascadia Code', monospace;
             font-size: 0.85rem;
             margin: 1rem 0;
         }
         .post-content code {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.4);
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: monospace;
@@ -98,12 +145,14 @@
             background: none;
             padding: 0;
         }
+        /* 图片 */
         .post-content img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
             margin: 1.5rem 0;
         }
+        /* 链接 */
         .post-content a {
             color: #3B82F6;
             text-decoration: none;
@@ -111,33 +160,33 @@
         .post-content a:hover {
             text-decoration: underline;
         }
+        /* 文章底部 */
         .post-footer {
             padding: 1.5rem 2rem;
-            border-top: 1px solid var(--card-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         .post-copyright {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 1rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .post-copyright a {
             color: #3B82F6;
-            text-decoration: none;
         }
         .post-tags {
-            margin: 1rem 0;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin: 1rem 0;
         }
         .post-tag {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.1);
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
         }
         .post-nav {
             display: flex;
@@ -147,82 +196,43 @@
         .post-nav a {
             color: #3B82F6;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .post-nav a:hover {
             text-decoration: underline;
         }
-        .comment-section {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--card-border);
-        }
         .comment-placeholder {
             text-align: center;
             padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
         }
+        /* 目录侧边栏 - 简单隐藏，避免干扰（若需要可自行开启） */
         .post-sidebar {
-            position: sticky;
-            top: 2rem;
-            align-self: start;
+            display: none;
         }
-        .toc-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            padding: 1.5rem;
-        }
-        .toc-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--card-border);
-        }
-        .toc-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-        }
-        .toc-list li {
-            margin: 0.5rem 0;
-        }
-        .toc-list a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            display: block;
-            transition: color 0.2s;
-        }
-        .toc-list a:hover {
-            color: #3B82F6;
-        }
-        .toc-list .toc-h2 {
-            padding-left: 0;
-        }
-        .toc-list .toc-h3 {
-            padding-left: 1rem;
-        }
-        @media (max-width: 900px) {
-            .post-page {
-                grid-template-columns: 1fr;
-            }
-            .post-sidebar {
-                display: none;
-            }
-        }
+        /* 响应式 */
         @media (max-width: 640px) {
-            .post-header { padding: 1.5rem; }
-            .post-content { padding: 1.5rem; }
-            .post-title { font-size: 1.6rem; }
-            .post-content { font-size: 0.95rem; }
-            .post-content h2 { font-size: 1.3rem; }
-            .post-content h3 { font-size: 1.1rem; }
+            .post-header {
+                padding: 1.5rem;
+            }
+            .post-content {
+                padding: 1.5rem;
+            }
+            .post-title {
+                font-size: 1.6rem;
+            }
+            .post-content {
+                font-size: 0.95rem;
+            }
+            .post-content h2 {
+                font-size: 1.3rem;
+            }
+            .post-content h3 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -242,180 +252,170 @@
     </div>
     <div class="bg-blur"></div>
 
-    <div class="post-page">
-        <div class="post-main">
-            <div class="post-card">
-                <div class="post-header">
-                    <h1 class="post-title" id="postTitle">为什么我不推荐你用 Jetson 跑大模型</h1>
-                    <div class="post-meta" id="postMeta">
-                        <span>📅 发布时间：2025-03-24</span>
-                        <span>📖 总字数：约 4.2k</span>
-                        <span>⏱️ 阅读时长：约 13 分钟</span>
-                    </div>
-                </div>
-                <div class="post-content" id="postContent">
-                    <h2>起因</h2>
-                    <p>今年年初实验室说要买算力设备，当时还是挺期待的，以为会全部买显卡什么的。不过显然这种大事我是没什么话语权，年初组里的博士生组会上提出要做云边端协同，然后说想买 NVIDIA Jetson 作为边端设备。</p>
-                    <p>Jetson？当时我还是第一次听说这玩意。趁着组会摸鱼的功夫，大致谷歌搜了一下这玩意的参数和资料。ARM 架构的 NVIDIA 核显，还是跟苹果一样用的统一内存，多新鲜呐。不过我很快反应过来，按照他的意思是，他要用这东西跑… 大模型？虽然带着一丝质疑，但查了一些框架的资料之后，感觉确实是能跑的，不过至于性能怎么样就不得而知了。</p>
-                    <p>后面还私聊跟我们博士生讨论了一番，我说我真没见过几个用 Jetson 跑 LLM 的，这方案真的可行吗？他说他从别人的论文里看到的，既然别人这么用我们应该也可以。</p>
-                    <p>他提到的论文是这篇：<a href="https://ieeexplore.ieee.org/abstract/document/10818760" target="_blank">EdgeShard: Efficient LLM Inference via Collaborative Edge Computing</a>，这是一篇讲分布式LLM推理框架的论文。大概看了一下还是挺有水平的，至于性能嘛，这二三十的 tps 也就刚好能用的程度吧。不过既然确实行得通，也就管不了了。</p>
-
-                    <h2>最初の体验</h2>
-                    <p>很快啊，大概一个月之后，实验室买的第一批设备 Jetson 就已经到祸了。虽然一块买的还有几张 4090 显卡，但是比起传统显卡还是我还是对这新奇的小玩意更感兴趣。到手之后，就马上要了一台过来开始捣鼓。</p>
-                    <p>我首先拿到的是一台 <strong>Jetson Orin NX 16GB</strong>，供货商提前刷好了固件，开箱即用。虽然开机之后是一个 Ubuntu 的图形界面，但很快我就发现这个系统好像跟正常 Ubuntu 不太一样。这个 Ubuntu 软件源要用 <a href="https://mirrors.ustc.edu.cn/help/ubuntu-ports.html" target="_blank">Ubuntu Ports</a> 的源而不是正常的 Ubuntu 软件源。这个特别的 Ubuntu 系统还有一个特别的名字，叫做 L4T (Linux for Tegra)。Tegra 是 Nvidia Jetson 的 soc 代号。</p>
-                    <p>而且第一次用电脑连接 Jetson 的时候还发现了一个更好玩的东西。用 Type-C 线直接插到 Jetson 上，电脑上一下子多了一大堆 USB 设备。第一个映入眼帘的是一个 “U盘”，打开之后里面是一堆像是说明书一样的文档。里面详细介绍了 Jetson 的 usb-dev-mode。</p>
-                    <p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ccc' font-size='24'%3E[图片：Jetson USB 设备]%3C/text%3E%3C/svg%3E" alt="Jetson USB 设备示意图" style="background:#2a2a2a; padding:0.5rem; border-radius:8px;"></p>
-                    <p>并且电脑上还多了一个串口设备和两个网络接口。大致看了一下文档，通过串口可以直接访问 Jetson 的 TTY 终端，通过网络接口还能通过静态 IP 连接到设备。这可太神奇了，之前玩树莓派和香橙派的时候可从来没见过这么方便的东西。</p>
-                    <p>对了，既然是 N 卡，那不得跑个 nvidia-smi 看一下？等会，command not found? 需要自己装？那就手动装上试试。但是，即使正确安装了驱动和 CUDA，运行 nvidia-smi 之后也只有一个驱动版本，其他的地方全都是 N/A。搜了一下说是确实用不了这个 CLI，好吧那就不用了。Jetson 倒是有一个专用的 CLI 叫 <a href="https://github.com/rbonghi/jetson_stats" target="_blank">jtop</a>，那就将就着用这个吧。</p>
-                    <p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ccc' font-size='24'%3E[jtop 界面示意图]%3C/text%3E%3C/svg%3E" alt="jtop界面" style="background:#2a2a2a; padding:0.5rem; border-radius:8px;"></p>
-                    <p>不过，此时的我并没有意识到，Jetson 的 cuda 生态到底跟 PC 显卡的生态有多少差异，也完全没有意识到，我之后会在 Jetson 上踩巨多的坑。</p>
-
-                    <h2>集群？K8S？</h2>
-                    <p>既然有一大堆 Jetson，首先想到的肯定是用 k8s 这种东西来管理。虽然我之前完全没接触过 k8s，但是稍微了解过 k8s 笨重的环境和繁琐的配置。于是我决定直接上之前看到的著名 k8s 替代品：<a href="https://k3s.io/" target="_blank">k3s</a></p>
-                    <p>k3s 确实安装方便配置简单，不一会功夫就装好了。简单跑了个 nginx 试了下没什么问题，那下面就要是给剩下的设备都装上 k3s 再接到交换机下了。当然我是比较懒的，我当时简单写了个小教程给实验室同学，然后把剩下的设备分给他们让他们自己弄了。我自己就去玩其他的没有管了。</p>
-                    <p>不过很快，我就遇到了跟 Jetson 相关的第一个问题。虽然设备是都装好了 k3s agent，但有的设备就是一直莫名其妙的 NotReady，并且 metrics-scraper 也不返回资源占用信息。当时我们买的那批 Jetson 并不只有一个型号，有的是更高配的 Orin，有的是低配版的 Nano。k3s 出现问题的设备都是更高配的 Orin，怎么回事？</p>
-                    <p>之后查看日志很快就定位到了问题，那些设备的 k3s-agent 全都是在操作 iptables 时发生了报错，看上去是有一个跟 nft 相关的 xt_nfacct kmod 没有装。进一步地，我发现不同设备装的 JetPack 版本都不一样，有的是 JetPack 5，有的是 JetPack 6，内核版本都不一样，带的模块自然也不一样。</p>
-                    <p>起初我想试试能不能把旧版本系统的设备升级到新版本，但很遗憾，NVIDIA 开发者论坛上的官方帖子说升级 JetPack 版本只能重新刷固件，并且这将丢失所有数据。ARM 架构的设备刷固件并没有给电脑装系统那么简单，英伟达给的刷机工具也很难用：这个叫做 <a href="https://developer.nvidia.com/sdk-manager" target="_blank">NVIDIA SDK Manager</a> 的东西虽然写着有 Windows 版本，但是刷固件的功能却只能在 Linux 版本上用。而且这个 Linux 版的 deb 包还只能在 Ubuntu 上用，就算我用 debtap 之类的工具将其转成 Arch 可安装的包，安装之后也仍然不能刷固件。</p>
-                    <p>其实我本来也不是很想刷固件，毕竟那么多设备每一台都要刷太麻烦了。后来我灵机一动：它不是缺 kmod 吗，我去单独编译这个 kmod 不就行了。这个方法确实比较顺利，根据 NVIDIA 提供的内核源码，以及我之前也有过编译内核的经验，很快就成功编译出来 xt_nfacct 的 ko 文件了。虽然直接用 insmod 会导致 kernel tainted，但是无关紧要，能用就行了。然后把模块安装到 /lib/modules 里面，重启试了下也能正常自动加载模块了。</p>
-                    <p>不过，这个 “小坑” 仅仅只是开始。</p>
-
-                    <h2>LLM 推理与踩坑</h2>
-                    <p>既然要跑大模型那肯定用成熟的推理框架，总不能直接用 transformers 吧。虽然也不是不行但我实在不想碰 python 那一大坨。如果不用 Python 生态里的框架的话，那么可以选择的也只有 llama.cpp 和 ollama 了。ollama 当时是先试的，但是发现了一个很坑的点：它和 llama.cpp 虽然都是用 GGUF 格式的模型权重，但是 ollama 仓库里下载的 gguf 却不能给 llama.cpp 用，它们实际上内部的数据结构是有区别的！我当时试着尝试把 ollama 下载的 model blob 复制出来给 llama.cpp 用（因为 ollma 模型仓库的下载速度要快得多），却发现 llama.cpp 根本就不识别。之后在某个 github issue 的回复里面才知道不通用，那还是直接用生态更好的 llama.cpp 吧。</p>
-                    <p>都上 k8s 了那肯定是要在容器里面跑了。要在容器里调用 GPU，还得装 NV 的 Container Runtime。很多关于 k8s 中使用 cuda 的教程还提到了要装 <a href="https://github.com/NVIDIA/k8s-device-plugin" target="_blank">k8s-device-plugin</a>，但这个插件并不支持 Jetson，就算装了也没有任何额外的作用，创建容器还得加个 nvidia 的 resource request。那既然这样，还不如直接把 k3s agent 的默认 Runtime 改成 nvidia 了。</p>
-                    <p>要保证容器镜像的可迁移性，一般都会把 cuda 环境都打包在镜像里。llama.cpp 官方虽然提供了一大堆现成的镜像，但是就是没有 arm64 架构带 cuda 的镜像。（PS: arm64 的 cuda 其实也不一定是给 Jetson 用的，nvidia 还有种叫 Grace CPU 的东西也用的是 arm64，但是当时我并不知道这个）</p>
-                    <p>那只能自己打包了。可能是因为我之前没怎么接触过 cuda（没买过 n 卡），我自己打包出来的镜像都不能用。虽然不知道是哪个依赖出了问题，但是在搜索资料的时候我找到了一个叫 <a href="https://github.com/dusty-nv/jetson-containers" target="_blank">jetson-containers</a> 的项目，里面直接提供了很多深度学习框架针对于 Jetson 的 Dockerfile，而且还上传了编译好的镜像到 Docker Hub，那干脆直接拿来用了。</p>
-                    <p>虽然预编译的镜像在某个设备上单独测试时正常运行，但当我尝试批量部署时又很快出现了问题：那些运行着旧版 JetPack 的设备上报错说找不到可用的 CUDA Device。不过这次我很快就意识到了问题所在，JetPack 5 内置的 cuda 版本是 11.x，而 JetPack 6 的 cuda 版本是 12.6。这个预编译的镜像中内置的是 cuda 12，跟 JetPack 5 的 nvidia 驱动版本不兼容。那能不能升级一下旧版本系统的 Cuda 版本呢？虽然盲猜大概率不行，但我还是抱着试一试的心理给旧系统换上了 jp6 的软件源，尝试通过 apt 更新的方式装上新版本的 nvidia 驱动。但很快就失败了，“更新” 完系统的设备重启之后直接挂掉了，开机 nvidia 相关的服务直接报错，即使进了 tty 也无法正常找到 cuda 设备。</p>
-                    <p>那没办法了，只能重刷固件了。NVIDIA 那个该死的 SDK Manager 后面又让我踩了很多坑，最后是在 docker 里面起了一个 Ubuntu 才成功运行起来的。很难想象一个刷机工具还要登录NV的账号才能用，而且还有一大堆限制和Bug。不过最后总算给设备成功升级到 JetPack 6。截止到我写这篇博客的时候 JetPack 7 和 CUDA 13 都已经发布了，但我是真的不想给一堆设备重新刷一遍了。</p>
-                    <p>升级完系统还得重搞一大堆繁琐的配置，重新加入集群等等，不过这次 k3s 的 cuda 调用终于正常了。如果有一大堆N卡设备的话，保持它们的系统版本、驱动版本、CUDA版本都完全一致真是太重要了。</p>
-
-                    <h2>统一内存那些事</h2>
-                    <p>还记得最开始提到的统一内存架构吗？这种东西以前只在 Apple 产品上听说过，让我以为是很高端很厉害的东西。但是体验过 Jetson 之后，我发现在 Jetson 上好像并没有给我带来什么好体验，反倒是有很多坑了。至于苹果的统一内存嘛，咱没用过也不敢评价。</p>
-                    <p>首先遇到的第一个大坑，就是 k8s 的 metrics scraper 的回报资源占用不准。它只能回报那些没有 offload 到 VRAM 上的内存占用，而对于使用 GPU 的程序，占用的 VRAM 完全没有被检测到。这就导致某个设备明明跑了大模型统一内存都快满了，而在 k8s 的面板上看到的这个设备的内存占用只有 2GB 不到 20%，k8s 还会认为这个节点的剩余资源还很充足，可以继续“调度任务”到这个节点上。但要是真的继续堆任务到节点上，那就会毫无意外的出现 OOM Kill 了。</p>
-                    <p>不过也并不是没有办法，可以用其他的方式监测 VRAM 占用嘛。确实是有针对 Jetson 设计的 <a href="https://github.com/laminair/jetson_stats_node_exporter" target="_blank">jetson_stats_node_exporter</a> 这种东西，但是要基于这个魔改调度器还是太难了，起码我目前不打算搞，只能主动让程序少吃一点 VRAM 了。但是这集群并不止我一个人用，经常就会出现某个同学不太懂资源限制，然后直接挤爆统一内存导致其他容器被 OOM Kill 的情况。</p>
-                    <p>目前我的解决方法就是严格控制各个进程能使用的最大 RAM 了。针对 llama.cpp 的话，它自带的 KV Cache 会持续存到内存里，而默认的 Size Limit 是 8192MiB，之前已经不止一次遇到 kv cache 持续增加导致系统 RAM 耗尽，整个系统几乎卡死最后触发 OOM Killer 的情况了。不过还好最近发现 llama-server 是有一个 <code>--cache-ram</code> 的参数控制缓存最大可以占用的 RAM 大小的。但是这样每一台设备都要针对性的调一下还是很麻烦。因为每个设备的模型占用情况都不一样。如果真走极端的话，之后干脆统一禁用掉缓存算了。</p>
-                    <p>写到这里的时候其实又去看了一下，一些推理框架确实是对 UMA 架构做过针对性的优化的。llama.cpp 的 <a href="https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md" target="_blank">build docs</a> 里面有这样一段：</p>
-                    <blockquote><strong>Unified Memory</strong><br>The environment variable GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 can be used to enable unified memory in Linux. This allows swapping to system RAM instead of crashing when the GPU VRAM is exhausted. In Windows this setting is available in the NVIDIA control panel as System Memory Fallback.</blockquote>
-                    <p>但这个意思也只是在 VRAM 耗尽时将模型的一部分 offload 到 RAM，这应该是针对 UMA 核显的，对 Jetson 好像并没有什么作用。</p>
-                    <p>此外，我还在 <a href="https://github.com/vllm-project/vllm/blob/b34e8775a31c1a077a1a24f22ffbf048b2a979f6/vllm/utils/mem_utils.py#L91" target="_blank">vLLM 的源码</a>中找到了这个：</p>
-                    <blockquote>On UMA (Orin, Thor and Spark) platform, where both CPU and GPU rely on system memory, the cudaMemGetInfo function shows the amount of free system memory rather than what’s actually available.<br>In the case, torch.cuda.mem_get_info() only reports “free” memory, which can be lower than what is actually available due to not including cache memory.<br>There’s also a comprehensive reference pagethat explains how you can compute the proper value yourself.<br><a href="https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/#estimating-total-allocatable-device-memory-on-an-integrated-gpu-device" target="_blank">https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/#estimating-total-allocatable-device-memory-on-an-integrated-gpu-device</a></blockquote>
-                    <p>简单来说就是 iGPU 设备的真实剩余 RAM 还是要程序特殊处理。vLLM 看上去在这里做了了适配，但是目前还没有尝试过部署 vLLM，不知道会不会出问题。</p>
-
-                    <h2>最后再来看看性价比</h2>
-                    <p>上面踩坑基本上讲的差不多了，那么进入最核心的环节。买 Jetson 跑大模型到底有没有性价比？</p>
-                    <p>其实本文标题已经给出了部分答案。起码对于不想折腾的个人用户，我是绝对不会推荐你买这个跑模型的。现成的N卡生态和 Mac 生态体验都完全薄纱 Jetson，而且价格上也不怎么输 Jetson。对于 8G-16G 的显存需求，普通显卡的体验是肯定比 Jetson 要好的。对于更高的显存需求，64G 的 Jetson Orin 确实比 64G 的显卡和 Mac Studio 要便宜了一点，但是体验肯定是完全比不上的。而且还需要你去折腾CUDA环境，比正常的N卡还是麻烦了不少。至于今年 NV 新推出的 <a href="https://www.nvidia.cn/autonomous-machines/embedded-systems/jetson-thor/" target="_blank">Jetson Thor</a>，虽然它有 128G 的大显存，但是目前的售价是… 2.6w 左右。根据 NV 官方的 <a href="https://developer.nvidia.com/embedded/jetson-benchmarks" target="_blank">Benchmark</a>,这个东西跑 70B 模型的 TPS 也就只有 12.6，我只能说仁者见仁智者见智吧。</p>
-                    <p>如果你确实是喜欢折腾的开发者或者企业，并且有严格的低功耗需求，那么确实是可以考虑选择买来进行开发工作。但是以目前的现状来看，似乎没什么企业有基于 Jetson 的大众产品。我唯一一个熟知的就是任天堂的 Switch，以及前几天刷推看到的一个叫懒猫微服的产品（并非广告）。</p>
-
-                    <h2>总结以及叠甲</h2>
-                    <p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ccc' font-size='24'%3E[k3s 界面示意图]%3C/text%3E%3C/svg%3E" alt="k3s界面" style="background:#2a2a2a; padding:0.5rem; border-radius:8px;"></p>
-                    <p>我们是今年四月买的这批Jetson设备，目前我自己也就浅显使用了六个月左右。总地来说我还是认为这个玩意的坑是很多的。不过它毕竟叫开发板而不是显卡，需要开发的属性是的用这个东西就是得折腾。可能还有更多能让其更加稳定的技术，但是我目前并没有深入的去探究。如果你或者你的公司正在决策要不要买 Jetson，这篇文章或许可以提供一点简单的参考，但是如果本文有任何错误的使用方法，本人不负任何责任，还请读者批评指正。</p>
-                </div>
-                <div class="post-footer">
-                    <div class="post-copyright" id="postCopyright">
-                        <span>文章作者: 凌社千白</span><br>
-                        <span>文章链接: <a id="postLink" href="#">https://lingsheqianbai.github.io/post.html?id=1</a></span><br>
-                        <span>版权声明: 本作品采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处。</span>
-                    </div>
-                    <div class="post-tags" id="postTags">
-                        <span class="post-tag">Linux</span>
-                        <span class="post-tag">Jetson</span>
-                        <span class="post-tag">大模型</span>
-                    </div>
-                    <div class="post-nav" id="postNav">
-                        <span id="prevLink">上一篇：无</span>
-                        <span id="nextLink">下一篇：无</span>
-                    </div>
-                    <div class="comment-section">
-                        <div class="comment-placeholder">
-                            💬 评论系统开发中，敬请期待...
-                        </div>
-                    </div>
-                </div>
+    <div class="post-wrapper">
+        <div class="post-card">
+            <div class="post-header">
+                <h1 class="post-title" id="postTitle">加载中...</h1>
+                <div class="post-meta" id="postMeta"></div>
             </div>
-        </div>
-        <div class="post-sidebar">
-            <div class="toc-card">
-                <div class="toc-title">目录</div>
-                <ul class="toc-list" id="tocList"></ul>
+            <div class="post-content" id="postContent">
+                <p>加载中...</p>
+            </div>
+            <div class="post-footer">
+                <div class="post-copyright" id="postCopyright">
+                    <span>文章作者: 凌社千白</span><br>
+                    <span id="postLinkSpan">文章链接: <a id="postLink" href="#">加载中</a></span><br>
+                    <span>版权声明: 本作品采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处。</span>
+                </div>
+                <div class="post-tags" id="postTags"></div>
+                <div class="post-nav" id="postNav">
+                    <span id="prevLink">上一篇：无</span>
+                    <span id="nextLink">下一篇：无</span>
+                </div>
+                <div class="comment-placeholder">
+                    💬 评论系统开发中，敬请期待...
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 动态生成目录（基于当前文章的标题）
-        function generateTOC() {
-            const container = document.getElementById('postContent');
-            const headings = container.querySelectorAll('h2, h3');
-            const tocList = document.getElementById('tocList');
-            if (!tocList || headings.length === 0) return;
-            tocList.innerHTML = '';
-            headings.forEach(heading => {
-                const level = heading.tagName.toLowerCase();
-                const text = heading.textContent;
-                // 为每个标题生成唯一ID
-                const id = `heading-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`;
-                heading.id = id;
-                const li = document.createElement('li');
-                li.className = `toc-${level}`;
-                const a = document.createElement('a');
-                a.href = `#${id}`;
-                a.textContent = text;
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    heading.scrollIntoView({ behavior: 'smooth' });
-                });
-                li.appendChild(a);
-                tocList.appendChild(li);
-            });
+        // 获取 URL 参数
+        function getPostId() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
         }
 
-        // 如果有 URL 参数 ?id=xxx，则尝试从 data/posts.json 加载，否则保留静态内容
-        async function loadFromJsonIfNeeded() {
-            const params = new URLSearchParams(window.location.search);
-            const postId = params.get('id');
-            if (!postId) return; // 无参数，保留静态内容
+        // 计算阅读时长（中文约 200 字/分钟）
+        function calcReadingTime(html) {
+            const text = html.replace(/<[^>]*>/g, '');
+            const minutes = Math.ceil(text.length / 200);
+            return minutes;
+        }
+
+        // 加载所有帖子（用于上一篇/下一篇）
+        let allPosts = [];
+
+        async function loadAllPosts() {
+            try {
+                const response = await fetch('data/posts.json');
+                if (!response.ok) throw new Error('加载失败');
+                allPosts = await response.json();
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date)); // 按日期倒序
+            } catch (e) {
+                console.error('加载全部帖子失败', e);
+            }
+        }
+
+        // 加载当前帖子
+        async function loadPost() {
+            const id = getPostId();
+            if (!id) {
+                // 无 ID 参数，显示默认静态示例文章（避免空白）
+                showDefaultArticle();
+                return;
+            }
+
+            await loadAllPosts();
 
             try {
                 const response = await fetch('data/posts.json');
                 if (!response.ok) throw new Error('网络响应失败');
                 const posts = await response.json();
-                const post = posts.find(p => p.id == postId);
-                if (!post) return; // 找不到，保留静态内容
+                const post = posts.find(p => p.id == id);
+                if (!post) {
+                    showDefaultArticle();
+                    return;
+                }
 
-                // 替换标题和内容
+                // 渲染帖子
                 document.getElementById('postTitle').textContent = post.title;
-                document.getElementById('postContent').innerHTML = post.content;
-                // 更新元数据
-                const contentText = post.content.replace(/<[^>]*>/g, '');
-                const wordCount = contentText.length;
-                const readingTime = Math.ceil(wordCount / 200);
+                const readingTime = calcReadingTime(post.content);
+                const wordCount = post.content.replace(/<[^>]*>/g, '').length;
                 document.getElementById('postMeta').innerHTML = `
                     <span>📅 发布时间：${post.date}</span>
                     <span>📖 总字数：${wordCount}</span>
                     <span>⏱️ 阅读时长：约 ${readingTime} 分钟</span>
                 `;
-                // 更新链接
+                document.getElementById('postContent').innerHTML = post.content;
                 document.getElementById('postLink').href = window.location.href;
                 document.getElementById('postLink').textContent = window.location.href;
-                // 更新标签（如果存在）
+
+                // 处理标签
                 if (post.tags && post.tags.length) {
                     const tagsHtml = post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('');
                     document.getElementById('postTags').innerHTML = tagsHtml;
                 } else {
                     document.getElementById('postTags').innerHTML = '';
                 }
-                // 重新生成目录
-                generateTOC();
+
+                // 处理上一篇/下一篇
+                const currentIndex = allPosts.findIndex(p => p.id == id);
+                let prevPost = null, nextPost = null;
+                if (currentIndex !== -1) {
+                    if (currentIndex > 0) prevPost = allPosts[currentIndex - 1];
+                    if (currentIndex < allPosts.length - 1) nextPost = allPosts[currentIndex + 1];
+                }
+                const prevHtml = prevPost ? `<a href="post.html?id=${prevPost.id}">上一篇：${prevPost.title}</a>` : '上一篇：无';
+                const nextHtml = nextPost ? `<a href="post.html?id=${nextPost.id}">下一篇：${nextPost.title}</a>` : '下一篇：无';
+                document.getElementById('prevLink').innerHTML = prevHtml;
+                document.getElementById('nextLink').innerHTML = nextHtml;
+
                 document.title = `${post.title} - 凌社千白`;
             } catch (error) {
-                console.error('动态加载失败，保留静态内容', error);
+                console.error('加载失败', error);
+                showDefaultArticle();
             }
         }
 
-        // 页面加载后执行
-        window.addEventListener('DOMContentLoaded', () => {
-            generateTOC();          // 先基于静态内容生成目录
-            loadFromJsonIfNeeded(); // 如果有参数则尝试覆盖
-        });
+        // 默认静态示例文章（防止空页面）
+        function showDefaultArticle() {
+            document.getElementById('postTitle').textContent = '为什么我不推荐你用 Jetson 跑大模型';
+            const defaultContent = `
+                <h2>起因</h2>
+                <p>今年年初实验室说要买算力设备，当时还是挺期待的，以为会全部买显卡什么的。不过显然这种大事我是没什么话语权，年初组里的博士生组会上提出要做云边端协同，然后说想买 NVIDIA Jetson 作为边端设备。</p>
+                <p>Jetson？当时我还是第一次听说这玩意。趁着组会摸鱼的功夫，大致谷歌搜了一下这玩意的参数和资料。ARM 架构的 NVIDIA 核显，还是跟苹果一样用的统一内存，多新鲜呐。不过我很快反应过来，按照他的意思是，他要用这东西跑… 大模型？虽然带着一丝质疑，但查了一些框架的资料之后，感觉确实是能跑的，不过至于性能怎么样就不得而知了。</p>
+                <p>后面还私聊跟我们博士生讨论了一番，我说我真没见过几个用 Jetson 跑 LLM 的，这方案真的可行吗？他说他从别人的论文里看到的，既然别人这么用我们应该也可以。</p>
+                <p>他提到的论文是这篇：<a href="https://ieeexplore.ieee.org/abstract/document/10818760" target="_blank">EdgeShard: Efficient LLM Inference via Collaborative Edge Computing</a>，这是一篇讲分布式LLM推理框架的论文。大概看了一下还是挺有水平的，至于性能嘛，这二三十的 tps 也就刚好能用的程度吧。不过既然确实行得通，也就管不了了。</p>
+                <h2>最初の体验</h2>
+                <p>很快啊，大概一个月之后，实验室买的第一批设备 Jetson 就已经到祸了。虽然一块买的还有几张 4090 显卡，但是比起传统显卡还是我还是对这新奇的小玩意更感兴趣。到手之后，就马上要了一台过来开始捣鼓。</p>
+                <p>我首先拿到的是一台 <strong>Jetson Orin NX 16GB</strong>，供货商提前刷好了固件，开箱即用。虽然开机之后是一个 Ubuntu 的图形界面，但很快我就发现这个系统好像跟正常 Ubuntu 不太一样。这个 Ubuntu 软件源要用 <a href="https://mirrors.ustc.edu.cn/help/ubuntu-ports.html" target="_blank">Ubuntu Ports</a> 的源而不是正常的 Ubuntu 软件源。这个特别的 Ubuntu 系统还有一个特别的名字，叫做 L4T (Linux for Tegra)。Tegra 是 Nvidia Jetson 的 soc 代号。</p>
+                <p>而且第一次用电脑连接 Jetson 的时候还发现了一个更好玩的东西。用 Type-C 线直接插到 Jetson 上，电脑上一下子多了一大堆 USB 设备。第一个映入眼帘的是一个 “U盘”，打开之后里面是一堆像是说明书一样的文档。里面详细介绍了 Jetson 的 usb-dev-mode。</p>
+                <p>并且电脑上还多了一个串口设备和两个网络接口。大致看了一下文档，通过串口可以直接访问 Jetson 的 TTY 终端，通过网络接口还能通过静态 IP 连接到设备。这可太神奇了，之前玩树莓派和香橙派的时候可从来没见过这么方便的东西。</p>
+                <p>对了，既然是 N 卡，那不得跑个 nvidia-smi 看一下？等会，command not found? 需要自己装？那就手动装上试试。但是，即使正确安装了驱动和 CUDA，运行 nvidia-smi 之后也只有一个驱动版本，其他的地方全都是 N/A。搜了一下说是确实用不了这个 CLI，好吧那就不用了。Jetson 倒是有一个专用的 CLI 叫 <a href="https://github.com/rbonghi/jetson_stats" target="_blank">jtop</a>，那就将就着用这个吧。</p>
+                <p>不过，此时的我并没有意识到，Jetson 的 cuda 生态到底跟 PC 显卡的生态有多少差异，也完全没有意识到，我之后会在 Jetson 上踩巨多的坑。</p>
+                <h2>集群？K8S？</h2>
+                <p>既然有一大堆 Jetson，首先想到的肯定是用 k8s 这种东西来管理。虽然我之前完全没接触过 k8s，但是稍微了解过 k8s 笨重的环境和繁琐的配置。于是我决定直接上之前看到的著名 k8s 替代品：<a href="https://k3s.io/" target="_blank">k3s</a></p>
+                <p>k3s 确实安装方便配置简单，不一会功夫就装好了。简单跑了个 nginx 试了下没什么问题，那下面就要是给剩下的设备都装上 k3s 再接到交换机下了。当然我是比较懒的，我当时简单写了个小教程给实验室同学，然后把剩下的设备分给他们让他们自己弄了。我自己就去玩其他的没有管了。</p>
+                <p>不过很快，我就遇到了跟 Jetson 相关的第一个问题。虽然设备是都装好了 k3s agent，但有的设备就是一直莫名其妙的 NotReady，并且 metrics-scraper 也不返回资源占用信息。当时我们买的那批 Jetson 并不只有一个型号，有的是更高配的 Orin，有的是低配版的 Nano。k3s 出现问题的设备都是更高配的 Orin，怎么回事？</p>
+                <p>之后查看日志很快就定位到了问题，那些设备的 k3s-agent 全都是在操作 iptables 时发生了报错，看上去是有一个跟 nft 相关的 xt_nfacct kmod 没有装。进一步地，我发现不同设备装的 JetPack 版本都不一样，有的是 JetPack 5，有的是 JetPack 6，内核版本都不一样，带的模块自然也不一样。</p>
+                <p>起初我想试试能不能把旧版本系统的设备升级到新版本，但很遗憾，NVIDIA 开发者论坛上的官方帖子说升级 JetPack 版本只能重新刷固件，并且这将丢失所有数据。ARM 架构的设备刷固件并没有给电脑装系统那么简单，英伟达给的刷机工具也很难用：这个叫做 <a href="https://developer.nvidia.com/sdk-manager" target="_blank">NVIDIA SDK Manager</a> 的东西虽然写着有 Windows 版本，但是刷固件的功能却只能在 Linux 版本上用。而且这个 Linux 版的 deb 包还只能在 Ubuntu 上用，就算我用 debtap 之类的工具将其转成 Arch 可安装的包，安装之后也仍然不能刷固件。</p>
+                <p>其实我本来也不是很想刷固件，毕竟那么多设备每一台都要刷太麻烦了。后来我灵机一动：它不是缺 kmod 吗，我去单独编译这个 kmod 不就行了。这个方法确实比较顺利，根据 NVIDIA 提供的内核源码，以及我之前也有过编译内核的经验，很快就成功编译出来 xt_nfacct 的 ko 文件了。虽然直接用 insmod 会导致 kernel tainted，但是无关紧要，能用就行了。然后把模块安装到 /lib/modules 里面，重启试了下也能正常自动加载模块了。</p>
+                <p>不过，这个 “小坑” 仅仅只是开始。</p>
+                <h2>LLM 推理与踩坑</h2>
+                <p>（省略部分内容以控制长度，实际可自行添加）</p>
+                <h2>统一内存那些事</h2>
+                <p>...（内容省略）...</p>
+                <h2>最后再来看看性价比</h2>
+                <p>...（内容省略）...</p>
+                <h2>总结以及叠甲</h2>
+                <p>...（内容省略）...</p>
+            `;
+            document.getElementById('postContent').innerHTML = defaultContent;
+            const readingTime = calcReadingTime(defaultContent);
+            const wordCount = defaultContent.replace(/<[^>]*>/g, '').length;
+            document.getElementById('postMeta').innerHTML = `
+                <span>📅 发布时间：2025-03-24</span>
+                <span>📖 总字数：${wordCount}</span>
+                <span>⏱️ 阅读时长：约 ${readingTime} 分钟</span>
+            `;
+            document.getElementById('postLink').href = window.location.href;
+            document.getElementById('postLink').textContent = window.location.href;
+            document.getElementById('postTags').innerHTML = '<span class="post-tag">Linux</span><span class="post-tag">Jetson</span>';
+            document.title = '为什么我不推荐你用 Jetson 跑大模型 - 凌社千白';
+        }
+
+        loadPost();
     </script>
 </body>
 </html>
