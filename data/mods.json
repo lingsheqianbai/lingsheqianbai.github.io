@@ -4675,6 +4675,17 @@
     "offline": false
   },
   {
+    "name": "SnackTime 89 [B42 SP/MP]",
+    "chineseName": "零食时光89",
+    "platform": "steam",
+    "steamId": "3589560764",
+    "game": "僵毁 僵尸毁灭工程 Project Zomboid",
+    "status": "待检测",
+    "videoUrl": "",
+    "note": "",
+    "offline": false
+  },
+  {
     "name": "EnvironmentalProtectionSuit",
     "chineseName": "",
     "platform": "steam",
