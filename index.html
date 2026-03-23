@@ -605,13 +605,15 @@
     </div>
     <div class="bg-blur"></div>
     <div class="container">
-        <!-- 左侧栏 -->
+        <!-- 左侧栏（增加“帖子”项） -->
         <aside class="sidebar">
-            <div class="radio-container" style="--total-radio: 4;">
+            <div class="radio-container" style="--total-radio: 5;">
                 <input type="radio" name="nav" id="nav-about" checked>
                 <label for="nav-about">简介</label>
                 <input type="radio" name="nav" id="nav-projects">
                 <label for="nav-projects">项目</label>
+                <input type="radio" name="nav" id="nav-posts">
+                <label for="nav-posts">帖子</label>
                 <input type="radio" name="nav" id="nav-contact">
                 <label for="nav-contact">联系</label>
                 <input type="radio" name="nav" id="nav-thanks">
@@ -621,7 +623,6 @@
                 </div>
             </div>
         </aside>
-
         <!-- 右侧主内容区 -->
         <main class="main-content">
             <div class="mobile-avatar-card" id="mobileAvatarCard" style="display: none;"></div>
@@ -727,32 +728,24 @@
                         </div>
                     </div>
                 </details>
-
                 <!-- 卡片 3：模组信息统计（简化版筛选 + 游戏搜索） -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">📊</span> 模组信息统计
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
-                        <!-- 更新时间（自动显示） -->
                         <span id="updateDate" style="font-size: 12px; color: rgba(255,255,255,0.4); margin-left: 10px;">更新: 加载中...</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
-                        <!-- 统计信息（动态生成） -->
                         <div id="modStats" class="stats-bar">加载统计中...</div>
-
-                        <!-- 搜索框 -->
                         <div class="search-box">
                             <input type="text" id="modSearch" placeholder="搜索模组名称、中文名、ID或备注...">
                         </div>
-
-                        <!-- ========== 高级筛选面板（各组默认折叠） ========== -->
                         <div class="filter-section">
                             <div class="filter-header" id="filterToggle">
                                 <span><span>🔍</span> 高级筛选</span>
                                 <span class="arrow">▼</span>
                             </div>
                             <div class="filter-content" id="filterContent">
-                                <!-- 游戏组（新增，默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▶</span>
@@ -762,19 +755,13 @@
                                         <input type="text" id="gameSearchInput" class="game-search-input" placeholder="输入游戏名称...">
                                     </div>
                                 </div>
-
-                                <!-- 翻译状态组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▶</span>
                                         <span>翻译状态</span>
                                     </div>
-                                    <div class="filter-group-options collapsed" id="statusFilterGroup">
-                                        <!-- 由 JS 动态生成 -->
-                                    </div>
+                                    <div class="filter-group-options collapsed" id="statusFilterGroup"></div>
                                 </div>
-
-                                <!-- 离线分享组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▶</span>
@@ -786,8 +773,6 @@
                                         <span class="filter-btn" data-group="offline" data-value="no">未上传</span>
                                     </div>
                                 </div>
-
-                                <!-- 备注组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▶</span>
@@ -799,8 +784,6 @@
                                         <span class="filter-btn" data-group="note" data-value="no">无备注</span>
                                     </div>
                                 </div>
-
-                                <!-- 中文名组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▶</span>
@@ -812,8 +795,6 @@
                                         <span class="filter-btn" data-group="chinese" data-value="no">无中文名</span>
                                     </div>
                                 </div>
-
-                                <!-- 视频教程组（默认折叠） -->
                                 <div class="filter-group">
                                     <div class="filter-group-header" onclick="toggleGroup(this)">
                                         <span class="group-arrow">▶</span>
@@ -827,25 +808,16 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="table-responsive">
                             <table class="mod-table" id="modTable">
                                 <thead>
-                                    <tr>
-                                        <th>模组名称 / ID</th>
-                                        <th>模组中文名</th>
-                                        <th>翻译进度</th>
-                                        <th>视频教程</th>
-                                        <th>备注</th>
-                                        <th>离线分享</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="modTableBody"><tr><td colspan="6" class="loading">加载中...</td></tr></tbody>
-                            </table>
-                        </div>
+                                    <tr><th>模组名称 / ID</th><th>模组中文名</th><th>翻译进度</th><th>视频教程</th><th>备注</th><th>离线分享</th> </thead>
+                                <tbody id="modTableBody"> <tr><td colspan="6" class="loading">加载中...<\/td><\/tr> <\/tbody>
+                            <\/table>
+                        <\/div>
                         <div class="pagination" id="pagination"></div>
-                    </div>
-                </details>
+                    <\/div>
+                <\/details>
 
                 <!-- ========== 我制作的游戏攻略卡片 ========== -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
@@ -854,38 +826,28 @@
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
-                        <!-- 攻略总数统计 -->
                         <div id="guideStats" class="stats-bar">📚 加载中...</div>
-
-                        <!-- 搜索框 -->
                         <div class="search-box">
                             <input type="text" id="guideSearch" placeholder="搜索攻略名称...">
                         </div>
-
                         <div class="table-responsive">
                             <table class="mod-table guide-table" id="guideTable">
-                                <thead>
-                                    <tr>
-                                        <th>攻略名称</th>
-                                        <th>视频</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="guideTableBody"><tr><td colspan="2" class="loading">加载中...</td></tr></tbody>
-                            </table>
-                        </div>
+                                <thead> 的人<th>攻略名称</th><th>视频</th> </thead>
+                                <tbody id="guideTableBody"> 的人<td colspan="2" class="loading">加载中...<\/td><\/tr> <\/tbody>
+                            <\/table>
+                        <\/div>
                         <div class="pagination" id="guidePagination"></div>
-                    </div>
-                </details>
+                    <\/div>
+                <\/details>
 
                 <!-- ========== 我的帖子（卡片列表，仿 Revincx 主页） ========== -->
-                <div class="posts-section">
+                <div class="posts-section" id="posts">
                     <h3 class="section-title">📝 我的帖子</h3>
                     <div id="postsGrid" class="posts-grid">
                         <div class="loading" style="text-align:center; padding:40px;">加载中...</div>
-                    </div>
-                </div>
-            </div>
-
+                    <\/div>
+                <\/div>
+            <\/div>
             <!-- ========== 联系方式模块 ========== -->
             <div class="comms-card" id="contact">
                 <div class="comms-header">
@@ -912,78 +874,33 @@
             <!-- ========== 致谢模块 ========== -->
             <div class="projects-card" id="thanks" style="margin-top: 10px;">
                 <h3 class="section-title">致谢</h3>
-
-                <!-- 卡片 1：网页贡献致谢 -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">🌐</span> 网页贡献致谢
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
-                        <div class="thanks-section">
-                            <ul>
-                                <li><a href="https://www.deepseek.com/" target="_blank" style="color: #3B82F6; text-decoration: none;">DeepSeek</a> - AI 助手，提供代码生成与技术支持</li>
-                                <li><a href="https://space.bilibili.com/3493078216215098" target="_blank" style="color: #3B82F6; text-decoration: none;">小狐务器</a> - B站主页，灵感来源与设计参考</li>
-                            </ul>
-                        </div>
+                        <div class="thanks-section"><ul><li><a href="https://www.deepseek.com/" target="_blank" style="color: #3B82F6;">DeepSeek</a> - AI 助手</li><li><a href="https://space.bilibili.com/3493078216215098" target="_blank" style="color: #3B82F6;">小狐务器</a> - B站主页</li></ul></div>
                     </div>
                 </details>
-
-                <!-- 卡片 2：僵尸毁灭工程致谢 -->
                 <details class="contact-item" style="padding: 0; overflow: hidden; border-radius: 14px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.1);">
                     <summary style="cursor: pointer; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.02); transition: background 0.2s; color: rgba(255,255,255,0.95); font-weight: 500;">
                         <span style="font-size: 24px;">🧟</span> 僵尸毁灭工程致谢
                         <span style="margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.4);">点击展开</span>
                     </summary>
                     <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);">
-                        <div class="thanks-section">
-                            <h4>老版汉化组成员</h4>
-                            <ul><li>Sky_Orc_Mm</li><li>Misha（紗紗）</li><li>HennyFishYu（江中小鱼）</li><li>Jeff</li></ul>
-                        </div>
-                        <div class="thanks-section">
-                            <h4>新版汉化组成员</h4>
-                            <ul><li>Alexa-Hong（湖畔镇一枝花）</li><li>AZ</li><li>Flying penguin</li><li>格兰瑞敌击剑</li><li>HansKaffee</li><li>L'Etranger</li><li>Livia</li><li>moonlight-pz</li><li>轻轻的晚风</li><li>RunAbout</li><li>Susan Admason（Canada）</li><li>taoran</li><li>天冷就要吃火锅</li><li>TwilightRain（暮雨）</li><li>战场蒲公英</li><li>zlq4863947</li></ul>
-                        </div>
-                        <div class="thanks-section">
-                            <h4>电台内容 汉化员</h4>
-                            <ul><li>HenryFishYu</li><li>Jeff</li><li>HansKaffee</li><li>TwilightRain</li><li>moonlight-pz</li><li>Susan Admason（Canada）</li><li>L'Etranger</li><li>天冷就要吃火锅</li><li>轻轻的晚风</li><li>格兰瑞敌击剑</li><li>湖畔镇一枝花</li><li>Livia</li><li>Flying Penguin</li><li>AZ</li><li>taoran</li><li>eva08maicy02</li></ul>
-                        </div>
-                        <div class="thanks-section">
-                            <h4>特別鳴謝</h4>
-                            <ul><li>YD360</li><li>Douggy_Sans(dfr12382)</li><li>BigSmoke</li><li>Washi(berice152233)</li><li>Yuanmo(ligyik00)</li><li>mraz#9738</li><li>COSeeds</li></ul>
-                        </div>
-                        <div class="thanks-section">
-                            <h4>社区汉化</h4>
-                            <ul><li>凌社千白 (本网页建设者 & 模组汉化)</li><li>DeepSeek (技术支持)</li><li>模组编程</li><li>DeepSeek (AI协作)</li></ul>
-                            <p class="thanks-note">注：是我制作的模组不指代其他人，因为这个网页本身是我建设汉化也是</p>
-                        </div>
-                        <div class="thanks-section">
-                            <h4>感谢以下模组提供的文件参考与灵感（排名不分先后）</h4>
-                            <ul>
-                                <li>[B42]汉化补充包（ID: 3388550747）——已在其基础上进行更新与维护</li>
-                                <li>[B42]简体中文修复（ID: 3386522562）</li>
-                                <li>[B42]统一·中文汉化（ID: 3556544454）——借鉴与修改</li>
-                                <li>42传单汉化（ID: 3395823587）</li>
-                                <li>[B42]出生点地图中文本地化（ID: 3401460152）——提供的地图压缩包</li>
-                                <li>模组备注 ID: 3391537655</li>
-                            </ul>
-                        </div>
-                        <div class="thanks-section">
-                            <h4>原版汉化模组搭建致谢</h4>
-                            <ul>
-                                <li><strong>模组备注</strong> ID: 3391537655 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3391537655" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 <a href="https://steamcommunity.com/profiles/76561198834649094" target="_blank" style="color:#3B82F6;">炎天amfysky</a></li>
-                                <li><strong>B42汉化补充包</strong> ID: 3388550747 <a href="https://steamcommunity.com/workshop/filedetails/?id=3388550747" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 <a href="https://steamcommunity.com/profiles/76561198834649094" target="_blank" style="color:#3B82F6;">炎天amfysky</a></li>
-                                <li><strong>B42简体中文修复</strong> ID: 3386522562 <a href="https://steamcommunity.com/workshop/filedetails/?id=3386522562" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 <a href="https://steamcommunity.com/profiles/76561198145796765" target="_blank" style="color:#3B82F6;">喵了个球</a></li>
-                                <li><strong>42传单汉化</strong> ID: 3395823587 <a href="https://steamcommunity.com/workshop/filedetails/?id=3395823587" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 <a href="https://tieba.baidu.com/home/main?id=tb.1.61915a7d.nJn2lbj8VCEKDg_Ztre_Vw?t=1571794067&fr=pb" target="_blank" style="color:#3B82F6;">Köngwaffle</a></li>
-                                <li><strong>[B42]出生点地图中文本地化 | SpawnSelectMap-CN</strong> ID: 3401460152 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3401460152&searchtext=%E5%9C%B0%E5%9B%BE%E6%B1%89%E5%8C%96" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 <a href="https://steamcommunity.com/id/abocide1997" target="_blank" style="color:#3B82F6;">SillageM</a></li>
-                            </ul>
-                        </div>
+                        <div class="thanks-section"><h4>老版汉化组成员</h4><ul><li>Sky_Orc_Mm</li><li>Misha</li><li>HennyFishYu</li><li>Jeff</li></ul></div>
+                        <div class="thanks-section"><h4>新版汉化组成员</h4><ul><li>Alexa-Hong</li><li>AZ</li><li>Flying penguin</li><li>格兰瑞敌击剑</li><li>HansKaffee</li><li>L'Etranger</li><li>Livia</li><li>moonlight-pz</li><li>轻轻的晚风</li><li>RunAbout</li><li>Susan Admason</li><li>taoran</li><li>天冷就要吃火锅</li><li>TwilightRain</li><li>战场蒲公英</li><li>zlq4863947</li></ul></div>
+                        <div class="thanks-section"><h4>电台内容汉化员</h4><ul><li>HenryFishYu</li><li>Jeff</li><li>HansKaffee</li><li>TwilightRain</li><li>moonlight-pz</li><li>Susan Admason</li><li>L'Etranger</li><li>天冷就要吃火锅</li><li>轻轻的晚风</li><li>格兰瑞敌击剑</li><li>湖畔镇一枝花</li><li>Livia</li><li>Flying Penguin</li><li>AZ</li><li>taoran</li><li>eva08maicy02</li></ul></div>
+                        <div class="thanks-section"><h4>特別鳴謝</h4><ul><li>YD360</li><li>Douggy_Sans</li><li>BigSmoke</li><li>Washi</li><li>Yuanmo</li><li>mraz#9738</li><li>COSeeds</li></ul></div>
+                        <div class="thanks-section"><h4>社区汉化</h4><ul><li>凌社千白</li><li>DeepSeek</li><li>模组编程</li><li>DeepSeek (AI协作)</li></ul><p class="thanks-note">注：是我制作的模组不指代其他人，因为这个网页本身是我建设汉化也是</p></div>
+                        <div class="thanks-section"><h4>感谢以下模组提供的文件参考与灵感</h4><ul><li>[B42]汉化补充包（ID: 3388550747）</li><li>[B42]简体中文修复（ID: 3386522562）</li><li>[B42]统一·中文汉化（ID: 3556544454）</li><li>42传单汉化（ID: 3395823587）</li><li>[B42]出生点地图中文本地化（ID: 3401460152）</li><li>模组备注 ID: 3391537655</li></ul></div>
+                        <div class="thanks-section"><h4>原版汉化模组搭建致谢</h4><ul><li><strong>模组备注</strong> ID: 3391537655 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3391537655" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 炎天amfysky</li><li><strong>B42汉化补充包</strong> ID: 3388550747 <a href="https://steamcommunity.com/workshop/filedetails/?id=3388550747" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 炎天amfysky</li><li><strong>B42简体中文修复</strong> ID: 3386522562 <a href="https://steamcommunity.com/workshop/filedetails/?id=3386522562" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 喵了个球</li><li><strong>42传单汉化</strong> ID: 3395823587 <a href="https://steamcommunity.com/workshop/filedetails/?id=3395823587" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 Köngwaffle</li><li><strong>[B42]出生点地图中文本地化</strong> ID: 3401460152 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3401460152" target="_blank" style="color:#3B82F6;">[创意工坊]</a> 原作者 SillageM</li></ul></div>
                     </div>
                 </details>
             </div>
         </main>
     </div>
-
     <!-- 图片放大功能脚本 -->
     <script>
         (function() {
@@ -991,345 +908,49 @@
             var modalImg = document.getElementById("modalImage");
             var sponsorImg = document.getElementById("sponsorImg");
             var closeBtn = document.getElementsByClassName("close-modal")[0];
-
-            if (sponsorImg) {
-                sponsorImg.onclick = function() {
-                    modal.style.display = "flex";
-                    modalImg.src = this.src;
-                };
-            }
-            if (closeBtn) {
-                closeBtn.onclick = function() {
-                    modal.style.display = "none";
-                };
-            }
-            if (modal) {
-                modal.onclick = function(event) {
-                    if (event.target === modal) {
-                        modal.style.display = "none";
-                    }
-                };
-            }
+            if (sponsorImg) sponsorImg.onclick = function() { modal.style.display = "flex"; modalImg.src = this.src; };
+            if (closeBtn) closeBtn.onclick = function() { modal.style.display = "none"; };
+            if (modal) modal.onclick = function(e) { if (e.target === modal) modal.style.display = "none"; };
         })();
     </script>
 
-    <!-- 折叠组切换函数（全局） -->
-    <script>
-        function toggleGroup(header) {
-            var options = header.nextElementSibling;
-            var arrow = header.querySelector('.group-arrow');
-            if (options.classList.contains('collapsed')) {
-                options.classList.remove('collapsed');
-                arrow.textContent = '▼';
-            } else {
-                options.classList.add('collapsed');
-                arrow.textContent = '▶';
-            }
-        }
-    </script>
+    <!-- 折叠组切换函数 -->
+    <script>function toggleGroup(header){var options=header.nextElementSibling;var arrow=header.querySelector('.group-arrow');if(options.classList.contains('collapsed')){options.classList.remove('collapsed');arrow.textContent='▼';}else{options.classList.add('collapsed');arrow.textContent='▶';}}</script>
 
     <!-- ========== 模组数据加载脚本 ========== -->
     <script>
         (function() {
             const PAGE_SIZE = 10;
-            let allMods = [];
-            let filteredMods = [];
-            let currentPage = 1;
-            let searchQuery = '';
-            let gameQuery = '';
-            let statusFilter = '全部';
-            let offlineFilter = 'all';
-            let noteFilter = 'all';
-            let chineseFilter = 'all';
-            let videoFilter = 'all';
-            let filterCollapsed = false;
+            let allMods = [], filteredMods = [], currentPage = 1;
+            let searchQuery = '', gameQuery = '', statusFilter = '全部', offlineFilter = 'all', noteFilter = 'all', chineseFilter = 'all', videoFilter = 'all', filterCollapsed = false;
+            const searchInput = document.getElementById('modSearch'), gameSearchInput = document.getElementById('gameSearchInput');
+            const tbody = document.getElementById('modTableBody'), paginationDiv = document.getElementById('pagination');
+            const filterToggle = document.getElementById('filterToggle'), filterContent = document.getElementById('filterContent');
+            const updateDateSpan = document.getElementById('updateDate'), modStatsDiv = document.getElementById('modStats');
+            const statusFilterGroup = document.getElementById('statusFilterGroup'), offlineFilterGroup = document.getElementById('offlineFilterGroup');
+            const noteFilterGroup = document.getElementById('noteFilterGroup'), chineseFilterGroup = document.getElementById('chineseFilterGroup'), videoFilterGroup = document.getElementById('videoFilterGroup');
 
-            const searchInput = document.getElementById('modSearch');
-            const gameSearchInput = document.getElementById('gameSearchInput');
-            const tbody = document.getElementById('modTableBody');
-            const paginationDiv = document.getElementById('pagination');
-            const filterToggle = document.getElementById('filterToggle');
-            const filterContent = document.getElementById('filterContent');
-            const updateDateSpan = document.getElementById('updateDate');
-            const modStatsDiv = document.getElementById('modStats');
+            if (filterToggle) filterToggle.addEventListener('click', function() { filterCollapsed = !filterCollapsed; if (filterContent) filterContent.classList.toggle('collapsed', filterCollapsed); filterToggle.classList.toggle('collapsed', filterCollapsed); });
 
-            const statusFilterGroup = document.getElementById('statusFilterGroup');
-            const offlineFilterGroup = document.getElementById('offlineFilterGroup');
-            const noteFilterGroup = document.getElementById('noteFilterGroup');
-            const chineseFilterGroup = document.getElementById('chineseFilterGroup');
-            const videoFilterGroup = document.getElementById('videoFilterGroup');
+            function setUpdateDate() { if (updateDateSpan) { const today = new Date(); updateDateSpan.textContent = `更新: ${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`; } }
+            function updateModStats() { if (!modStatsDiv || !allMods.length) return; const total = allMods.length; const countComplete = allMods.filter(m => m.status === '完整').length; const countIncomplete = allMods.filter(m => m.status === '非完整').length; const countPending = allMods.filter(m => m.status === '待检测').length; const countUnneeded = allMods.filter(m => m.status === '无需翻译').length; const countTodo = allMods.filter(m => m.status === '待处理').length; const countHasVideo = allMods.filter(m => m.videoUrl && m.videoUrl.trim() !== '').length; const countNoVideo = total - countHasVideo; modStatsDiv.innerHTML = `<div class="stats-item"><span class="icon">📊</span> 总模组: <span class="stats-number">${total}</span></div><div class="stats-item stats-complete"><span class="icon">✅</span> 完整: <span class="stats-number">${countComplete}</span></div><div class="stats-item stats-todo"><span class="icon">⏳</span> 待处理: <span class="stats-number">${countTodo}</span></div><div class="stats-item stats-pending"><span class="icon">🔍</span> 待检测: <span class="stats-number">${countPending}</span></div><div class="stats-item stats-incomplete"><span class="icon">🟡</span> 非完整: <span class="stats-number">${countIncomplete}</span></div><div class="stats-item stats-unneeded"><span class="icon">🟣</span> 无需翻译: <span class="stats-number">${countUnneeded}</span></div><div class="stats-item"><span class="icon">📹</span> 已拥有视频: <span class="stats-number">${countHasVideo}</span></div><div class="stats-item"><span class="icon">🚫</span> 未拥有视频: <span class="stats-number">${countNoVideo}</span></div>`; }
 
-            if (filterToggle) {
-                filterToggle.addEventListener('click', function() {
-                    filterCollapsed = !filterCollapsed;
-                    if (filterContent) filterContent.classList.toggle('collapsed', filterCollapsed);
-                    filterToggle.classList.toggle('collapsed', filterCollapsed);
-                });
-            }
+            function getModLink(mod) { if (mod.platform === 'steam' && mod.steamId) return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.steamId}`; else if (mod.platform === 'mcmod' && mod.mcmodId) return `https://www.mcmod.cn/class/${mod.mcmodId}.html`; else if (mod.platform === 'custom' && mod.customUrl) return mod.customUrl; else if (mod.id) return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.id}`; else return '#'; }
 
-            function setUpdateDate() {
-                if (updateDateSpan) {
-                    const today = new Date();
-                    const year = today.getFullYear();
-                    const month = String(today.getMonth() + 1).padStart(2, '0');
-                    const day = String(today.getDate()).padStart(2, '0');
-                    updateDateSpan.textContent = `更新: ${year}-${month}-${day}`;
-                }
-            }
+            fetch('data/mods.json').then(r => r.json()).then(data => { allMods = data; const statusSet = new Set(); data.forEach(mod => { if (mod.status) statusSet.add(mod.status); }); const statusList = ['全部', ...Array.from(statusSet).sort()]; if (statusFilterGroup) { statusFilterGroup.innerHTML = statusList.map(s => `<span class="filter-btn ${s === '全部' ? 'active' : ''}" data-group="status" data-value="${s}">${s}</span>`).join(''); document.querySelectorAll('[data-group="status"]').forEach(btn => { btn.addEventListener('click', function() { document.querySelectorAll('[data-group="status"]').forEach(b => b.classList.remove('active')); this.classList.add('active'); statusFilter = this.dataset.value; applyFilters(); }); }); }
+                if (offlineFilterGroup) offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(btn => { btn.addEventListener('click', function() { offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(b => b.classList.remove('active')); this.classList.add('active'); offlineFilter = this.dataset.value; applyFilters(); }); });
+                if (noteFilterGroup) noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(btn => { btn.addEventListener('click', function() { noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(b => b.classList.remove('active')); this.classList.add('active'); noteFilter = this.dataset.value; applyFilters(); }); });
+                if (chineseFilterGroup) chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(btn => { btn.addEventListener('click', function() { chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(b => b.classList.remove('active')); this.classList.add('active'); chineseFilter = this.dataset.value; applyFilters(); }); });
+                if (videoFilterGroup) videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(btn => { btn.addEventListener('click', function() { videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(b => b.classList.remove('active')); this.classList.add('active'); videoFilter = this.dataset.value; applyFilters(); }); });
+                if (gameSearchInput) gameSearchInput.addEventListener('input', function() { gameQuery = this.value.trim().toLowerCase(); applyFilters(); });
+                setUpdateDate(); updateModStats(); applyFilters();
+            }).catch(error => { console.error('加载 mods.json 失败:', error); if (tbody) tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`; setUpdateDate(); });
 
-            function updateModStats() {
-                if (!modStatsDiv || !allMods.length) return;
-                const total = allMods.length;
-                const countComplete = allMods.filter(m => m.status === '完整').length;
-                const countIncomplete = allMods.filter(m => m.status === '非完整').length;
-                const countPending = allMods.filter(m => m.status === '待检测').length;
-                const countUnneeded = allMods.filter(m => m.status === '无需翻译').length;
-                const countTodo = allMods.filter(m => m.status === '待处理').length;
-                const countHasVideo = allMods.filter(m => m.videoUrl && m.videoUrl.trim() !== '').length;
-                const countNoVideo = total - countHasVideo;
-
-                modStatsDiv.innerHTML = `
-                    <div class="stats-item"><span class="icon">📊</span> 总模组: <span class="stats-number">${total}</span></div>
-                    <div class="stats-item stats-complete"><span class="icon">✅</span> 完整: <span class="stats-number">${countComplete}</span></div>
-                    <div class="stats-item stats-todo"><span class="icon">⏳</span> 待处理: <span class="stats-number">${countTodo}</span></div>
-                    <div class="stats-item stats-pending"><span class="icon">🔍</span> 待检测: <span class="stats-number">${countPending}</span></div>
-                    <div class="stats-item stats-incomplete"><span class="icon">🟡</span> 非完整: <span class="stats-number">${countIncomplete}</span></div>
-                    <div class="stats-item stats-unneeded"><span class="icon">🟣</span> 无需翻译: <span class="stats-number">${countUnneeded}</span></div>
-                    <div class="stats-item"><span class="icon">📹</span> 已拥有视频: <span class="stats-number">${countHasVideo}</span></div>
-                    <div class="stats-item"><span class="icon">🚫</span> 未拥有视频: <span class="stats-number">${countNoVideo}</span></div>
-                `;
-            }
-
-            function getModLink(mod) {
-                if (mod.platform === 'steam' && mod.steamId) {
-                    return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.steamId}`;
-                } else if (mod.platform === 'mcmod' && mod.mcmodId) {
-                    return `https://www.mcmod.cn/class/${mod.mcmodId}.html`;
-                } else if (mod.platform === 'custom' && mod.customUrl) {
-                    return mod.customUrl;
-                } else if (mod.id) {
-                    return `https://steamcommunity.com/sharedfiles/filedetails/?id=${mod.id}`;
-                } else {
-                    return '#';
-                }
-            }
-
-            fetch('data/mods.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('网络响应失败');
-                    return response.json();
-                })
-                .then(data => {
-                    allMods = data;
-
-                    const statusSet = new Set();
-                    data.forEach(mod => { if (mod.status) statusSet.add(mod.status); });
-                    const statusList = ['全部', ...Array.from(statusSet).sort()];
-                    if (statusFilterGroup) {
-                        statusFilterGroup.innerHTML = statusList.map(status => 
-                            `<span class="filter-btn ${status === '全部' ? 'active' : ''}" data-group="status" data-value="${status}">${status}</span>`
-                        ).join('');
-                        document.querySelectorAll('[data-group="status"]').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                document.querySelectorAll('[data-group="status"]').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                statusFilter = this.dataset.value;
-                                applyFilters();
-                            });
-                        });
-                    }
-
-                    if (offlineFilterGroup) {
-                        offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                offlineFilterGroup.querySelectorAll('[data-group="offline"]').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                offlineFilter = this.dataset.value;
-                                applyFilters();
-                            });
-                        });
-                    }
-
-                    if (noteFilterGroup) {
-                        noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                noteFilterGroup.querySelectorAll('[data-group="note"]').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                noteFilter = this.dataset.value;
-                                applyFilters();
-                            });
-                        });
-                    }
-
-                    if (chineseFilterGroup) {
-                        chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                chineseFilterGroup.querySelectorAll('[data-group="chinese"]').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                chineseFilter = this.dataset.value;
-                                applyFilters();
-                            });
-                        });
-                    }
-
-                    if (videoFilterGroup) {
-                        videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(btn => {
-                            btn.addEventListener('click', function() {
-                                videoFilterGroup.querySelectorAll('[data-group="video"]').forEach(b => b.classList.remove('active'));
-                                this.classList.add('active');
-                                videoFilter = this.dataset.value;
-                                applyFilters();
-                            });
-                        });
-                    }
-
-                    if (gameSearchInput) {
-                        gameSearchInput.addEventListener('input', function() {
-                            gameQuery = this.value.trim().toLowerCase();
-                            applyFilters();
-                        });
-                    }
-
-                    setUpdateDate();
-                    updateModStats();
-                    applyFilters();
-                })
-                .catch(error => {
-                    console.error('加载 mods.json 失败:', error);
-                    if (tbody) tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
-                    setUpdateDate();
-                });
-
-            function getStatusClass(status) {
-                const map = {
-                    '完整': 'status-complete',
-                    '非完整': 'status-incomplete',
-                    '待检测': 'status-pending',
-                    '无需翻译': 'status-unneeded',
-                    '待处理': 'status-todo'
-                };
-                return map[status] || '';
-            }
-
-            function applyFilters() {
-                let filtered = allMods;
-                if (searchQuery.trim()) {
-                    const q = searchQuery.toLowerCase();
-                    filtered = filtered.filter(mod => 
-                        mod.name.toLowerCase().includes(q) || 
-                        (mod.steamId && mod.steamId.includes(q)) ||
-                        (mod.mcmodId && mod.mcmodId.includes(q)) ||
-                        (mod.chineseName && mod.chineseName.toLowerCase().includes(q)) ||
-                        (mod.note && mod.note.toLowerCase().includes(q))
-                    );
-                }
-                if (gameQuery) {
-                    filtered = filtered.filter(mod => mod.game && mod.game.toLowerCase().includes(gameQuery));
-                }
-                if (statusFilter !== '全部') {
-                    filtered = filtered.filter(mod => mod.status === statusFilter);
-                }
-                if (offlineFilter !== 'all') {
-                    const wantOffline = offlineFilter === 'yes';
-                    filtered = filtered.filter(mod => mod.offline === wantOffline);
-                }
-                if (noteFilter !== 'all') {
-                    const hasNote = noteFilter === 'yes';
-                    filtered = filtered.filter(mod => hasNote ? (mod.note && mod.note.trim()) : (!mod.note || !mod.note.trim()));
-                }
-                if (chineseFilter !== 'all') {
-                    const hasChinese = chineseFilter === 'yes';
-                    filtered = filtered.filter(mod => hasChinese ? (mod.chineseName && mod.chineseName.trim()) : (!mod.chineseName || !mod.chineseName.trim()));
-                }
-                if (videoFilter !== 'all') {
-                    const hasVideo = videoFilter === 'yes';
-                    filtered = filtered.filter(mod => hasVideo ? (mod.videoUrl && mod.videoUrl.trim() !== '') : (!mod.videoUrl || mod.videoUrl.trim() === ''));
-                }
-                filteredMods = filtered;
-                currentPage = 1;
-                renderTable();
-                renderPagination();
-            }
-
-            function renderTable() {
-                if (!tbody) return;
-                const start = (currentPage - 1) * PAGE_SIZE;
-                const end = start + PAGE_SIZE;
-                const pageMods = filteredMods.slice(start, end);
-                if (pageMods.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`;
-                    return;
-                }
-                let html = '';
-                pageMods.forEach(mod => {
-                    const videoLink = mod.videoUrl ? `<a href="${mod.videoUrl}" target="_blank" style="color:#3B82F6;">🔗</a>` : '-';
-                    const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>';
-                    const statusClass = getStatusClass(mod.status);
-                    const chineseName = mod.chineseName || '-';
-                    const modLink = getModLink(mod);
-                    let idDisplay = '';
-                    if (mod.steamId) {
-                        idDisplay = `<span class="mod-id">${mod.steamId}</span>`;
-                    } else if (mod.mcmodId) {
-                        idDisplay = `<span class="mod-id">MC百科 ID: ${mod.mcmodId}</span>`;
-                    } else if (mod.id) {
-                        idDisplay = `<span class="mod-id">${mod.id}</span>`;
-                    }
-                    html += `<tr>
-                        <td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td>
-                        <td>${chineseName}</td>
-                        <td><span class="status-badge ${statusClass}">${mod.status}</span></td>
-                        <td>${videoLink}</td>
-                        <td>${mod.note || '-'}</td>
-                        <td>${offlineIcon}</td>
-                    </tr>`;
-                });
-                tbody.innerHTML = html;
-            }
-
-            function renderPagination() {
-                if (!paginationDiv) return;
-                const totalPages = Math.ceil(filteredMods.length / PAGE_SIZE);
-                if (totalPages <= 1) {
-                    paginationDiv.innerHTML = '';
-                    return;
-                }
-                let html = '<button id="prevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
-                html += '<div class="page-numbers">';
-                let startPage = Math.max(1, currentPage - 2);
-                let endPage = Math.min(totalPages, startPage + 4);
-                if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
-                for (let i = startPage; i <= endPage; i++) {
-                    html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
-                }
-                html += '</div>';
-                html += `<button id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>下一页 ›</button>`;
-                paginationDiv.innerHTML = html;
-
-                document.querySelectorAll('.page-number').forEach(span => {
-                    span.addEventListener('click', function() {
-                        const page = parseInt(this.dataset.page, 10);
-                        if (page !== currentPage) {
-                            currentPage = page;
-                            renderTable();
-                            renderPagination();
-                        }
-                    });
-                });
-                document.getElementById('prevPage')?.addEventListener('click', () => {
-                    if (currentPage > 1) { currentPage--; renderTable(); renderPagination(); }
-                });
-                document.getElementById('nextPage')?.addEventListener('click', () => {
-                    if (currentPage < totalPages) { currentPage++; renderTable(); renderPagination(); }
-                });
-            }
-
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    searchQuery = this.value;
-                    applyFilters();
-                });
-            }
+            function getStatusClass(status) { const map = { '完整': 'status-complete', '非完整': 'status-incomplete', '待检测': 'status-pending', '无需翻译': 'status-unneeded', '待处理': 'status-todo' }; return map[status] || ''; }
+            function applyFilters() { let filtered = allMods; if (searchQuery.trim()) { const q = searchQuery.toLowerCase(); filtered = filtered.filter(mod => mod.name.toLowerCase().includes(q) || (mod.steamId && mod.steamId.includes(q)) || (mod.mcmodId && mod.mcmodId.includes(q)) || (mod.chineseName && mod.chineseName.toLowerCase().includes(q)) || (mod.note && mod.note.toLowerCase().includes(q))); } if (gameQuery) filtered = filtered.filter(mod => mod.game && mod.game.toLowerCase().includes(gameQuery)); if (statusFilter !== '全部') filtered = filtered.filter(mod => mod.status === statusFilter); if (offlineFilter !== 'all') filtered = filtered.filter(mod => mod.offline === (offlineFilter === 'yes')); if (noteFilter !== 'all') filtered = filtered.filter(mod => noteFilter === 'yes' ? (mod.note && mod.note.trim()) : (!mod.note || !mod.note.trim())); if (chineseFilter !== 'all') filtered = filtered.filter(mod => chineseFilter === 'yes' ? (mod.chineseName && mod.chineseName.trim()) : (!mod.chineseName || !mod.chineseName.trim())); if (videoFilter !== 'all') filtered = filtered.filter(mod => videoFilter === 'yes' ? (mod.videoUrl && mod.videoUrl.trim() !== '') : (!mod.videoUrl || mod.videoUrl.trim() === '')); filteredMods = filtered; currentPage = 1; renderTable(); renderPagination(); }
+            function renderTable() { if (!tbody) return; const start = (currentPage - 1) * PAGE_SIZE; const end = start + PAGE_SIZE; const pageMods = filteredMods.slice(start, end); if (pageMods.length === 0) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`; return; } let html = ''; pageMods.forEach(mod => { const videoLink = mod.videoUrl ? `<a href="${mod.videoUrl}" target="_blank" style="color:#3B82F6;">🔗</a>` : '-'; const offlineIcon = mod.offline ? '<span class="icon-uploaded">✅</span>' : '<span class="icon-not-uploaded">❌</span>'; const statusClass = getStatusClass(mod.status); const chineseName = mod.chineseName || '-'; const modLink = getModLink(mod); let idDisplay = ''; if (mod.steamId) idDisplay = `<span class="mod-id">${mod.steamId}</span>`; else if (mod.mcmodId) idDisplay = `<span class="mod-id">MC百科 ID: ${mod.mcmodId}</span>`; else if (mod.id) idDisplay = `<span class="mod-id">${mod.id}</span>`; html += `<tr><td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td><td>${chineseName}</td><td><span class="status-badge ${statusClass}">${mod.status}</span></td><td>${videoLink}</td><td>${mod.note || '-'}</td><td>${offlineIcon}</td></tr>`; }); tbody.innerHTML = html; }
+            function renderPagination() { if (!paginationDiv) return; const totalPages = Math.ceil(filteredMods.length / PAGE_SIZE); if (totalPages <= 1) { paginationDiv.innerHTML = ''; return; } let html = '<button id="prevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button><div class="page-numbers">'; let startPage = Math.max(1, currentPage - 2); let endPage = Math.min(totalPages, startPage + 4); if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4); for (let i = startPage; i <= endPage; i++) html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`; html += '</div><button id="nextPage" ' + (currentPage === totalPages ? 'disabled' : '') + '>下一页 ›</button>'; paginationDiv.innerHTML = html; document.querySelectorAll('.page-number').forEach(span => { span.addEventListener('click', function() { const page = parseInt(this.dataset.page, 10); if (page !== currentPage) { currentPage = page; renderTable(); renderPagination(); } }); }); document.getElementById('prevPage')?.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); renderPagination(); } }); document.getElementById('nextPage')?.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); renderPagination(); } }); }
+            if (searchInput) searchInput.addEventListener('input', function() { searchQuery = this.value; applyFilters(); });
         })();
     </script>
 
@@ -1337,177 +958,48 @@
     <script>
         (function() {
             const PAGE_SIZE = 10;
-            let allGuides = [];
-            let filteredGuides = [];
-            let currentPage = 1;
-
-            const searchInput = document.getElementById('guideSearch');
-            const tbody = document.getElementById('guideTableBody');
-            const paginationDiv = document.getElementById('guidePagination');
-            const guideStatsDiv = document.getElementById('guideStats');
-
-            function updateGuideStats() {
-                if (guideStatsDiv) {
-                    guideStatsDiv.innerHTML = `📚 总攻略: <span class="stats-number">${allGuides.length}</span>`;
-                }
-            }
-
-            fetch('data/guides.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('加载失败');
-                    return response.json();
-                })
-                .then(data => {
-                    allGuides = data;
-                    filteredGuides = [...allGuides];
-                    updateGuideStats();
-                    renderTable();
-                    renderPagination();
-                })
-                .catch(error => {
-                    console.error('加载 guides.json 失败:', error);
-                    if (tbody) tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`;
-                    if (guideStatsDiv) guideStatsDiv.innerHTML = '📚 加载失败';
-                });
-
-            function renderTable() {
-                if (!tbody) return;
-                const start = (currentPage - 1) * PAGE_SIZE;
-                const end = start + PAGE_SIZE;
-                const pageGuides = filteredGuides.slice(start, end);
-                if (pageGuides.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的攻略</td></tr>`;
-                    return;
-                }
-                let html = '';
-                pageGuides.forEach(guide => {
-                    html += `<tr>
-                        <td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">${guide.name}</a></td>
-                        <td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">🔗 观看</a></td>
-                    </tr>`;
-                });
-                tbody.innerHTML = html;
-            }
-
-            function renderPagination() {
-                if (!paginationDiv) return;
-                const totalPages = Math.ceil(filteredGuides.length / PAGE_SIZE);
-                if (totalPages <= 1) {
-                    paginationDiv.innerHTML = '';
-                    return;
-                }
-                let html = '<button id="guidePrevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
-                html += '<div class="page-numbers">';
-                let startPage = Math.max(1, currentPage - 2);
-                let endPage = Math.min(totalPages, startPage + 4);
-                if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
-                for (let i = startPage; i <= endPage; i++) {
-                    html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
-                }
-                html += '</div>';
-                html += `<button id="guideNextPage" ${currentPage === totalPages ? 'disabled' : ''}>下一页 ›</button>`;
-                paginationDiv.innerHTML = html;
-
-                document.querySelectorAll('.page-number').forEach(span => {
-                    span.addEventListener('click', function() {
-                        const page = parseInt(this.dataset.page, 10);
-                        if (page !== currentPage) {
-                            currentPage = page;
-                            renderTable();
-                            renderPagination();
-                        }
-                    });
-                });
-                document.getElementById('guidePrevPage')?.addEventListener('click', () => {
-                    if (currentPage > 1) { currentPage--; renderTable(); renderPagination(); }
-                });
-                document.getElementById('guideNextPage')?.addEventListener('click', () => {
-                    if (currentPage < totalPages) { currentPage++; renderTable(); renderPagination(); }
-                });
-            }
-
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    const query = this.value.trim().toLowerCase();
-                    filteredGuides = allGuides.filter(guide => guide.name.toLowerCase().includes(query));
-                    currentPage = 1;
-                    renderTable();
-                    renderPagination();
-                });
-            }
+            let allGuides = [], filteredGuides = [], currentPage = 1;
+            const searchInput = document.getElementById('guideSearch'), tbody = document.getElementById('guideTableBody'), paginationDiv = document.getElementById('guidePagination'), guideStatsDiv = document.getElementById('guideStats');
+            function updateGuideStats() { if (guideStatsDiv) guideStatsDiv.innerHTML = `📚 总攻略: <span class="stats-number">${allGuides.length}</span>`; }
+            fetch('data/guides.json').then(r => r.json()).then(data => { allGuides = data; filteredGuides = [...allGuides]; updateGuideStats(); renderTable(); renderPagination(); }).catch(error => { console.error('加载 guides.json 失败:', error); if (tbody) tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`; if (guideStatsDiv) guideStatsDiv.innerHTML = '📚 加载失败'; });
+            function renderTable() { if (!tbody) return; const start = (currentPage - 1) * PAGE_SIZE, end = start + PAGE_SIZE, pageGuides = filteredGuides.slice(start, end); if (pageGuides.length === 0) { tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的攻略</td></tr>`; return; } let html = ''; pageGuides.forEach(guide => { html += `<tr><td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">${guide.name}</a></td><td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">🔗 观看</a></td></tr>`; }); tbody.innerHTML = html; }
+            function renderPagination() { if (!paginationDiv) return; const totalPages = Math.ceil(filteredGuides.length / PAGE_SIZE); if (totalPages <= 1) { paginationDiv.innerHTML = ''; return; } let html = '<button id="guidePrevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button><div class="page-numbers">'; let startPage = Math.max(1, currentPage - 2); let endPage = Math.min(totalPages, startPage + 4); if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4); for (let i = startPage; i <= endPage; i++) html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`; html += '</div><button id="guideNextPage" ' + (currentPage === totalPages ? 'disabled' : '') + '>下一页 ›</button>'; paginationDiv.innerHTML = html; document.querySelectorAll('.page-number').forEach(span => { span.addEventListener('click', function() { const page = parseInt(this.dataset.page, 10); if (page !== currentPage) { currentPage = page; renderTable(); renderPagination(); } }); }); document.getElementById('guidePrevPage')?.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); renderPagination(); } }); document.getElementById('guideNextPage')?.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); renderPagination(); } }); }
+            if (searchInput) searchInput.addEventListener('input', function() { const query = this.value.trim().toLowerCase(); filteredGuides = allGuides.filter(guide => guide.name.toLowerCase().includes(query)); currentPage = 1; renderTable(); renderPagination(); });
         })();
     </script>
 
-    <!-- ========== 帖子数据加载脚本（卡片列表） ========== -->
+    <!-- ========== 帖子数据加载脚本 ========== -->
     <script>
         (function() {
             const postsGrid = document.getElementById('postsGrid');
             if (!postsGrid) return;
-
-            fetch('data/posts.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('加载失败');
-                    return response.json();
-                })
-                .then(posts => {
-                    if (posts.length === 0) {
-                        postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">暂无帖子，敬请期待～</div>';
-                        return;
-                    }
-
-                    // 按日期倒序排列（最新的在前）
-                    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-                    let html = '';
-                    posts.forEach(post => {
-                        // 封面图：优先使用 post.image，否则使用占位图
-                        let coverUrl = post.image || 'https://via.placeholder.com/400x200?text=No+Image';
-                        let summary = post.summary || '';
-                        if (summary.length > 150) summary = summary.substring(0, 150) + '…';
-                        
-                        html += `
-                            <div class="post-card-item" onclick="window.location.href='post.html?id=${post.id}'">
-                                <div class="post-card-cover" style="background-image: url('${coverUrl}');"></div>
-                                <div class="post-card-info">
-                                    <div class="post-card-title">${escapeHtml(post.title)}</div>
-                                    <div class="post-card-meta">
-                                        <span><i>📅</i> ${post.date}</span>
-                                    </div>
-                                    <div class="post-card-summary">${escapeHtml(summary)}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    postsGrid.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('加载帖子失败:', error);
-                    postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>';
+            fetch('data/posts.json').then(response => response.json()).then(posts => {
+                if (posts.length === 0) { postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">暂无帖子，敬请期待～</div>'; return; }
+                posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                let html = '';
+                posts.forEach(post => {
+                    let coverUrl = post.image || 'https://via.placeholder.com/400x200?text=No+Image';
+                    let summary = post.summary || '';
+                    if (summary.length > 150) summary = summary.substring(0, 150) + '…';
+                    html += `<div class="post-card-item" onclick="window.location.href='post.html?id=${post.id}'"><div class="post-card-cover" style="background-image: url('${coverUrl}');"></div><div class="post-card-info"><div class="post-card-title">${escapeHtml(post.title)}</div><div class="post-card-meta"><span><i>📅</i> ${post.date}</span></div><div class="post-card-summary">${escapeHtml(summary)}</div></div></div>`;
                 });
-
-            function escapeHtml(str) {
-                if (!str) return '';
-                return str.replace(/[&<>]/g, function(m) {
-                    if (m === '&') return '&amp;';
-                    if (m === '<') return '&lt;';
-                    if (m === '>') return '&gt;';
-                    return m;
-                });
-            }
+                postsGrid.innerHTML = html;
+            }).catch(error => { console.error('加载帖子失败:', error); postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>'; });
+            function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
         })();
     </script>
 
     <!-- 导航滚动脚本 -->
     <script>
-    (function () {
-        const navMap = { 'nav-about': 'about', 'nav-projects': 'projects', 'nav-contact': 'contact', 'nav-thanks': 'thanks' };
-        document.querySelectorAll('.radio-container input[name="nav"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const el = document.getElementById(navMap[this.id]);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        (function () {
+            const navMap = { 'nav-about': 'about', 'nav-projects': 'projects', 'nav-posts': 'posts', 'nav-contact': 'contact', 'nav-thanks': 'thanks' };
+            document.querySelectorAll('.radio-container input[name="nav"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const el = document.getElementById(navMap[this.id]);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
             });
-        });
-    })();
+        })();
     </script>
 </body>
 </html>

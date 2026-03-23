@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="style/word.css">
     <link rel="stylesheet" href="style/new.css">
     <style>
-        /* ===== 文章主体样式（舒适排版） ===== */
+        /* ===== 完全模仿参考博客的文章样式 ===== */
+        body {
+            background: #181c21;
+        }
         .post-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -46,6 +49,11 @@
             font-size: 1.25rem;
             font-weight: 600;
             margin: 1.5rem 0 0.75rem;
+        }
+        .post-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.2rem 0 0.6rem;
         }
         .post-content p {
             margin: 0 0 1rem;
@@ -90,6 +98,19 @@
             height: auto;
             border-radius: 8px;
             margin: 1.5rem 0;
+        }
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+        }
+        .post-content th, .post-content td {
+            border: 1px solid var(--card-border);
+            padding: 0.6rem;
+            text-align: left;
+        }
+        .post-content th {
+            background: rgba(255,255,255,0.05);
         }
         .post-content a {
             color: #3B82F6;
