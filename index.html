@@ -593,7 +593,7 @@
         .posts-grid {
             display: flex;
             flex-direction: column;
-            gap: 2rem
+            gap: 1.5rem
         }
 
         .post-card-item {
@@ -611,13 +611,6 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
             border-color: var(--card-border-hover)
-        }
-
-        .post-card-cover {
-            flex: 0 0 240px;
-            background-size: cover;
-            background-position: center;
-            background-color: rgba(0, 0, 0, 0.2)
         }
 
         .post-card-info {
@@ -659,29 +652,15 @@
             overflow: hidden
         }
 
-        .post-card-item:nth-child(even) {
-            flex-direction: row-reverse
-        }
-
         @media(max-width:768px) {
-
-            .post-card-item,
-            .post-card-item:nth-child(even) {
-                flex-direction: column
-            }
-
-            .post-card-cover {
-                flex: 0 0 180px
+            .post-card-title {
+                font-size: 1.2rem
             }
         }
 
         @media(max-width:480px) {
-            .post-card-cover {
-                flex: 0 0 150px
-            }
-
             .post-card-title {
-                font-size: 1.2rem
+                font-size: 1.1rem
             }
         }
     </style>
@@ -865,8 +844,9 @@
                 <div class="posts-section" id="posts">
                     <h3 class="section-title">📝 我的帖子(测试)</h3>
                     <div id="postsGrid" class="posts-grid">
-                        <div class="loading" style="text-align:center;padding:40px">加载中...</div>
+                        <!-- 帖子卡片会由JS动态渲染 -->
                     </div>
+                    <div class="pagination" id="postsPagination"></div>
                 </div>
             </div>
             <div class="comms-card" id="contact">
@@ -1348,35 +1328,131 @@
     </script>
     <script>
         (function() {
+            const PAGE_SIZE = 5;               // 每页显示 5 条
+            let allPosts = [];
+            let filteredPosts = [];
+            let currentPage = 1;
+
             const postsGrid = document.getElementById('postsGrid');
+            const paginationDiv = document.getElementById('postsPagination');
+
             if (!postsGrid) return;
-            fetch('data/posts.json').then(response => response.json()).then(posts => {
-                if (posts.length === 0) {
+
+            // 加载帖子数据
+            fetch('data/posts.json')
+                .then(response => response.json())
+                .then(posts => {
+                    allPosts = posts;
+                    // 按日期倒序排序（新帖在前）
+                    allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    filteredPosts = [...allPosts];
+                    renderPosts();
+                    renderPagination();
+                })
+                .catch(error => {
+                    console.error('加载帖子失败:', error);
+                    postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>';
+                });
+
+            // 渲染当前页的帖子卡片
+            function renderPosts() {
+                const start = (currentPage - 1) * PAGE_SIZE;
+                const end = start + PAGE_SIZE;
+                const pagePosts = filteredPosts.slice(start, end);
+
+                if (pagePosts.length === 0) {
                     postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">暂无帖子，敬请期待～</div>';
-                    return
+                    return;
                 }
-                posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
                 let html = '';
-                posts.forEach(post => {
-                    let coverUrl = post.image || 'https://via.placeholder.com/400x200?text=No+Image';
+                pagePosts.forEach(post => {
+                    // 摘要截取前 150 字符
                     let summary = post.summary || '';
                     if (summary.length > 150) summary = summary.substring(0, 150) + '…';
-                    html += `<div class="post-card-item" onclick="window.location.href='post.html?id=${post.id}'"><div class="post-card-cover" style="background-image: url('${coverUrl}');"></div><div class="post-card-info"><div class="post-card-title">${escapeHtml(post.title)}</div><div class="post-card-meta"><span><i>📅</i> ${post.date}</span></div><div class="post-card-summary">${escapeHtml(summary)}</div></div></div>`
-                });
-                postsGrid.innerHTML = html
-            }).catch(error => {
-                console.error('加载帖子失败:', error);
-                postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>'
-            });
 
+                    html += `
+                        <div class="post-card-item" onclick="window.location.href='post.html?id=${post.id}'">
+                            <div class="post-card-info">
+                                <div class="post-card-title">${escapeHtml(post.title)}</div>
+                                <div class="post-card-meta">
+                                    <span>📅 ${post.date}</span>
+                                </div>
+                                <div class="post-card-summary">${escapeHtml(summary)}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                postsGrid.innerHTML = html;
+            }
+
+            // 渲染分页按钮
+            function renderPagination() {
+                if (!paginationDiv) return;
+                const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
+                if (totalPages <= 1) {
+                    paginationDiv.innerHTML = '';
+                    return;
+                }
+
+                let html = '<button id="postsPrevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
+                html += '<div class="page-numbers">';
+
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + 4);
+                if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+
+                for (let i = startPage; i <= endPage; i++) {
+                    html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
+                }
+                html += '</div>';
+                html += '<button id="postsNextPage" ' + (currentPage === totalPages ? 'disabled' : '') + '>下一页 ›</button>';
+                paginationDiv.innerHTML = html;
+
+                // 绑定页码点击事件
+                document.querySelectorAll('#postsPagination .page-number').forEach(span => {
+                    span.addEventListener('click', function() {
+                        const page = parseInt(this.dataset.page, 10);
+                        if (page !== currentPage) {
+                            currentPage = page;
+                            renderPosts();
+                            renderPagination();
+                        }
+                    });
+                });
+
+                // 绑定上一页/下一页事件
+                const prevBtn = document.getElementById('postsPrevPage');
+                const nextBtn = document.getElementById('postsNextPage');
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            renderPosts();
+                            renderPagination();
+                        }
+                    });
+                }
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            renderPosts();
+                            renderPagination();
+                        }
+                    });
+                }
+            }
+
+            // 简单的防 XSS 函数
             function escapeHtml(str) {
                 if (!str) return '';
                 return str.replace(/[&<>]/g, function(m) {
                     if (m === '&') return '&amp;';
                     if (m === '<') return '&lt;';
                     if (m === '>') return '&gt;';
-                    return m
-                })
+                    return m;
+                });
             }
         })();
     </script>
