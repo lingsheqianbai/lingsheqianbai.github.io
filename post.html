@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>帖子详情 - 凌社千白</title>
+    <!-- 51.LA 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"3PEh97IIsQ2zJUR2",ck:"3PEh97IIsQ2zJUR2"})</script>
+    <!-- 引入主站样式 -->
     <link rel="stylesheet" href="style/word.css">
     <link rel="stylesheet" href="style/new.css">
     <style>
-        /* ===== 全局重置，确保阅读舒适 ===== */
+        /* ===== 完全复刻 Revincx 博客文章样式 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -15,11 +19,11 @@
         }
         body {
             background: #0A0C10;
-            color: rgba(255, 255, 255, 0.92);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
+            color: #e6e6e6;
         }
-        /* 背景复用主页样式 */
+        /* 背景（与主页一致） */
         .bg {
             position: fixed;
             inset: 0;
@@ -50,83 +54,83 @@
             pointer-events: none;
             z-index: 1;
         }
-        /* 文章容器 */
-        .post-wrapper {
+        /* 文章布局 - 完全模仿 Revincx */
+        .layout {
             position: relative;
             z-index: 2;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2rem;
         }
-        .post-card {
-            background: rgba(255, 255, 255, 0.05);
+        /* 文章主体 */
+        #post {
+            min-width: 0;
+        }
+        .post-content {
+            background: rgba(30, 34, 40, 0.7);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.08);
             overflow: hidden;
         }
-        /* 文章头部 */
         .post-header {
             padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .post-title {
             font-size: 2rem;
             font-weight: 700;
             line-height: 1.3;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         .post-meta {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 0.5rem;
         }
-        /* 正文区域 - 关键样式 */
-        .post-content {
+        .article-container {
             padding: 2rem;
             font-size: 1rem;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.92);
         }
-        /* 正文标题 */
-        .post-content h2 {
+        /* 文章内标题 */
+        .article-container h2 {
             font-size: 1.5rem;
             font-weight: 600;
             margin: 2rem 0 1rem;
             padding-bottom: 0.3rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
-        .post-content h3 {
+        .article-container h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin: 1.5rem 0 0.75rem;
         }
-        /* 段落 */
-        .post-content p {
+        .article-container p {
             margin: 0 0 1rem;
         }
-        /* 列表 */
-        .post-content ul, .post-content ol {
+        .article-container ul, .article-container ol {
             margin: 0 0 1rem 1.5rem;
         }
-        .post-content li {
+        .article-container li {
             margin: 0.4rem 0;
         }
-        /* 引用 */
-        .post-content blockquote {
+        .article-container blockquote {
             margin: 1rem 0;
             padding: 0.5rem 0 0.5rem 1rem;
-            border-left: 4px solid rgba(255, 255, 255, 0.4);
-            color: rgba(255, 255, 255, 0.7);
-            background: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.2);
             border-radius: 0 8px 8px 0;
+            color: rgba(255,255,255,0.7);
         }
-        /* 代码 */
-        .post-content pre {
-            background: rgba(0, 0, 0, 0.5);
+        .article-container pre {
+            background: rgba(0,0,0,0.5);
             padding: 1rem;
             border-radius: 8px;
             overflow-x: auto;
@@ -134,104 +138,142 @@
             font-size: 0.85rem;
             margin: 1rem 0;
         }
-        .post-content code {
-            background: rgba(0, 0, 0, 0.4);
+        .article-container code {
+            background: rgba(0,0,0,0.4);
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.9em;
         }
-        .post-content pre code {
+        .article-container pre code {
             background: none;
             padding: 0;
         }
-        /* 图片 */
-        .post-content img {
+        .article-container img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
             margin: 1.5rem 0;
         }
-        /* 链接 */
-        .post-content a {
+        .article-container a {
             color: #3B82F6;
             text-decoration: none;
         }
-        .post-content a:hover {
+        .article-container a:hover {
             text-decoration: underline;
         }
         /* 文章底部 */
-        .post-footer {
-            padding: 1.5rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
         .post-copyright {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255,255,255,0.6);
         }
         .post-copyright a {
             color: #3B82F6;
         }
         .post-tags {
+            padding: 0 2rem 1rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin: 1rem 0;
         }
         .post-tag {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
             font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
         }
         .post-nav {
+            padding: 0 2rem 1.5rem;
             display: flex;
             justify-content: space-between;
-            margin: 1.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .post-nav a {
             color: #3B82F6;
-            text-decoration: none;
             font-size: 0.85rem;
+            text-decoration: none;
         }
         .post-nav a:hover {
             text-decoration: underline;
         }
-        .comment-placeholder {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+        /* 评论区域 */
+        .comment-wrap {
+            padding: 1.5rem 2rem 2rem;
         }
-        /* 目录侧边栏 - 简单隐藏，避免干扰（若需要可自行开启） */
-        .post-sidebar {
-            display: none;
+        #twikoo-wrap {
+            margin-top: 0;
+        }
+        /* 右侧目录 */
+        .aside-content {
+            position: sticky;
+            top: 2rem;
+            align-self: start;
+        }
+        .card-widget {
+            background: rgba(30, 34, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 1.5rem;
+        }
+        .item-headline {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .toc-content {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .toc {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc-item {
+            margin: 0.5rem 0;
+        }
+        .toc-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: block;
+            transition: color 0.2s;
+        }
+        .toc-link:hover {
+            color: #3B82F6;
+        }
+        .toc-level-2 {
+            padding-left: 0;
+        }
+        .toc-level-3 {
+            padding-left: 1rem;
         }
         /* 响应式 */
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .aside-content {
+                display: none;
+            }
+        }
         @media (max-width: 640px) {
             .post-header {
                 padding: 1.5rem;
             }
-            .post-content {
+            .article-container {
                 padding: 1.5rem;
             }
             .post-title {
                 font-size: 1.6rem;
-            }
-            .post-content {
-                font-size: 0.95rem;
-            }
-            .post-content h2 {
-                font-size: 1.3rem;
-            }
-            .post-content h3 {
-                font-size: 1.1rem;
             }
         }
     </style>
@@ -252,16 +294,16 @@
     </div>
     <div class="bg-blur"></div>
 
-    <div class="post-wrapper">
-        <div class="post-card">
-            <div class="post-header">
-                <h1 class="post-title" id="postTitle">加载中...</h1>
-                <div class="post-meta" id="postMeta"></div>
-            </div>
-            <div class="post-content" id="postContent">
-                <p>加载中...</p>
-            </div>
-            <div class="post-footer">
+    <div class="layout">
+        <div id="post">
+            <div class="post-content">
+                <div class="post-header">
+                    <h1 class="post-title" id="postTitle">加载中...</h1>
+                    <div class="post-meta" id="postMeta"></div>
+                </div>
+                <div class="article-container" id="articleContainer">
+                    <p>加载中...</p>
+                </div>
                 <div class="post-copyright" id="postCopyright">
                     <span>文章作者: 凌社千白</span><br>
                     <span id="postLinkSpan">文章链接: <a id="postLink" href="#">加载中</a></span><br>
@@ -272,8 +314,30 @@
                     <span id="prevLink">上一篇：无</span>
                     <span id="nextLink">下一篇：无</span>
                 </div>
-                <div class="comment-placeholder">
-                    💬 评论系统开发中，敬请期待...
+                <div class="comment-wrap">
+                    <div id="twikoo-wrap"></div>
+                    <script src="https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js"></script>
+                    <script>
+                        // 可选：初始化 Twikoo，若不需要评论可删除此段
+                        if (typeof twikoo !== 'undefined') {
+                            twikoo.init({
+                                el: '#twikoo-wrap',
+                                envId: '你的环境ID', // 替换为你的环境 ID
+                                region: ''
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="aside-content">
+            <div class="card-widget">
+                <div class="item-headline">
+                    <i class="fas fa-stream"></i>
+                    <span>目录</span>
+                </div>
+                <div class="toc-content">
+                    <ul class="toc" id="tocList"></ul>
                 </div>
             </div>
         </div>
@@ -293,6 +357,34 @@
             return minutes;
         }
 
+        // 生成目录
+        function generateTOC() {
+            const container = document.getElementById('articleContainer');
+            const headings = container.querySelectorAll('h2, h3');
+            const tocList = document.getElementById('tocList');
+            if (!tocList) return;
+            tocList.innerHTML = '';
+            headings.forEach(heading => {
+                const level = heading.tagName.toLowerCase();
+                const text = heading.textContent;
+                // 为每个标题生成唯一 ID
+                const id = `heading-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`;
+                heading.id = id;
+                const li = document.createElement('li');
+                li.className = `toc-item toc-level-${level}`;
+                const a = document.createElement('a');
+                a.className = 'toc-link';
+                a.href = `#${id}`;
+                a.textContent = text;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    heading.scrollIntoView({ behavior: 'smooth' });
+                });
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+        }
+
         // 加载所有帖子（用于上一篇/下一篇）
         let allPosts = [];
 
@@ -301,7 +393,7 @@
                 const response = await fetch('data/posts.json');
                 if (!response.ok) throw new Error('加载失败');
                 allPosts = await response.json();
-                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date)); // 按日期倒序
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
             } catch (e) {
                 console.error('加载全部帖子失败', e);
             }
@@ -311,8 +403,9 @@
         async function loadPost() {
             const id = getPostId();
             if (!id) {
-                // 无 ID 参数，显示默认静态示例文章（避免空白）
-                showDefaultArticle();
+                // 无 ID 参数，显示默认提示
+                document.getElementById('postTitle').textContent = '未指定帖子';
+                document.getElementById('articleContainer').innerHTML = '<p>请从首页点击帖子进入。</p>';
                 return;
             }
 
@@ -324,11 +417,12 @@
                 const posts = await response.json();
                 const post = posts.find(p => p.id == id);
                 if (!post) {
-                    showDefaultArticle();
+                    document.getElementById('postTitle').textContent = '未找到该帖子';
+                    document.getElementById('articleContainer').innerHTML = '<p>帖子不存在或已被删除。</p>';
                     return;
                 }
 
-                // 渲染帖子
+                // 更新标题和元数据
                 document.getElementById('postTitle').textContent = post.title;
                 const readingTime = calcReadingTime(post.content);
                 const wordCount = post.content.replace(/<[^>]*>/g, '').length;
@@ -337,7 +431,7 @@
                     <span>📖 总字数：${wordCount}</span>
                     <span>⏱️ 阅读时长：约 ${readingTime} 分钟</span>
                 `;
-                document.getElementById('postContent').innerHTML = post.content;
+                document.getElementById('articleContainer').innerHTML = post.content;
                 document.getElementById('postLink').href = window.location.href;
                 document.getElementById('postLink').textContent = window.location.href;
 
@@ -361,58 +455,16 @@
                 document.getElementById('prevLink').innerHTML = prevHtml;
                 document.getElementById('nextLink').innerHTML = nextHtml;
 
+                // 生成目录
+                generateTOC();
+
+                // 更新页面标题
                 document.title = `${post.title} - 凌社千白`;
             } catch (error) {
                 console.error('加载失败', error);
-                showDefaultArticle();
+                document.getElementById('postTitle').textContent = '加载失败';
+                document.getElementById('articleContainer').innerHTML = '<p>数据加载失败，请稍后重试。</p>';
             }
-        }
-
-        // 默认静态示例文章（防止空页面）
-        function showDefaultArticle() {
-            document.getElementById('postTitle').textContent = '为什么我不推荐你用 Jetson 跑大模型';
-            const defaultContent = `
-                <h2>起因</h2>
-                <p>今年年初实验室说要买算力设备，当时还是挺期待的，以为会全部买显卡什么的。不过显然这种大事我是没什么话语权，年初组里的博士生组会上提出要做云边端协同，然后说想买 NVIDIA Jetson 作为边端设备。</p>
-                <p>Jetson？当时我还是第一次听说这玩意。趁着组会摸鱼的功夫，大致谷歌搜了一下这玩意的参数和资料。ARM 架构的 NVIDIA 核显，还是跟苹果一样用的统一内存，多新鲜呐。不过我很快反应过来，按照他的意思是，他要用这东西跑… 大模型？虽然带着一丝质疑，但查了一些框架的资料之后，感觉确实是能跑的，不过至于性能怎么样就不得而知了。</p>
-                <p>后面还私聊跟我们博士生讨论了一番，我说我真没见过几个用 Jetson 跑 LLM 的，这方案真的可行吗？他说他从别人的论文里看到的，既然别人这么用我们应该也可以。</p>
-                <p>他提到的论文是这篇：<a href="https://ieeexplore.ieee.org/abstract/document/10818760" target="_blank">EdgeShard: Efficient LLM Inference via Collaborative Edge Computing</a>，这是一篇讲分布式LLM推理框架的论文。大概看了一下还是挺有水平的，至于性能嘛，这二三十的 tps 也就刚好能用的程度吧。不过既然确实行得通，也就管不了了。</p>
-                <h2>最初の体验</h2>
-                <p>很快啊，大概一个月之后，实验室买的第一批设备 Jetson 就已经到祸了。虽然一块买的还有几张 4090 显卡，但是比起传统显卡还是我还是对这新奇的小玩意更感兴趣。到手之后，就马上要了一台过来开始捣鼓。</p>
-                <p>我首先拿到的是一台 <strong>Jetson Orin NX 16GB</strong>，供货商提前刷好了固件，开箱即用。虽然开机之后是一个 Ubuntu 的图形界面，但很快我就发现这个系统好像跟正常 Ubuntu 不太一样。这个 Ubuntu 软件源要用 <a href="https://mirrors.ustc.edu.cn/help/ubuntu-ports.html" target="_blank">Ubuntu Ports</a> 的源而不是正常的 Ubuntu 软件源。这个特别的 Ubuntu 系统还有一个特别的名字，叫做 L4T (Linux for Tegra)。Tegra 是 Nvidia Jetson 的 soc 代号。</p>
-                <p>而且第一次用电脑连接 Jetson 的时候还发现了一个更好玩的东西。用 Type-C 线直接插到 Jetson 上，电脑上一下子多了一大堆 USB 设备。第一个映入眼帘的是一个 “U盘”，打开之后里面是一堆像是说明书一样的文档。里面详细介绍了 Jetson 的 usb-dev-mode。</p>
-                <p>并且电脑上还多了一个串口设备和两个网络接口。大致看了一下文档，通过串口可以直接访问 Jetson 的 TTY 终端，通过网络接口还能通过静态 IP 连接到设备。这可太神奇了，之前玩树莓派和香橙派的时候可从来没见过这么方便的东西。</p>
-                <p>对了，既然是 N 卡，那不得跑个 nvidia-smi 看一下？等会，command not found? 需要自己装？那就手动装上试试。但是，即使正确安装了驱动和 CUDA，运行 nvidia-smi 之后也只有一个驱动版本，其他的地方全都是 N/A。搜了一下说是确实用不了这个 CLI，好吧那就不用了。Jetson 倒是有一个专用的 CLI 叫 <a href="https://github.com/rbonghi/jetson_stats" target="_blank">jtop</a>，那就将就着用这个吧。</p>
-                <p>不过，此时的我并没有意识到，Jetson 的 cuda 生态到底跟 PC 显卡的生态有多少差异，也完全没有意识到，我之后会在 Jetson 上踩巨多的坑。</p>
-                <h2>集群？K8S？</h2>
-                <p>既然有一大堆 Jetson，首先想到的肯定是用 k8s 这种东西来管理。虽然我之前完全没接触过 k8s，但是稍微了解过 k8s 笨重的环境和繁琐的配置。于是我决定直接上之前看到的著名 k8s 替代品：<a href="https://k3s.io/" target="_blank">k3s</a></p>
-                <p>k3s 确实安装方便配置简单，不一会功夫就装好了。简单跑了个 nginx 试了下没什么问题，那下面就要是给剩下的设备都装上 k3s 再接到交换机下了。当然我是比较懒的，我当时简单写了个小教程给实验室同学，然后把剩下的设备分给他们让他们自己弄了。我自己就去玩其他的没有管了。</p>
-                <p>不过很快，我就遇到了跟 Jetson 相关的第一个问题。虽然设备是都装好了 k3s agent，但有的设备就是一直莫名其妙的 NotReady，并且 metrics-scraper 也不返回资源占用信息。当时我们买的那批 Jetson 并不只有一个型号，有的是更高配的 Orin，有的是低配版的 Nano。k3s 出现问题的设备都是更高配的 Orin，怎么回事？</p>
-                <p>之后查看日志很快就定位到了问题，那些设备的 k3s-agent 全都是在操作 iptables 时发生了报错，看上去是有一个跟 nft 相关的 xt_nfacct kmod 没有装。进一步地，我发现不同设备装的 JetPack 版本都不一样，有的是 JetPack 5，有的是 JetPack 6，内核版本都不一样，带的模块自然也不一样。</p>
-                <p>起初我想试试能不能把旧版本系统的设备升级到新版本，但很遗憾，NVIDIA 开发者论坛上的官方帖子说升级 JetPack 版本只能重新刷固件，并且这将丢失所有数据。ARM 架构的设备刷固件并没有给电脑装系统那么简单，英伟达给的刷机工具也很难用：这个叫做 <a href="https://developer.nvidia.com/sdk-manager" target="_blank">NVIDIA SDK Manager</a> 的东西虽然写着有 Windows 版本，但是刷固件的功能却只能在 Linux 版本上用。而且这个 Linux 版的 deb 包还只能在 Ubuntu 上用，就算我用 debtap 之类的工具将其转成 Arch 可安装的包，安装之后也仍然不能刷固件。</p>
-                <p>其实我本来也不是很想刷固件，毕竟那么多设备每一台都要刷太麻烦了。后来我灵机一动：它不是缺 kmod 吗，我去单独编译这个 kmod 不就行了。这个方法确实比较顺利，根据 NVIDIA 提供的内核源码，以及我之前也有过编译内核的经验，很快就成功编译出来 xt_nfacct 的 ko 文件了。虽然直接用 insmod 会导致 kernel tainted，但是无关紧要，能用就行了。然后把模块安装到 /lib/modules 里面，重启试了下也能正常自动加载模块了。</p>
-                <p>不过，这个 “小坑” 仅仅只是开始。</p>
-                <h2>LLM 推理与踩坑</h2>
-                <p>（省略部分内容以控制长度，实际可自行添加）</p>
-                <h2>统一内存那些事</h2>
-                <p>...（内容省略）...</p>
-                <h2>最后再来看看性价比</h2>
-                <p>...（内容省略）...</p>
-                <h2>总结以及叠甲</h2>
-                <p>...（内容省略）...</p>
-            `;
-            document.getElementById('postContent').innerHTML = defaultContent;
-            const readingTime = calcReadingTime(defaultContent);
-            const wordCount = defaultContent.replace(/<[^>]*>/g, '').length;
-            document.getElementById('postMeta').innerHTML = `
-                <span>📅 发布时间：2025-03-24</span>
-                <span>📖 总字数：${wordCount}</span>
-                <span>⏱️ 阅读时长：约 ${readingTime} 分钟</span>
-            `;
-            document.getElementById('postLink').href = window.location.href;
-            document.getElementById('postLink').textContent = window.location.href;
-            document.getElementById('postTags').innerHTML = '<span class="post-tag">Linux</span><span class="post-tag">Jetson</span>';
-            document.title = '为什么我不推荐你用 Jetson 跑大模型 - 凌社千白';
         }
 
         loadPost();
