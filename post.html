@@ -7,23 +7,49 @@
     <!-- 51.LA 统计代码 -->
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
     <script>LA.init({id:"3PEh97IIsQ2zJUR2",ck:"3PEh97IIsQ2zJUR2"})</script>
-    <!-- 引入主站样式 -->
     <link rel="stylesheet" href="style/word.css">
     <link rel="stylesheet" href="style/new.css">
     <style>
-        /* ===== 完全复刻 Revincx 博客文章样式 ===== */
+        /* ===== 主题变量（支持亮色/暗色切换） ===== */
+        :root {
+            --bg-body: #0d0d0d;
+            --bg-card: rgba(30, 30, 35, 0.9);
+            --text-primary: rgba(255, 255, 255, 0.9);
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --link-color: #3B82F6;
+            --code-bg: rgba(0, 0, 0, 0.4);
+            --pre-bg: rgba(0, 0, 0, 0.5);
+            --blockquote-bg: rgba(0, 0, 0, 0.3);
+            --tag-bg: rgba(255, 255, 255, 0.1);
+            --header-bg: rgba(30, 30, 35, 0.9);
+        }
+        [data-theme="light"] {
+            --bg-body: #f5f5f7;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --link-color: #2563eb;
+            --code-bg: rgba(0, 0, 0, 0.05);
+            --pre-bg: rgba(0, 0, 0, 0.05);
+            --blockquote-bg: rgba(0, 0, 0, 0.03);
+            --tag-bg: rgba(0, 0, 0, 0.08);
+            --header-bg: rgba(255, 255, 255, 0.9);
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            background: #0A0C10;
+            background: var(--bg-body);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
-            color: #e6e6e6;
+            color: var(--text-primary);
+            transition: background 0.2s ease;
         }
-        /* 背景（与主页一致） */
+        /* 背景动画（保留立方体，适应主题） */
         .bg {
             position: fixed;
             inset: 0;
@@ -33,6 +59,11 @@
             width: 100%;
             height: 100%;
             background: repeating-linear-gradient(135deg, #0F1115 0px, #0F1115 60px, #14171C 70px, #1A1D24 130px);
+            opacity: 0.3;
+        }
+        [data-theme="light"] .pattern-bg {
+            background: repeating-linear-gradient(135deg, #e5e7eb 0px, #e5e7eb 60px, #d1d5db 70px, #f3f4f6 130px);
+            opacity: 0.15;
         }
         .cube-svg {
             position: absolute;
@@ -40,7 +71,7 @@
             height: 200%;
             left: -30%;
             top: -20%;
-            opacity: 0.6;
+            opacity: 0.2;
             animation: bgDrift 25s linear infinite alternate;
         }
         @keyframes bgDrift {
@@ -54,7 +85,26 @@
             pointer-events: none;
             z-index: 1;
         }
-        /* 文章布局 - 完全模仿 Revincx */
+        /* 主题切换按钮 */
+        .theme-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        .theme-switch:hover {
+            transform: scale(1.05);
+        }
+        /* 文章布局 */
         .layout {
             position: relative;
             z-index: 2;
@@ -65,29 +115,29 @@
             grid-template-columns: 1fr 280px;
             gap: 2rem;
         }
-        /* 文章主体 */
         #post {
             min-width: 0;
         }
         .post-content {
-            background: rgba(30, 34, 40, 0.7);
+            background: var(--bg-card);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid var(--border-color);
             overflow: hidden;
         }
         .post-header {
             padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--border-color);
         }
         .post-title {
             font-size: 2rem;
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
         .post-meta {
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
             font-size: 0.85rem;
             margin-top: 0.5rem;
             display: flex;
@@ -99,18 +149,19 @@
             font-size: 1rem;
             line-height: 1.7;
         }
-        /* 文章内标题 */
         .article-container h2 {
             font-size: 1.5rem;
             font-weight: 600;
             margin: 2rem 0 1rem;
             padding-bottom: 0.3rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
         }
         .article-container h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin: 1.5rem 0 0.75rem;
+            color: var(--text-primary);
         }
         .article-container p {
             margin: 0 0 1rem;
@@ -124,13 +175,13 @@
         .article-container blockquote {
             margin: 1rem 0;
             padding: 0.5rem 0 0.5rem 1rem;
-            border-left: 4px solid rgba(255,255,255,0.4);
-            background: rgba(0,0,0,0.2);
+            border-left: 4px solid var(--link-color);
+            background: var(--blockquote-bg);
             border-radius: 0 8px 8px 0;
-            color: rgba(255,255,255,0.7);
+            color: var(--text-secondary);
         }
         .article-container pre {
-            background: rgba(0,0,0,0.5);
+            background: var(--pre-bg);
             padding: 1rem;
             border-radius: 8px;
             overflow-x: auto;
@@ -139,7 +190,7 @@
             margin: 1rem 0;
         }
         .article-container code {
-            background: rgba(0,0,0,0.4);
+            background: var(--code-bg);
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: monospace;
@@ -156,7 +207,7 @@
             margin: 1.5rem 0;
         }
         .article-container a {
-            color: #3B82F6;
+            color: var(--link-color);
             text-decoration: none;
         }
         .article-container a:hover {
@@ -165,12 +216,12 @@
         /* 文章底部 */
         .post-copyright {
             padding: 1.5rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border-color);
             font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
         }
         .post-copyright a {
-            color: #3B82F6;
+            color: var(--link-color);
         }
         .post-tags {
             padding: 0 2rem 1rem;
@@ -179,44 +230,40 @@
             gap: 0.5rem;
         }
         .post-tag {
-            background: rgba(255,255,255,0.1);
+            background: var(--tag-bg);
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
             font-size: 0.75rem;
-            color: rgba(255,255,255,0.7);
+            color: var(--text-secondary);
         }
         .post-nav {
             padding: 0 2rem 1.5rem;
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--border-color);
         }
         .post-nav a {
-            color: #3B82F6;
+            color: var(--link-color);
             font-size: 0.85rem;
             text-decoration: none;
         }
         .post-nav a:hover {
             text-decoration: underline;
         }
-        /* 评论区域 */
-        .comment-wrap {
-            padding: 1.5rem 2rem 2rem;
-        }
-        #twikoo-wrap {
-            margin-top: 0;
-        }
-        /* 右侧目录 */
+        /* 右侧侧边栏 */
         .aside-content {
             position: sticky;
             top: 2rem;
             align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
         .card-widget {
-            background: rgba(30, 34, 40, 0.7);
+            background: var(--bg-card);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid var(--border-color);
             padding: 1.5rem;
         }
         .item-headline {
@@ -224,10 +271,11 @@
             font-weight: 600;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--text-primary);
         }
         .toc-content {
             max-height: 70vh;
@@ -241,20 +289,31 @@
             margin: 0.5rem 0;
         }
         .toc-link {
-            color: rgba(255,255,255,0.7);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.85rem;
             display: block;
             transition: color 0.2s;
         }
         .toc-link:hover {
-            color: #3B82F6;
+            color: var(--link-color);
         }
         .toc-level-2 {
             padding-left: 0;
         }
         .toc-level-3 {
             padding-left: 1rem;
+        }
+        /* 网站信息卡片 */
+        .webinfo-item {
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .webinfo-item .item-name {
+            font-weight: 500;
         }
         /* 响应式 */
         @media (max-width: 900px) {
@@ -263,6 +322,11 @@
             }
             .aside-content {
                 display: none;
+            }
+            .theme-switch {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.3rem 0.8rem;
             }
         }
         @media (max-width: 640px) {
@@ -294,6 +358,8 @@
     </div>
     <div class="bg-blur"></div>
 
+    <button class="theme-switch" id="themeToggle">🌓 切换主题</button>
+
     <div class="layout">
         <div id="post">
             <div class="post-content">
@@ -314,20 +380,6 @@
                     <span id="prevLink">上一篇：无</span>
                     <span id="nextLink">下一篇：无</span>
                 </div>
-                <div class="comment-wrap">
-                    <div id="twikoo-wrap"></div>
-                    <script src="https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js"></script>
-                    <script>
-                        // 可选：初始化 Twikoo，若不需要评论可删除此段
-                        if (typeof twikoo !== 'undefined') {
-                            twikoo.init({
-                                el: '#twikoo-wrap',
-                                envId: '你的环境ID', // 替换为你的环境 ID
-                                region: ''
-                            });
-                        }
-                    </script>
-                </div>
             </div>
         </div>
         <div class="aside-content">
@@ -340,24 +392,123 @@
                     <ul class="toc" id="tocList"></ul>
                 </div>
             </div>
+            <div class="card-widget" id="statsCard">
+                <div class="item-headline">
+                    <i class="fas fa-chart-line"></i>
+                    <span>网站信息</span>
+                </div>
+                <div id="webinfoContent">
+                    <div class="webinfo-item"><span class="item-name">文章数目 :</span><span id="postCount">0</span></div>
+                    <div class="webinfo-item"><span class="item-name">本站总字数 :</span><span id="totalWords">0</span></div>
+                    <div class="webinfo-item"><span class="item-name">最后更新时间 :</span><span id="lastUpdate">加载中...</span></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 获取 URL 参数
+        // ========== 主题切换功能 ==========
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️ 切换亮色' : '🌙 切换暗色';
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️ 切换亮色' : '🌙 切换暗色';
+        });
+
+        // ========== 帖子加载逻辑 ==========
         function getPostId() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('id');
+            return new URLSearchParams(window.location.search).get('id');
         }
 
-        // 计算阅读时长（中文约 200 字/分钟）
         function calcReadingTime(html) {
             const text = html.replace(/<[^>]*>/g, '');
-            const minutes = Math.ceil(text.length / 200);
-            return minutes;
+            return Math.ceil(text.length / 200);
         }
 
-        // 生成目录
+        // 全局存储所有帖子，用于统计和上一篇/下一篇
+        let allPosts = [];
+
+        async function loadAllPosts() {
+            try {
+                const res = await fetch('data/posts.json');
+                if (!res.ok) throw new Error();
+                allPosts = await res.json();
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                // 更新统计信息
+                const totalPosts = allPosts.length;
+                const totalWords = allPosts.reduce((sum, p) => sum + p.content.replace(/<[^>]*>/g, '').length, 0);
+                const lastUpdate = allPosts.length ? allPosts[0].date : '暂无';
+                document.getElementById('postCount').textContent = totalPosts;
+                document.getElementById('totalWords').textContent = totalWords;
+                document.getElementById('lastUpdate').textContent = lastUpdate;
+            } catch (e) {
+                console.error('加载全部帖子失败', e);
+                document.getElementById('postCount').textContent = '加载失败';
+                document.getElementById('totalWords').textContent = '加载失败';
+                document.getElementById('lastUpdate').textContent = '加载失败';
+            }
+        }
+
+        async function loadPost() {
+            const id = getPostId();
+            if (!id) {
+                document.getElementById('postTitle').textContent = '未指定帖子';
+                document.getElementById('articleContainer').innerHTML = '<p>请从首页点击帖子进入。</p>';
+                return;
+            }
+            await loadAllPosts(); // 确保统计数据和帖子列表已加载
+            try {
+                const res = await fetch('data/posts.json');
+                if (!res.ok) throw new Error();
+                const posts = await res.json();
+                const post = posts.find(p => p.id == id);
+                if (!post) {
+                    document.getElementById('postTitle').textContent = '未找到该帖子';
+                    document.getElementById('articleContainer').innerHTML = '<p>帖子不存在或已被删除。</p>';
+                    return;
+                }
+                document.getElementById('postTitle').textContent = post.title;
+                const readingTime = calcReadingTime(post.content);
+                const wordCount = post.content.replace(/<[^>]*>/g, '').length;
+                document.getElementById('postMeta').innerHTML = `
+                    <span>📅 发布时间：${post.date}</span>
+                    <span>📖 总字数：${wordCount}</span>
+                    <span>⏱️ 阅读时长：约 ${readingTime} 分钟</span>
+                `;
+                document.getElementById('articleContainer').innerHTML = post.content;
+                document.getElementById('postLink').href = window.location.href;
+                document.getElementById('postLink').textContent = window.location.href;
+                if (post.tags && post.tags.length) {
+                    document.getElementById('postTags').innerHTML = post.tags.map(t => `<span class="post-tag">${t}</span>`).join('');
+                } else {
+                    document.getElementById('postTags').innerHTML = '';
+                }
+                // 处理上一篇/下一篇（基于 allPosts 的顺序）
+                const currentIndex = allPosts.findIndex(p => p.id == id);
+                let prevPost = null, nextPost = null;
+                if (currentIndex !== -1) {
+                    if (currentIndex > 0) prevPost = allPosts[currentIndex - 1];
+                    if (currentIndex < allPosts.length - 1) nextPost = allPosts[currentIndex + 1];
+                }
+                const prevHtml = prevPost ? `<a href="post.html?id=${prevPost.id}">上一篇：${prevPost.title}</a>` : '上一篇：无';
+                const nextHtml = nextPost ? `<a href="post.html?id=${nextPost.id}">下一篇：${nextPost.title}</a>` : '下一篇：无';
+                document.getElementById('prevLink').innerHTML = prevHtml;
+                document.getElementById('nextLink').innerHTML = nextHtml;
+
+                // 生成目录
+                generateTOC();
+                document.title = `${post.title} - 凌社千白`;
+            } catch (e) {
+                console.error(e);
+                document.getElementById('postTitle').textContent = '加载失败';
+                document.getElementById('articleContainer').innerHTML = '<p>数据加载失败，请稍后重试。</p>';
+            }
+        }
+
         function generateTOC() {
             const container = document.getElementById('articleContainer');
             const headings = container.querySelectorAll('h2, h3');
@@ -367,7 +518,6 @@
             headings.forEach(heading => {
                 const level = heading.tagName.toLowerCase();
                 const text = heading.textContent;
-                // 为每个标题生成唯一 ID
                 const id = `heading-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`;
                 heading.id = id;
                 const li = document.createElement('li');
@@ -383,88 +533,6 @@
                 li.appendChild(a);
                 tocList.appendChild(li);
             });
-        }
-
-        // 加载所有帖子（用于上一篇/下一篇）
-        let allPosts = [];
-
-        async function loadAllPosts() {
-            try {
-                const response = await fetch('data/posts.json');
-                if (!response.ok) throw new Error('加载失败');
-                allPosts = await response.json();
-                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            } catch (e) {
-                console.error('加载全部帖子失败', e);
-            }
-        }
-
-        // 加载当前帖子
-        async function loadPost() {
-            const id = getPostId();
-            if (!id) {
-                // 无 ID 参数，显示默认提示
-                document.getElementById('postTitle').textContent = '未指定帖子';
-                document.getElementById('articleContainer').innerHTML = '<p>请从首页点击帖子进入。</p>';
-                return;
-            }
-
-            await loadAllPosts();
-
-            try {
-                const response = await fetch('data/posts.json');
-                if (!response.ok) throw new Error('网络响应失败');
-                const posts = await response.json();
-                const post = posts.find(p => p.id == id);
-                if (!post) {
-                    document.getElementById('postTitle').textContent = '未找到该帖子';
-                    document.getElementById('articleContainer').innerHTML = '<p>帖子不存在或已被删除。</p>';
-                    return;
-                }
-
-                // 更新标题和元数据
-                document.getElementById('postTitle').textContent = post.title;
-                const readingTime = calcReadingTime(post.content);
-                const wordCount = post.content.replace(/<[^>]*>/g, '').length;
-                document.getElementById('postMeta').innerHTML = `
-                    <span>📅 发布时间：${post.date}</span>
-                    <span>📖 总字数：${wordCount}</span>
-                    <span>⏱️ 阅读时长：约 ${readingTime} 分钟</span>
-                `;
-                document.getElementById('articleContainer').innerHTML = post.content;
-                document.getElementById('postLink').href = window.location.href;
-                document.getElementById('postLink').textContent = window.location.href;
-
-                // 处理标签
-                if (post.tags && post.tags.length) {
-                    const tagsHtml = post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('');
-                    document.getElementById('postTags').innerHTML = tagsHtml;
-                } else {
-                    document.getElementById('postTags').innerHTML = '';
-                }
-
-                // 处理上一篇/下一篇
-                const currentIndex = allPosts.findIndex(p => p.id == id);
-                let prevPost = null, nextPost = null;
-                if (currentIndex !== -1) {
-                    if (currentIndex > 0) prevPost = allPosts[currentIndex - 1];
-                    if (currentIndex < allPosts.length - 1) nextPost = allPosts[currentIndex + 1];
-                }
-                const prevHtml = prevPost ? `<a href="post.html?id=${prevPost.id}">上一篇：${prevPost.title}</a>` : '上一篇：无';
-                const nextHtml = nextPost ? `<a href="post.html?id=${nextPost.id}">下一篇：${nextPost.title}</a>` : '下一篇：无';
-                document.getElementById('prevLink').innerHTML = prevHtml;
-                document.getElementById('nextLink').innerHTML = nextHtml;
-
-                // 生成目录
-                generateTOC();
-
-                // 更新页面标题
-                document.title = `${post.title} - 凌社千白`;
-            } catch (error) {
-                console.error('加载失败', error);
-                document.getElementById('postTitle').textContent = '加载失败';
-                document.getElementById('articleContainer').innerHTML = '<p>数据加载失败，请稍后重试。</p>';
-            }
         }
 
         loadPost();
