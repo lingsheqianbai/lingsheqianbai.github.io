@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="style/icon.css">
     <link rel="stylesheet" href="style/aoo.css">
     <style>
+        /* ========== 原有样式保持不变（仅新增帖子搜索相关） ========== */
         .sidebar {
             align-items: flex-start;
             padding-left: 0
@@ -590,6 +591,41 @@
             margin: 2rem 0
         }
 
+        /* 帖子标题行布局（标题+搜索框） */
+        .posts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+        .posts-header .section-title {
+            margin-bottom: 0;
+        }
+        .posts-search {
+            max-width: 280px;
+            width: 100%;
+        }
+        .posts-search input {
+            width: 100%;
+            padding: 8px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .posts-search input:focus {
+            border-color: #3B82F6;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .posts-search input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
         .posts-grid {
             display: flex;
             flex-direction: column;
@@ -655,6 +691,13 @@
         @media(max-width:768px) {
             .post-card-title {
                 font-size: 1.2rem
+            }
+            .posts-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .posts-search {
+                max-width: 100%;
             }
         }
 
@@ -842,7 +885,12 @@
                     </div>
                 </details>
                 <div class="posts-section" id="posts">
-                    <h3 class="section-title">📝 我的帖子(测试)</h3>
+                    <div class="posts-header">
+                        <h3 class="section-title">📝 我的帖子(测试)</h3>
+                        <div class="posts-search">
+                            <input type="text" id="postsSearchInput" placeholder="搜索帖子标题或内容...">
+                        </div>
+                    </div>
                     <div id="postsGrid" class="posts-grid">
                         <!-- 帖子卡片会由JS动态渲染 -->
                     </div>
@@ -1335,6 +1383,7 @@
 
             const postsGrid = document.getElementById('postsGrid');
             const paginationDiv = document.getElementById('postsPagination');
+            const searchInput = document.getElementById('postsSearchInput');
 
             if (!postsGrid) return;
 
@@ -1348,6 +1397,25 @@
                     filteredPosts = [...allPosts];
                     renderPosts();
                     renderPagination();
+
+                    // 绑定搜索事件
+                    if (searchInput) {
+                        searchInput.addEventListener('input', function() {
+                            const query = this.value.trim().toLowerCase();
+                            if (query === '') {
+                                filteredPosts = [...allPosts];
+                            } else {
+                                filteredPosts = allPosts.filter(post =>
+                                    post.title.toLowerCase().includes(query) ||
+                                    (post.summary && post.summary.toLowerCase().includes(query)) ||
+                                    (post.content && post.content.toLowerCase().includes(query))
+                                );
+                            }
+                            currentPage = 1;
+                            renderPosts();
+                            renderPagination();
+                        });
+                    }
                 })
                 .catch(error => {
                     console.error('加载帖子失败:', error);
