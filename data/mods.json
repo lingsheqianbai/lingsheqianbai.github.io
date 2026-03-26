@@ -4658,7 +4658,7 @@
     "platform": "steam",
     "steamId": "3682674886",
     "game": "僵毁 僵尸毁灭工程 Project Zomboid",
-    "status": "待处理",
+    "status": "完整",
     "videoUrl": "https://www.bilibili.com/video/BV1GmQBBxEaD/",
     "note": "",
     "offline": false
@@ -4680,9 +4680,31 @@
     "platform": "steam",
     "steamId": "3589560764",
     "game": "僵毁 僵尸毁灭工程 Project Zomboid",
+    "status": "完整",
+    "videoUrl": "https://www.bilibili.com/video/BV1jaQ1BSEs4/?vd_source=73e550a3569a193e56d345c2b1e1a721",
+    "note": "",
+    "offline": false
+  },
+  {
+    "name": "Reactive Sound Events",
+    "chineseName": "反应式声音事件",
+    "platform": "steam",
+    "steamId": "3656190498",
+    "game": "僵毁 僵尸毁灭工程 Project Zomboid",
     "status": "待检测",
     "videoUrl": "",
     "note": "",
+    "offline": false
+  },
+  {
+    "name": "Minimal Hotbar",
+    "chineseName": "极简快捷栏",
+    "platform": "steam",
+    "steamId": "3688576740",
+    "game": "僵毁 僵尸毁灭工程 Project Zomboid",
+    "status": "完整",
+    "videoUrl": "",
+    "note": "视频待发布",
     "offline": false
   },
   {
