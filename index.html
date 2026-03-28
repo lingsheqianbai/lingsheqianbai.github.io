@@ -651,16 +651,16 @@
         .post-card-cover {
             background-size: cover;
             background-position: center;
-            min-width: 120px;
-            width: 120px;
-            height: 120px;
+            width: 35%;                     /* 占卡片宽度的 35% */
+            padding-top: 46.67%;           /* 35% * 4/3 ≈ 46.67% ，实现 3:4 纵向比例 */
             border-radius: 12px 0 0 12px;
+            flex-shrink: 0;
+            position: relative;            /* 用于内部背景图定位 */
         }
         @media (max-width: 768px) {
             .post-card-cover {
-                width: 80px;
-                height: 80px;
-                min-width: 80px;
+                width: 40%;                /* 移动端可以稍大 */
+                padding-top: 53.33%;       /* 40% * 4/3 ≈ 53.33% */
             }
         }
 
