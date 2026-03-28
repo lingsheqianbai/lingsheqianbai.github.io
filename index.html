@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="style/icon.css">
     <link rel="stylesheet" href="style/aoo.css">
     <style>
-        /* ========== 原有样式保持不变（仅新增帖子搜索相关） ========== */
+        /* ========== 原有样式保持不变 ========== */
         .sidebar {
             align-items: flex-start;
             padding-left: 0
@@ -591,7 +591,6 @@
             margin: 2rem 0
         }
 
-        /* 帖子标题行布局（标题+搜索框） */
         .posts-header {
             display: flex;
             justify-content: space-between;
@@ -647,6 +646,22 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
             border-color: var(--card-border-hover)
+        }
+
+        .post-card-cover {
+            background-size: cover;
+            background-position: center;
+            min-width: 120px;
+            width: 120px;
+            height: 120px;
+            border-radius: 12px 0 0 12px;
+        }
+        @media (max-width: 768px) {
+            .post-card-cover {
+                width: 80px;
+                height: 80px;
+                min-width: 80px;
+            }
         }
 
         .post-card-info {
@@ -1422,7 +1437,7 @@
                     postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>';
                 });
 
-            // 渲染当前页的帖子卡片
+            // 渲染当前页的帖子卡片（带封面图）
             function renderPosts() {
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const end = start + PAGE_SIZE;
@@ -1438,9 +1453,15 @@
                     // 摘要截取前 150 字符
                     let summary = post.summary || '';
                     if (summary.length > 150) summary = summary.substring(0, 150) + '…';
+                    // 图片地址处理：如果是相对路径，直接使用
+                    let imageUrl = post.image;
+                    if (imageUrl && !imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
+                        imageUrl = './' + imageUrl;  // 确保相对路径正确
+                    }
 
                     html += `
                         <div class="post-card-item" onclick="window.location.href='post.html?id=${post.id}'">
+                            <div class="post-card-cover" style="background-image: url('${escapeHtml(imageUrl)}');"></div>
                             <div class="post-card-info">
                                 <div class="post-card-title">${escapeHtml(post.title)}</div>
                                 <div class="post-card-meta">
