@@ -1,8 +1,10 @@
-{
-  "id": "Agent17",
-  "title": "Agent17(特工17)攻略",
-  "date": "2026-03-28",
-  "summary": "Agent17的游戏攻略。",
-  "content": "<p>Agent17 不宣传任何的安装包等等会进行打码。</p><h2>第一章</h2><p>攻略内容...</p>",
-  "image": "images/Agent17/cover.jpg"
-}
+[
+  {
+    "id": "Agent17",
+    "title": "Agent17(特工17)攻略",
+    "date": "2026-03-28",
+    "summary": "Agent17的游戏攻略。",
+    "content": "<p>Agent17 不宣传任何的安装包等等会进行打码。</p><h2>第一章</h2><p>攻略内容...</p>",
+    "image": "images/Agent17/cover.jpg"
+  }
+]
