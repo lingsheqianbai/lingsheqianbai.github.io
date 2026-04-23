@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "火花",
+    "note": "初始宠物，火系",
+    "video": "https://www.bilibili.com/video/BV1xxx"
+  },
+  {
+    "id": 2,
+    "name": "水蓝蓝",
+    "note": "初始宠物，水系",
+    "video": "https://www.bilibili.com/video/BV1yyy"
+  },
+  {
+    "id": 3,
+    "name": "喵喵",
+    "note": "初始宠物，草系",
+    "video": ""
+  }
+]

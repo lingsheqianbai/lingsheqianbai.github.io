@@ -651,16 +651,16 @@
         .post-card-cover {
             background-size: cover;
             background-position: center;
-            width: 50%;                     /* 占卡片宽度的 35% */
-            padding-top: 20%;           /* 35% * 4/3 ≈ 46.67% ，实现 3:4 纵向比例 */
+            width: 50%;
+            padding-top: 20%;
             border-radius: 12px 0 0 12px;
             flex-shrink: 0;
-            position: relative;            /* 用于内部背景图定位 */
+            position: relative;
         }
         @media (max-width: 768px) {
             .post-card-cover {
-                width: 40%;                /* 移动端可以稍大 */
-                padding-top: 53.33%;       /* 40% * 4/3 ≈ 53.33% */
+                width: 40%;
+                padding-top: 53.33%;
             }
         }
 
@@ -721,6 +721,8 @@
                 font-size: 1.1rem
             }
         }
+
+        /* 洛克王国表格样式（继承mod-table）无需额外 */
     </style>
 </head>
 <body>
@@ -866,7 +868,7 @@
                                 </thead>
                                 <tbody id="modTableBody">
                                     <tr>
-                                        <td colspan="6" class="loading">加载中...</td>
+                                        <td colspan="6" class="loading">加载中...<\/td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -874,6 +876,33 @@
                         <div class="pagination" id="pagination"></div>
                     </div>
                 </details>
+                <!-- 洛克王国精灵图鉴 (新增) -->
+                <details class="contact-item" style="padding:0;overflow:hidden;border-radius:14px;margin-bottom:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1)">
+                    <summary style="cursor:pointer;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.02);transition:background .2s;color:rgba(255,255,255,0.95);font-weight:500">
+                        <span style="font-size:24px">🐉</span> 洛克王国精灵图鉴收集资料查询 (仅千白用)<span style="margin-left:auto;font-size:14px;color:rgba(255,255,255,0.4)">点击展开</span>
+                    </summary>
+                    <div style="padding:20px;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.2)">
+                        <div class="search-box" style="margin-bottom:16px">
+                            <input type="text" id="wonderSearch" placeholder="搜索精灵名称或备注...">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="mod-table" id="wonderTable" style="min-width:500px">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>精灵名称</th>
+                                        <th>备注</th>
+                                        <th>视频链接</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wonderTableBody">
+                                    <tr><td colspan="4" class="loading">加载中...<\/td><\/tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+                <!-- 我制作的游戏攻略 -->
                 <details class="contact-item" style="padding:0;overflow:hidden;border-radius:14px;margin-bottom:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1)">
                     <summary style="cursor:pointer;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.02);transition:background .2s;color:rgba(255,255,255,0.95);font-weight:500">
                         <span style="font-size:24px">🎮</span> 我制作的游戏攻略<span style="margin-left:auto;font-size:14px;color:rgba(255,255,255,0.4)">点击展开</span>
@@ -891,7 +920,7 @@
                                 </thead>
                                 <tbody id="guideTableBody">
                                     <tr>
-                                        <td colspan="2" class="loading">加载中...</td>
+                                        <td colspan="2" class="loading">加载中...<\/td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -901,7 +930,7 @@
                 </details>
                 <div class="posts-section" id="posts">
                     <div class="posts-header">
-                        <h3 class="section-title">📝 帖子</h3>
+                        <h3 class="section-title">📝 我的帖子(测试)</h3>
                         <div class="posts-search">
                             <input type="text" id="postsSearchInput" placeholder="搜索帖子标题或内容...">
                         </div>
@@ -1196,7 +1225,7 @@
                 applyFilters()
             }).catch(error => {
                 console.error('加载 mods.json 失败:', error);
-                if (tbody) tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件</td></tr>`;
+                if (tbody) tbody.innerHTML = `<tr><td colspan="6" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 模组数据加载失败，请检查 data/mods.json 文件<\/td><\/tr>`;
                 setUpdateDate()
             });
 
@@ -1235,7 +1264,7 @@
                 const end = start + PAGE_SIZE;
                 const pageMods = filteredMods.slice(start, end);
                 if (pageMods.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的模组<\/td><\/tr>`;
                     return
                 }
                 let html = '';
@@ -1249,7 +1278,7 @@
                     if (mod.steamId) idDisplay = `<span class="mod-id">${mod.steamId}</span>`;
                     else if (mod.mcmodId) idDisplay = `<span class="mod-id">MC百科 ID: ${mod.mcmodId}</span>`;
                     else if (mod.id) idDisplay = `<span class="mod-id">${mod.id}</span>`;
-                    html += `<tr><td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}</td><td>${chineseName}</td><td><span class="status-badge ${statusClass}">${mod.status}</span></td><td>${videoLink}</td><td>${mod.note || '-'}</td><td>${offlineIcon}</td></tr>`
+                    html += `<tr><td><a href="${modLink}" target="_blank">${mod.name}</a>${idDisplay}<\/td><td>${chineseName}<\/td><td><span class="status-badge ${statusClass}">${mod.status}<\/span><\/td><td>${videoLink}<\/td><td>${mod.note || '-'}<\/td><td>${offlineIcon}<\/td><\/tr>`
                 });
                 tbody.innerHTML = html
             }
@@ -1321,7 +1350,7 @@
                 renderPagination()
             }).catch(error => {
                 console.error('加载 guides.json 失败:', error);
-                if (tbody) tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件</td></tr>`;
+                if (tbody) tbody.innerHTML = `<tr><td colspan="2" style="color:#ff6b6b; text-align:center; padding:40px;">❌ 攻略数据加载失败，请检查 data/guides.json 文件<\/td><\/tr>`;
                 if (guideStatsDiv) guideStatsDiv.innerHTML = '📚 加载失败'
             });
 
@@ -1331,12 +1360,12 @@
                     end = start + PAGE_SIZE,
                     pageGuides = filteredGuides.slice(start, end);
                 if (pageGuides.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的攻略</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; padding:40px; color:rgba(255,255,255,0.5);">没有匹配的攻略<\/td><\/tr>`;
                     return
                 }
                 let html = '';
                 pageGuides.forEach(guide => {
-                    html += `<tr><td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">${guide.name}</a></td><td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">🔗 观看</a></td></tr>`
+                    html += `<tr><td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">${guide.name}</a><\/td><td><a href="${guide.url}" target="_blank" style="color:#3B82F6;">🔗 观看<\/a><\/td><\/tr>`
                 });
                 tbody.innerHTML = html
             }
@@ -1402,30 +1431,23 @@
 
             if (!postsGrid) return;
 
-            // 加载帖子数据
             fetch('data/posts.json')
                 .then(response => response.json())
                 .then(posts => {
                     allPosts = posts;
-                    // 按日期倒序排序（新帖在前）
                     allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
                     filteredPosts = [...allPosts];
                     renderPosts();
                     renderPagination();
 
-                    // 绑定搜索事件
                     if (searchInput) {
                         searchInput.addEventListener('input', function() {
                             const query = this.value.trim().toLowerCase();
-                            if (query === '') {
-                                filteredPosts = [...allPosts];
-                            } else {
-                                filteredPosts = allPosts.filter(post =>
-                                    post.title.toLowerCase().includes(query) ||
-                                    (post.summary && post.summary.toLowerCase().includes(query)) ||
-                                    (post.content && post.content.toLowerCase().includes(query))
-                                );
-                            }
+                            filteredPosts = query === '' ? [...allPosts] : allPosts.filter(post =>
+                                post.title.toLowerCase().includes(query) ||
+                                (post.summary && post.summary.toLowerCase().includes(query)) ||
+                                (post.content && post.content.toLowerCase().includes(query))
+                            );
                             currentPage = 1;
                             renderPosts();
                             renderPagination();
@@ -1437,7 +1459,6 @@
                     postsGrid.innerHTML = '<div style="text-align:center; padding:40px; color:#ff6b6b;">❌ 帖子数据加载失败，请检查 data/posts.json 文件</div>';
                 });
 
-            // 渲染当前页的帖子卡片（带封面图）
             function renderPosts() {
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const end = start + PAGE_SIZE;
@@ -1450,15 +1471,12 @@
 
                 let html = '';
                 pagePosts.forEach(post => {
-                    // 摘要截取前 150 字符
                     let summary = post.summary || '';
                     if (summary.length > 150) summary = summary.substring(0, 150) + '…';
-                    // 图片地址处理：如果是相对路径，直接使用
                     let imageUrl = post.image;
                     if (imageUrl && !imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
-                        imageUrl = './' + imageUrl;  // 确保相对路径正确
+                        imageUrl = './' + imageUrl;
                     }
-
                     html += `
                         <div class="post-card-item" onclick="window.location.href='post.html?id=${post.id}'">
                             <div class="post-card-cover" style="background-image: url('${escapeHtml(imageUrl)}');"></div>
@@ -1475,7 +1493,6 @@
                 postsGrid.innerHTML = html;
             }
 
-            // 渲染分页按钮
             function renderPagination() {
                 if (!paginationDiv) return;
                 const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
@@ -1486,11 +1503,9 @@
 
                 let html = '<button id="postsPrevPage" ' + (currentPage === 1 ? 'disabled' : '') + '>‹ 上一页</button>';
                 html += '<div class="page-numbers">';
-
                 let startPage = Math.max(1, currentPage - 2);
                 let endPage = Math.min(totalPages, startPage + 4);
                 if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
-
                 for (let i = startPage; i <= endPage; i++) {
                     html += `<span class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
                 }
@@ -1498,7 +1513,6 @@
                 html += '<button id="postsNextPage" ' + (currentPage === totalPages ? 'disabled' : '') + '>下一页 ›</button>';
                 paginationDiv.innerHTML = html;
 
-                // 绑定页码点击事件
                 document.querySelectorAll('#postsPagination .page-number').forEach(span => {
                     span.addEventListener('click', function() {
                         const page = parseInt(this.dataset.page, 10);
@@ -1509,31 +1523,12 @@
                         }
                     });
                 });
-
-                // 绑定上一页/下一页事件
                 const prevBtn = document.getElementById('postsPrevPage');
                 const nextBtn = document.getElementById('postsNextPage');
-                if (prevBtn) {
-                    prevBtn.addEventListener('click', () => {
-                        if (currentPage > 1) {
-                            currentPage--;
-                            renderPosts();
-                            renderPagination();
-                        }
-                    });
-                }
-                if (nextBtn) {
-                    nextBtn.addEventListener('click', () => {
-                        if (currentPage < totalPages) {
-                            currentPage++;
-                            renderPosts();
-                            renderPagination();
-                        }
-                    });
-                }
+                if (prevBtn) prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderPosts(); renderPagination(); } });
+                if (nextBtn) nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderPosts(); renderPagination(); } });
             }
 
-            // 简单的防 XSS 函数
             function escapeHtml(str) {
                 if (!str) return '';
                 return str.replace(/[&<>]/g, function(m) {
@@ -1541,6 +1536,69 @@
                     if (m === '<') return '&lt;';
                     if (m === '>') return '&gt;';
                     return m;
+                });
+            }
+        })();
+    </script>
+    <!-- 洛克王国精灵图鉴数据加载 -->
+    <script>
+        (function() {
+            const wonderTbody = document.getElementById('wonderTableBody');
+            const wonderSearch = document.getElementById('wonderSearch');
+            let wonderData = [];
+
+            function renderWonders(filter = '') {
+                if (!wonderTbody) return;
+                const lowerFilter = filter.toLowerCase();
+                const filtered = wonderData.filter(item =>
+                    item.name.toLowerCase().includes(lowerFilter) ||
+                    (item.note && item.note.toLowerCase().includes(lowerFilter))
+                );
+                if (filtered.length === 0) {
+                    wonderTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px;">没有匹配的精灵<\/td><\/tr>';
+                    return;
+                }
+                let html = '';
+                filtered.forEach(item => {
+                    const videoLink = item.video && item.video.trim() !== '' 
+                        ? `<a href="${item.video}" target="_blank" style="color:#3B82F6;">🔗 视频</a>`
+                        : '-';
+                    html += `
+                        <tr>
+                            <td>${item.id}<\/td>
+                            <td>${escapeHtml(item.name)}<\/td>
+                            <td>${escapeHtml(item.note || '-')}<\/td>
+                            <td>${videoLink}<\/td>
+                        <\/tr>
+                    `;
+                });
+                wonderTbody.innerHTML = html;
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return str.replace(/[&<>]/g, function(m) {
+                    if (m === '&') return '&amp;';
+                    if (m === '<') return '&lt;';
+                    if (m === '>') return '&gt;';
+                    return m;
+                });
+            }
+
+            fetch('data/wonders.json')
+                .then(res => res.json())
+                .then(data => {
+                    wonderData = data;
+                    renderWonders();
+                })
+                .catch(err => {
+                    console.error('加载 wonders.json 失败', err);
+                    if (wonderTbody) wonderTbody.innerHTML = '<tr><td colspan="4" style="color:#ff6b6b; text-align:center;">❌ 数据加载失败，请检查 data/wonders.json<\/td><\/tr>';
+                });
+
+            if (wonderSearch) {
+                wonderSearch.addEventListener('input', function() {
+                    renderWonders(this.value.trim().toLowerCase());
                 });
             }
         })();
