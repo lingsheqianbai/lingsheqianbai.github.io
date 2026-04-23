@@ -1,20 +1,62 @@
 [
   {
     "id": 1,
-    "name": "火花",
-    "note": "初始宠物，火系",
-    "video": "https://www.bilibili.com/video/BV1xxx"
+    "name": "迪莫",
+    "note": "待补充,圣光迪莫暂无途径",
+    "video": "https://www.bilibili.com/video/BV1q8oYBcErm/?vd_source=73e550a3569a193e56d345c2b1e1a721"
   },
   {
     "id": 2,
-    "name": "水蓝蓝",
-    "note": "初始宠物，水系",
-    "video": "https://www.bilibili.com/video/BV1yyy"
+    "name": "喵喵",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1HwoeBuEGb/?vd_source=73e550a3569a193e56d345c2b1e1a721"
   },
   {
     "id": 3,
-    "name": "喵喵",
-    "note": "初始宠物，草系",
-    "video": ""
+    "name": "喵呜",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1HwoeBuEGb/?vd_source=73e550a3569a193e56d345c2b1e1a721"
+  },
+  {
+    "id": 4,
+    "name": "魔力猫",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1HwoeBuEGb/?vd_source=73e550a3569a193e56d345c2b1e1a721"
+  },
+  {
+    "id": 5,
+    "name": "火花",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1p5oMBNEgL/?vd_source=73e550a3569a193e56d345c2b1e1a721"
+  },
+  {
+    "id": 6,
+    "name": "焰火",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1p5oMBNEgL/?vd_source=73e550a3569a193e56d345c2b1e1a721"
+  },
+  {
+    "id": 7,
+    "name": "火神",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1p5oMBNEgL/?vd_source=73e550a3569a193e56d345c2b1e1a721"
+  },
+  {
+    "id": 8,
+    "name": "水蓝蓝",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1JnoMBcEkc?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections"
+  },
+  {
+    "id": 9,
+    "name": "波波拉",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1JnoMBcEkc?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections"
+  },
+  {
+    "id": 10,
+    "name": "水灵",
+    "note": "",
+    "video": "https://www.bilibili.com/video/BV1JnoMBcEkc?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections"
   }
 ]
