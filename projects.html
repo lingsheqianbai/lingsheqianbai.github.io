@@ -1097,20 +1097,25 @@
                 if (other.length) renderSimpleTable('luokeOtherTable', other, [{ key: 'name', label: '项目名' }, { key: 'note', label: '备注' }, { key: 'video', type: 'video', label: '视频' }], 15);
             }
             else if (game.id === 'whiteday') {
-                const [endingsRes, otherRes, ghostsRes, modelsRes] = await Promise.all([
+                const [endingsRes, otherRes, ghostsRes, modelsRes, guidesRes] = await Promise.all([
                     fetch('data/White%20Day%20A%20Labyrinth%20Named%20School/endings.json').catch(() => null),
                     fetch('data/White%20Day%20A%20Labyrinth%20Named%20School/other.json').catch(() => null),
                     fetch('data/White%20Day%20A%20Labyrinth%20Named%20School/ghosts.json').catch(() => null),
-                    fetch('data/White%20Day%20A%20Labyrinth%20Named%20School/models.json').catch(() => null)
+                    fetch('data/White%20Day%20A%20Labyrinth%20Named%20School/models.json').catch(() => null),
+                    fetch('data/White%20Day%20A%20Labyrinth%20Named%20School/guides.json').catch(() => null)
                 ]);
                 let endings = endingsRes && endingsRes.ok ? await endingsRes.json() : [];
                 let other = otherRes && otherRes.ok ? await otherRes.json() : [];
                 let ghosts = ghostsRes && ghostsRes.ok ? await ghostsRes.json() : [];
                 let models = modelsRes && modelsRes.ok ? await modelsRes.json() : [];
+                let guides = guidesRes && guidesRes.ok ? await guidesRes.json() : [];
 
                 let html = '';
                 if (endings.length) {
-                    html += `<details class="section-details"><summary>🎭 恐怖学校白色情人节结局收集 (${endings.length}个)</summary><div class="section-content"><div id="whitedayEndingsTableContainer"><table class="mod-table" id="whitedayEndingsTable"><thead><tr><th>攻略名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="whitedayEndingsTable-pagination"></div></div></div></details>`;
+                    html += `<details class="section-details"><summary>🎭 结局收集 (${endings.length}个)</summary><div class="section-content"><div id="whitedayEndingsTableContainer"><table class="mod-table" id="whitedayEndingsTable"><thead><tr><th>攻略名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="whitedayEndingsTable-pagination"></div></div></div></details>`;
+                }
+                if (guides.length) {
+                    html += `<details class="section-details"><summary>📖 自制教程 (${guides.length}个)</summary><div class="section-content"><div id="whitedayGuidesTableContainer"><table class="mod-table" id="whitedayGuidesTable"><thead><tr><th>教程名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="whitedayGuidesTable-pagination"></div></div></div></details>`;
                 }
                 if (other.length) {
                     html += `<details class="section-details"><summary>📖 其他项目 (${other.length}个)</summary><div class="section-content"><div id="whitedayOtherTableContainer"><table class="mod-table" id="whitedayOtherTable"><thead><tr><th>攻略名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="whitedayOtherTable-pagination"></div></div></div></details>`;
@@ -1126,6 +1131,10 @@
                 if (endings.length) {
                     const endingsData = endings.map(g => ({ name: g.name, url: g.url }));
                     renderSimpleTable('whitedayEndingsTable', endingsData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (guides.length) {
+                    const guidesData = guides.map(g => ({ name: g.name, url: g.url }));
+                    renderSimpleTable('whitedayGuidesTable', guidesData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
                 }
                 if (other.length) {
                     const otherData = other.map(g => ({ name: g.name, url: g.url }));
