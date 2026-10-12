@@ -654,9 +654,9 @@
                         let cells = '';
                         columns.forEach(col => {
                             let value = row[col.key] || '-';
-                            if (col.type === 'video' && value && value !== '') {
+                            if (col.type === 'video' && value && value !== '' && value !== '-') {
                                 value = `<a href="${value}" target="_blank" style="color:#3B82F6;">🎬 视频</a>`;
-                            } else if (col.type === 'url' && value && value !== '') {
+                            } else if (col.type === 'url' && value && value !== '' && value !== '-' && value.indexOf('http') === 0) {
                                 value = `<a href="${value}" target="_blank" style="color:#3B82F6;">🔗 详情</a>`;
                             }
                             cells += `<td>${value}</td>`;
@@ -1211,17 +1211,55 @@
                 renderSimpleTable('onlyyouEndingsTable', endingsData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
             }
             else if (game.id === 'sonsoftheforest') {
-                const modsRes = await fetch('data/Sons%20of%20the%20Forest/mods.json').catch(() => null);
+                const [modsRes, tutorialsRes, collectiblesRes, recommendationsRes, resourcesRes] = await Promise.all([
+                    fetch('data/Sons%20of%20the%20Forest/mods.json').catch(() => null),
+                    fetch('data/Sons%20of%20the%20Forest/tutorials.json').catch(() => null),
+                    fetch('data/Sons%20of%20the%20Forest/collectibles.json').catch(() => null),
+                    fetch('data/Sons%20of%20the%20Forest/recommendations.json').catch(() => null),
+                    fetch('data/Sons%20of%20the%20Forest/resources.json').catch(() => null)
+                ]);
                 let mods = modsRes && modsRes.ok ? await modsRes.json() : [];
+                let tutorials = tutorialsRes && tutorialsRes.ok ? await tutorialsRes.json() : [];
+                let collectibles = collectiblesRes && collectiblesRes.ok ? await collectiblesRes.json() : [];
+                let recommendations = recommendationsRes && recommendationsRes.ok ? await recommendationsRes.json() : [];
+                let resources = resourcesRes && resourcesRes.ok ? await resourcesRes.json() : [];
 
                 let html = '';
                 if (mods.length) {
                     html += `<details class="section-details"><summary>📦 森林之子模组 (${mods.length}个)</summary><div class="section-content"><div id="sotfModsTableContainer"><table class="mod-table" id="sotfModsTable"><thead><tr><th>模组名称</th><th>模组中文名</th><th>备注</th></tr></thead><tbody></tbody></table><div id="sotfModsTable-pagination"></div></div></div></details>`;
                 }
+                if (tutorials.length) {
+                    html += `<details class="section-details"><summary>📖 森林之子教程 (${tutorials.length}个)</summary><div class="section-content"><div id="sotfTutorialsTableContainer"><table class="mod-table" id="sotfTutorialsTable"><thead><tr><th>教程名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfTutorialsTable-pagination"></div></div></div></details>`;
+                }
+                if (collectibles.length) {
+                    const sotfNoteCount = collectibles.filter(x => x && x.name && x.name.indexOf('说明') === 0).length;
+                    const sotfTotal = collectibles.length - sotfNoteCount;
+                    html += `<details class="section-details"><summary>🎬 森林之子全收集 (${sotfTotal}个)</summary><div class="section-content"><div id="sotfCollectiblesTableContainer"><table class="mod-table" id="sotfCollectiblesTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfCollectiblesTable-pagination"></div></div></div></details>`;
+                }
+                if (recommendations.length) {
+                    const sotfRecTotal = recommendations.filter(x => !(x && x.name && x.name.indexOf('说明') === 0)).length;
+                    html += `<details class="section-details"><summary>⭐ 森林之子模组推荐 (${sotfRecTotal}个)</summary><div class="section-content"><div id="sotfRecommendationsTableContainer"><table class="mod-table" id="sotfRecommendationsTable"><thead><tr><th>名称</th><th>链接 / 密码</th></tr></thead><tbody></tbody></table><div id="sotfRecommendationsTable-pagination"></div></div></div></details>`;
+                }
+                if (resources.length) {
+                    const sotfResTotal = resources.filter(x => !(x && x.name && x.name.indexOf('说明') === 0)).length;
+                    html += `<details class="section-details"><summary>📖 森林之子资源下载 (${sotfResTotal}个)</summary><div class="section-content"><div id="sotfResourcesTableContainer"><table class="mod-table" id="sotfResourcesTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfResourcesTable-pagination"></div></div></div></details>`;
+                }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
 
                 if (mods.length) {
                     renderSimpleTable('sotfModsTable', mods, [{ key: 'name', label: '模组名称' }, { key: 'chineseName', label: '模组中文名' }, { key: 'note', label: '备注' }], 15);
+                }
+                if (tutorials.length) {
+                    renderSimpleTable('sotfTutorialsTable', tutorials, [{ key: 'name', label: '教程名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (collectibles.length) {
+                    renderSimpleTable('sotfCollectiblesTable', collectibles, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (recommendations.length) {
+                    renderSimpleTable('sotfRecommendationsTable', recommendations, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接 / 密码' }], 15);
+                }
+                if (resources.length) {
+                    renderSimpleTable('sotfResourcesTable', resources, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
                 }
             }
             else if (game.id === '7days') {
