@@ -7,5 +7,6 @@
   { "id": "7days", "name": "我与你共度的七日", "icon": "📅", "description": "结局流程攻略" },
   { "id": "kingdom", "name": "王国：两位君主", "icon": "👑", "description": "暂无内容，后续补充" },
   { "id": "jojo", "name": "JOJO群星之战", "icon": "⭐", "description": "暂无内容，后续补充" },
-  { "id": "onlyyou", "name": "仅你一人", "icon": "🌸", "description": "结局流程攻略" }
+  { "id": "onlyyou", "name": "仅你一人", "icon": "🌸", "description": "结局流程攻略" },
+  { "id": "sonsoftheforest", "name": "森林之子", "icon": "🌲", "description": "模组汉化、教程" }
 ]
