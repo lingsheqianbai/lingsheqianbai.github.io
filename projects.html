@@ -1211,18 +1211,20 @@
                 renderSimpleTable('onlyyouEndingsTable', endingsData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
             }
             else if (game.id === 'sonsoftheforest') {
-                const [modsRes, tutorialsRes, collectiblesRes, recommendationsRes, resourcesRes] = await Promise.all([
+                const [modsRes, tutorialsRes, collectiblesRes, recommendationsRes, resourcesRes, modWebsitesRes] = await Promise.all([
                     fetch('data/Sons%20of%20the%20Forest/mods.json').catch(() => null),
                     fetch('data/Sons%20of%20the%20Forest/tutorials.json').catch(() => null),
                     fetch('data/Sons%20of%20the%20Forest/collectibles.json').catch(() => null),
                     fetch('data/Sons%20of%20the%20Forest/recommendations.json').catch(() => null),
-                    fetch('data/Sons%20of%20the%20Forest/resources.json').catch(() => null)
+                    fetch('data/Sons%20of%20the%20Forest/resources.json').catch(() => null),
+                    fetch('data/Sons%20of%20the%20Forest/mod_websites.json').catch(() => null)
                 ]);
                 let mods = modsRes && modsRes.ok ? await modsRes.json() : [];
                 let tutorials = tutorialsRes && tutorialsRes.ok ? await tutorialsRes.json() : [];
                 let collectibles = collectiblesRes && collectiblesRes.ok ? await collectiblesRes.json() : [];
                 let recommendations = recommendationsRes && recommendationsRes.ok ? await recommendationsRes.json() : [];
                 let resources = resourcesRes && resourcesRes.ok ? await resourcesRes.json() : [];
+                let modWebsites = modWebsitesRes && modWebsitesRes.ok ? await modWebsitesRes.json() : [];
 
                 let html = '';
                 if (mods.length) {
@@ -1244,6 +1246,10 @@
                     const sotfResTotal = resources.filter(x => !(x && x.name && x.name.indexOf('说明') === 0)).length;
                     html += `<details class="section-details"><summary>📖 森林之子资源下载 (${sotfResTotal}个)</summary><div class="section-content"><div id="sotfResourcesTableContainer"><table class="mod-table" id="sotfResourcesTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfResourcesTable-pagination"></div></div></div></details>`;
                 }
+                if (modWebsites.length) {
+                    const sotfWebTotal = modWebsites.filter(x => !(x && x.name && x.name.indexOf('说明') === 0)).length;
+                    html += `<details class="section-details"><summary>⭐ 森林之子模组网页推荐 (${sotfWebTotal}个)</summary><div class="section-content"><div id="sotfModWebsitesTableContainer"><table class="mod-table" id="sotfModWebsitesTable"><thead><tr><th>网站</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfModWebsitesTable-pagination"></div></div></div></details>`;
+                }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
 
                 if (mods.length) {
@@ -1260,6 +1266,9 @@
                 }
                 if (resources.length) {
                     renderSimpleTable('sotfResourcesTable', resources, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (modWebsites.length) {
+                    renderSimpleTable('sotfModWebsitesTable', modWebsites, [{ key: 'name', label: '网站' }, { key: 'url', type: 'url', label: '链接' }], 15);
                 }
             }
             else if (game.id === '7days') {
