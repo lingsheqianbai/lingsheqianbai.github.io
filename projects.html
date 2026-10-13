@@ -1248,7 +1248,7 @@
                 }
                 if (modWebsites.length) {
                     const sotfWebTotal = modWebsites.filter(x => !(x && x.name && x.name.indexOf('说明') === 0)).length;
-                    html += `<details class="section-details"><summary>⭐ 森林之子模组网页推荐 (${sotfWebTotal}个)</summary><div class="section-content"><div id="sotfModWebsitesTableContainer"><table class="mod-table" id="sotfModWebsitesTable"><thead><tr><th>网站</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfModWebsitesTable-pagination"></div></div></div></details>`;
+                    html += `<details class="section-details"><summary>🌐 森林之子模组网页推荐 (${sotfWebTotal}个)</summary><div class="section-content"><div id="sotfModWebsitesTableContainer"><table class="mod-table" id="sotfModWebsitesTable"><thead><tr><th>网站</th><th>链接</th></tr></thead><tbody></tbody></table><div id="sotfModWebsitesTable-pagination"></div></div></div></details>`;
                 }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
 
