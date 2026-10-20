@@ -658,6 +658,17 @@
                                 value = `<a href="${value}" target="_blank" style="color:#3B82F6;">🎬 视频</a>`;
                             } else if (col.type === 'url' && value && value !== '' && value !== '-' && value.indexOf('http') === 0) {
                                 value = `<a href="${value}" target="_blank" style="color:#3B82F6;">🔗 详情</a>`;
+                            } else if (col.type === 'sources') {
+                                const pick = (row && row.sources) || [];
+                                const official = pick.filter(s => s && s.label === 'official' && s.url).pop();
+                                const alt = pick.filter(s => s && s.label !== 'official' && s.url).pop();
+                                if (official || alt) {
+                                    value = `<button type="button" class="sources-pick"`
+                                        + (official ? ` data-o="${official.url}"` : '')
+                                        + (alt ? ` data-a="${alt.url}"` : '')
+                                        + (row.password ? ` data-p="${row.password}"` : '')
+                                        + ` style="background:var(--pink-light);border:1px solid var(--border-color);border-radius:20px;padding:3px 12px;font-size:12px;cursor:pointer;">🔗 详情</button>`;
+                                }
                             }
                             cells += `<td>${value}</td>`;
                         });
@@ -676,7 +687,11 @@
                 else filteredData = data.filter(row => {
                     // 搜索对象的所有字段
                     const q = query.toLowerCase();
-                    return Object.values(row).some(val => val && val.toString().toLowerCase().includes(q));
+                    return Object.values(row).some(val => {
+                        if (val === null || val === undefined) return false;
+                        const s = (typeof val === 'object') ? JSON.stringify(val) : val.toString();
+                        return s.toLowerCase().includes(q);
+                    });
                 });
                 currentPage = 1;
                 render();
@@ -1265,7 +1280,33 @@
                     renderSimpleTable('sotfRecommendationsTable', recommendations, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接 / 密码' }], 15);
                 }
                 if (resources.length) {
-                    renderSimpleTable('sotfResourcesTable', resources, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                    renderSimpleTable('sotfResourcesTable', resources, [{ key: 'name', label: '名称' }, { key: 'url', type: 'sources', label: '下载' }], 15);
+                    window._sotfSourcePick = function (official, alt, pwd) {
+                        const old = document.getElementById('sotfSrcPicker');
+                        if (old) old.remove();
+                        let html = '<div id="sotfSrcPickerBackdrop" style="position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10000;display:flex;align-items:center;justify-content:center;">'
+                            + '<div style="background:#fff;border:1px solid #000;border-radius:16px;padding:22px;max-width:340px;width:88%;box-shadow:0 10px 30px rgba(0,0,0,.3);">'
+                            + '<div style="font-size:15px;font-weight:bold;margin-bottom:4px;">📥 选择下载方式</div>'
+                            + '<div style="font-size:12px;color:#5a3e4b;margin-bottom:14px;">同一个文件，两个来源，点哪个都能下</div>';
+                        if (official) html += '<a class="sotfSrcBtn" href="' + official + '" target="_blank" rel="noopener" style="display:block;text-align:center;background:#ffcfe2;border:1px solid #000;border-radius:12px;padding:11px 14px;margin-bottom:10px;text-decoration:none;color:#2a1a2e;font-weight:bold;">🔗 官方链接下载</a>';
+                        if (alt) html += '<a class="sotfSrcBtn" href="' + alt + '" target="_blank" rel="noopener" style="display:block;text-align:center;background:#ffcfe2;border:1px solid #000;border-radius:12px;padding:11px 14px;margin-bottom:10px;text-decoration:none;color:#2a1a2e;font-weight:bold;">📦 UP链接下载</a>';
+                        if (pwd) html += '<div style="font-size:12px;color:#5a3e4b;text-align:center;margin-top:2px;">网盘提取码：<b>' + pwd + '</b></div>';
+                        html += '<div id="sotfSrcClose" style="text-align:center;margin-top:14px;font-size:12px;color:#8a6f7b;cursor:pointer;text-decoration:underline;">取消</div></div></div>';
+                        const wrap = document.createElement('div');
+                        wrap.innerHTML = html;
+                        const backdrop = wrap.firstElementChild;
+                        document.body.appendChild(backdrop);
+                        backdrop.addEventListener('click', (e) => { if (e.target === backdrop || e.target.id === 'sotfSrcClose') backdrop.remove(); });
+                        backdrop.querySelectorAll('.sotfSrcBtn').forEach(function (b) { b.addEventListener('click', function () { setTimeout(function () { backdrop.remove(); }, 250); }); });
+                    };
+                    const resContainer = document.getElementById('sotfResourcesTableContainer');
+                    if (resContainer && !resContainer.__srcBound) {
+                        resContainer.__srcBound = true;
+                        resContainer.addEventListener('click', function (e) {
+                            const b = e.target.closest('.sources-pick');
+                            if (b) window._sotfSourcePick(b.dataset.o || '', b.dataset.a || '', b.dataset.p || '');
+                        });
+                    }
                 }
                 if (modWebsites.length) {
                     renderSimpleTable('sotfModWebsitesTable', modWebsites, [{ key: 'name', label: '网站' }, { key: 'url', type: 'url', label: '链接' }], 15);

@@ -5,18 +5,18 @@
   },
   {
     "name": "模组管理器",
-    "url": "https://wwavd.lanzouc.com/iQzzo49kywxi"
-  },
-  {
-    "name": "模组管理器（GitHub）",
-    "url": "https://github.com/ToniMacaroni/RedManager"
+    "password": "123456",
+    "sources": [
+      { "label": "official", "url": "https://github.com/ToniMacaroni/RedManager" },
+      { "label": "up", "url": "https://wwavd.lanzouc.com/iQzzo49kywxi" }
+    ]
   },
   {
     "name": "森林之子模组前置",
-    "url": "https://wwavd.lanzouc.com/iUjAq49kywvg"
-  },
-  {
-    "name": "森林之子模组前置（GitHub）",
-    "url": "https://github.com/ToniMacaroni/RedLoader"
+    "password": "123456",
+    "sources": [
+      { "label": "official", "url": "https://github.com/ToniMacaroni/RedLoader" },
+      { "label": "up", "url": "https://wwavd.lanzouc.com/iUjAq49kywvg" }
+    ]
   }
 ]
