@@ -1217,8 +1217,7 @@
                 }
                 if (jojoRewardItems.length) {
                     const noteHtml = rewardsData.note ? `<div style="font-size:12px;line-height:1.6;color:var(--text-mid);background:rgba(0,0,0,0.04);border-left:3px solid var(--pink);border-radius:6px;padding:8px 12px;margin-bottom:10px;">${rewardsData.note}</div>` : '';
-                    const partHtml = jojoParts.length === 1 ? `<div style="font-size:14px;font-weight:bold;margin:4px 0 8px;">${jojoParts[0]}</div>` : '';
-                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}${partHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th><th>视频</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
+                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th><th>视频</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
                 }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容</div>';
 
@@ -1232,7 +1231,7 @@
                 }
                 if (jojoRewardItems.length) {
                     const rewardRows = jojoRewardItems.map(it => ({
-                        battle: (jojoParts.length > 1 && it.part ? it.part + ' · ' : '') + (it.no ? it.no + '. ' : '') + (it.battle || ''),
+                        battle: ((it.part ? it.part + ' ' : '') + (it.battle || '')).trim(),
                         rewards: (it.rewards || []).join('<br>'),
                         video: it.video || ''
                     }));
