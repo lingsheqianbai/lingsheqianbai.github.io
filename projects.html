@@ -638,9 +638,11 @@
         }
 
         // ---------- 简单表格渲染（用于教程、精灵等）----------
-        function renderSimpleTable(containerId, data, columns, pageSize = 10) {
+        function renderSimpleTable(containerId, data, columns, pageSize = 10, options = {}) {
             let currentPage = 1;
             let filteredData = [...data];
+            const searchKeys = (options && options.searchKeys && options.searchKeys.length) ? options.searchKeys : null;
+            const searchPlaceholder = (options && options.placeholder) || '搜索...';
 
             function render() {
                 const start = (currentPage - 1) * pageSize;
@@ -685,9 +687,11 @@
             function filterData(query) {
                 if (!query) filteredData = [...data];
                 else filteredData = data.filter(row => {
-                    // 搜索对象的所有字段
+                    // 默认搜索所有字段；传了 searchKeys 则只搜这些字段
                     const q = query.toLowerCase();
-                    return Object.values(row).some(val => {
+                    const keys = searchKeys || (row ? Object.keys(row) : []);
+                    return keys.some(k => {
+                        const val = row ? row[k] : undefined;
                         if (val === null || val === undefined) return false;
                         const s = (typeof val === 'object') ? JSON.stringify(val) : val.toString();
                         return s.toLowerCase().includes(q);
@@ -700,7 +704,7 @@
             const container = document.getElementById(containerId);
             const searchHost = (container && container.parentElement) ? container.parentElement : container;
             if (searchHost && !searchHost.querySelector('.simple-search')) {
-                const searchHtml = `<div class="simple-search" style="margin-bottom:12px;"><input type="text" placeholder="搜索..." id="${containerId}-search" style="width:100%; padding:6px 12px; border:1px solid var(--border-color); border-radius:30px;"></div>`;
+                const searchHtml = `<div class="simple-search" style="margin-bottom:12px;"><input type="text" placeholder="${searchPlaceholder}" id="${containerId}-search" style="width:100%; padding:6px 12px; border:1px solid var(--border-color); border-radius:30px;"></div>`;
                 searchHost.insertAdjacentHTML('afterbegin', searchHtml);
                 const searchBox = document.getElementById(`${containerId}-search`);
                 if (searchBox) searchBox.addEventListener('input', (e) => filterData(e.target.value));
@@ -1214,7 +1218,7 @@
                 if (jojoRewardItems.length) {
                     const noteHtml = rewardsData.note ? `<div style="font-size:12px;line-height:1.6;color:var(--text-mid);background:rgba(0,0,0,0.04);border-left:3px solid var(--pink);border-radius:6px;padding:8px 12px;margin-bottom:10px;">${rewardsData.note}</div>` : '';
                     const partHtml = jojoParts.length === 1 ? `<div style="font-size:14px;font-weight:bold;margin:4px 0 8px;">${jojoParts[0]}</div>` : '';
-                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}${partHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>对战</th><th>可获报酬</th><th>视频</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
+                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}${partHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th><th>视频</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
                 }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容</div>';
 
@@ -1232,7 +1236,7 @@
                         rewards: (it.rewards || []).join('<br>'),
                         video: it.video || ''
                     }));
-                    renderSimpleTable('jojoRewardsTable', rewardRows, [{ key: 'battle', label: '对战' }, { key: 'rewards', label: '可获报酬' }, { key: 'video', type: 'url', label: '视频' }], 15);
+                    renderSimpleTable('jojoRewardsTable', rewardRows, [{ key: 'battle', label: '获取方式' }, { key: 'rewards', label: '可获报酬' }, { key: 'video', type: 'url', label: '视频' }], 15, { searchKeys: ['rewards'], placeholder: '搜索报酬（如 设定图 / BGM / 特殊服装）' });
                 }
             }
             else if (game.id === 'onlyyou') {
