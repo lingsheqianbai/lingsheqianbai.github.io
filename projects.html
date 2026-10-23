@@ -698,9 +698,10 @@
             }
 
             const container = document.getElementById(containerId);
-            if (container && !container.querySelector('.simple-search')) {
+            const searchHost = (container && container.parentElement) ? container.parentElement : container;
+            if (searchHost && !searchHost.querySelector('.simple-search')) {
                 const searchHtml = `<div class="simple-search" style="margin-bottom:12px;"><input type="text" placeholder="搜索..." id="${containerId}-search" style="width:100%; padding:6px 12px; border:1px solid var(--border-color); border-radius:30px;"></div>`;
-                container.insertAdjacentHTML('afterbegin', searchHtml);
+                searchHost.insertAdjacentHTML('afterbegin', searchHtml);
                 const searchBox = document.getElementById(`${containerId}-search`);
                 if (searchBox) searchBox.addEventListener('input', (e) => filterData(e.target.value));
             }
