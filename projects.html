@@ -1206,23 +1206,30 @@
                 let other = otherRes && otherRes.ok ? await otherRes.json() : [];
                 let rewardsData = rewardsRes && rewardsRes.ok ? await rewardsRes.json() : null;
                 const jojoRewardItems = (rewardsData && rewardsData.items) || [];
-                const jojoParts = [...new Set(jojoRewardItems.map(it => it.part).filter(Boolean))];
+                // 打斗演示视频（取自报酬数据）合并进攻略列表，按链接去重
+                const jojoRewardVideos = jojoRewardItems.filter(it => it.video).map(it => ({
+                    name: ((it.part ? it.part + ' ' : '') + (it.battle || '')).trim(),
+                    url: it.video
+                }));
+                const jojoSeenUrls = new Set(guides.map(g => g.url));
+                const jojoGuides = guides.concat(jojoRewardVideos.filter(g => !jojoSeenUrls.has(g.url)));
 
                 let html = '';
-                if (guides.length) {
-                    html += `<details class="section-details"><summary>⭐ JOJO群星之战攻略 (${guides.length}个)</summary><div class="section-content"><div id="jojoGuidesTableContainer"><table class="mod-table" id="jojoGuidesTable"><thead><tr><th>攻略名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="jojoGuidesTable-pagination"></div></div></div></details>`;
+                if (jojoGuides.length) {
+                    html += `<details class="section-details"><summary>⭐ JOJO群星之战攻略 (${jojoGuides.length}个)</summary><div class="section-content"><div id="jojoGuidesTableContainer"><table class="mod-table" id="jojoGuidesTable"><thead><tr><th>攻略名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="jojoGuidesTable-pagination"></div></div></div></details>`;
                 }
                 if (other.length) {
                     html += `<details class="section-details"><summary>📖 其他项目 (${other.length}个)</summary><div class="section-content"><div id="jojoOtherTableContainer"><table class="mod-table" id="jojoOtherTable"><thead><tr><th>攻略名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="jojoOtherTable-pagination"></div></div></div></details>`;
                 }
                 if (jojoRewardItems.length) {
                     const noteHtml = rewardsData.note ? `<div style="font-size:12px;line-height:1.6;color:var(--text-mid);background:rgba(0,0,0,0.04);border-left:3px solid var(--pink);border-radius:6px;padding:8px 12px;margin-bottom:10px;">${rewardsData.note}</div>` : '';
-                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th><th>视频</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
+                    const hintHtml = `<div style="font-size:12px;color:var(--text-mid);margin-bottom:10px;">💡 打斗演示视频见上方「⭐ JOJO群星之战攻略」</div>`;
+                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}${hintHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
                 }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容</div>';
 
-                if (guides.length) {
-                    const guideData = guides.map(g => ({ name: g.name, url: g.url }));
+                if (jojoGuides.length) {
+                    const guideData = jojoGuides.map(g => ({ name: g.name, url: g.url }));
                     renderSimpleTable('jojoGuidesTable', guideData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
                 }
                 if (other.length) {
@@ -1232,10 +1239,9 @@
                 if (jojoRewardItems.length) {
                     const rewardRows = jojoRewardItems.map(it => ({
                         battle: ((it.part ? it.part + ' ' : '') + (it.battle || '')).trim(),
-                        rewards: (it.rewards || []).join('<br>'),
-                        video: it.video || ''
+                        rewards: (it.rewards || []).join('<br>')
                     }));
-                    renderSimpleTable('jojoRewardsTable', rewardRows, [{ key: 'battle', label: '获取方式' }, { key: 'rewards', label: '可获报酬' }, { key: 'video', type: 'url', label: '视频' }], 15, { searchKeys: ['rewards'], placeholder: '搜索报酬（如 设定图 / BGM / 特殊服装）' });
+                    renderSimpleTable('jojoRewardsTable', rewardRows, [{ key: 'battle', label: '获取方式' }, { key: 'rewards', label: '可获报酬' }], 15, { searchKeys: ['rewards'], placeholder: '搜索报酬（如 设定图 / BGM / 特殊服装）' });
                 }
             }
             else if (game.id === 'onlyyou') {
