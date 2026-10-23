@@ -1,0 +1,85 @@
+{
+  "note": "以下为剧情模式报酬分享（皮肤等图鉴、金币不包含在内）可以自行搜索对应想要的、个人总结： ASB模式|剧情模式",
+  "items": [
+    {
+      "part": "第1部 幻影血脉",
+      "no": 1,
+      "battle": "迪奥VS乔瑟夫",
+      "video": "https://www.bilibili.com/video/BV1u2ns66EBM?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]迪奥·布兰度 设定图",
+        "[追加颜色]迪奥 追加颜色C"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 2,
+      "battle": "乔纳森VS史彼特瓦根",
+      "video": "https://www.bilibili.com/video/BV1x5ns6aEGK?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]罗伯特·E·O·史彼特瓦根 宣传用图",
+        "[BGM]多管闲事的史彼特瓦根"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 3,
+      "battle": "齐贝林VS迪奥",
+      "video": "https://www.bilibili.com/video/BV12Vns6AEWL?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]威廉·A·齐贝林 宣传用图"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 4,
+      "battle": "乔纳森VS乔鲁诺",
+      "video": "https://www.bilibili.com/video/BV1W7ns68Eed?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]乔纳森 ·乔斯达 设定图",
+        "[追加颜色]乔鲁诺 追加颜色C"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 5,
+      "battle": "齐贝林VS乔纳森",
+      "video": "https://www.bilibili.com/video/BV1sjns6cEPJ?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]乔纳森· 乔斯达 宣传用图"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 6,
+      "battle": "史彼特瓦根VS老乔瑟夫",
+      "video": "https://www.bilibili.com/video/BV143ns6eECS?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]紫色隐者 设定图",
+        "[追加颜色]史彼特瓦根 追加颜色C"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 7,
+      "battle": "迪奥VSDIO",
+      "video": "https://www.bilibili.com/video/BV1tgns6NE4H?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]世界 设定图",
+        "[BGM] 太弱太弱 ~~!!",
+        "[特殊服装]迪奥SP服装A"
+      ]
+    },
+    {
+      "part": "第1部 幻影血脉",
+      "no": 8,
+      "battle": "乔纳森VS迪奥",
+      "video": "https://www.bilibili.com/video/BV1J4ns6WE7b?vd_source=73e550a3569a193e56d345c2b1e1a721&spm_id_from=333.788.videopod.sections",
+      "rewards": [
+        "[2D美术]迪奥· 布兰度 宣传用图",
+        "[BGM] LUCK & PLUCK",
+        "[特殊服装]乔纳森SP服装A"
+      ]
+    }
+  ]
+}
