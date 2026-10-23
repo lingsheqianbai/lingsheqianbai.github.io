@@ -160,6 +160,86 @@
         "[BGM] 纽约的JOJO",
         "[特殊服装]乔瑟夫 SP服装A"
       ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 1,
+      "battle": "卡兹VS瓦伦泰",
+      "video": "https://www.bilibili.com/video/BV1Kune6oEWF/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]卡兹 设足图",
+        "[BGM] 所作所为皆为『正义』!",
+        "[特殊服装]卡兹SP服装A"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 2,
+      "battle": "乔瑟夫VS西撒",
+      "video": "https://www.bilibili.com/video/BV1Z4ne65E5Q/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]西撒·安东尼奥· 齐贝林 设定图"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 3,
+      "battle": "瓦姆乌VS老乔瑟夫",
+      "video": "https://www.bilibili.com/video/BV1Zsne61Eya/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]老乔瑟夫 ·乔斯达 设定图",
+        "[追加颜色]瓦姆乌 追加颜色C"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 4,
+      "battle": "莉莎莉莎VS卡兹",
+      "video": "https://www.bilibili.com/video/BV1cnne6JEYo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]莉莎莉莎 宣传用图",
+        "[BGM] 光之流法"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 5,
+      "battle": "西撒VS杰洛",
+      "video": "https://www.bilibili.com/video/BV1cEne6DEQq/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]杰洛·齐贝林 设定图",
+        "[追加颜色]西撒追加颜色C"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 6,
+      "battle": "莉莎莉莎VS史彼特瓦根",
+      "video": "https://www.bilibili.com/video/BV1nHne6UEAK/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]莉莎莉莎 设定图",
+        "[追加颜色]莉莎莉莎 追加颜色C"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 7,
+      "battle": "乔瑟夫VS瓦姆乌",
+      "video": "https://www.bilibili.com/video/BV1LSnY66E2S/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]乔瑟夫 ·乔斯达 设定图"
+      ]
+    },
+    {
+      "part": "第2部 战斗潮流 第2位面",
+      "no": 8,
+      "battle": "西撒VS瓦姆乌",
+      "video": "https://www.bilibili.com/video/BV1eXnY6BEE1/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]瓦姆乌 宣传用图",
+        "[BGM]真正的格斗者",
+        "[特殊服装]西撒SP服装A"
+      ]
     }
   ]
 }
