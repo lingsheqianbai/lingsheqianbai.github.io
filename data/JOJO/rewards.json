@@ -240,6 +240,86 @@
         "[BGM]真正的格斗者",
         "[特殊服装]西撒SP服装A"
       ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 1,
+      "battle": "阿布德尔VS加丘",
+      "video": "https://www.bilibili.com/video/BV1FtHg6nEkL/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]穆罕默德·阿布德尔 宣传用图",
+        "[追加颜色]阿布德尔 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 2,
+      "battle": "伊奇VS佩特夏",
+      "video": "https://www.bilibili.com/video/BV1yEHg64Eiy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]THE FOOL 宣传用图",
+        "[BGM]地狱的门卫"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 3,
+      "battle": "空条承太郎VS史彼特瓦根",
+      "video": "https://www.bilibili.com/video/BV1PJHg6dEpr/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]空条承太郎 设定图",
+        "[追加颜色]空条承太郎 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 4,
+      "battle": "波鲁纳雷夫VS伊奇",
+      "video": "https://www.bilibili.com/video/BV1LqHg65EyF/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]尚·皮耶尔·波鲁纳雷夫 宣传用图"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 5,
+      "battle": "DIOVS乔纳森",
+      "video": "https://www.bilibili.com/video/BV1qaHg6mERi/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]DIO 宣传用图",
+        "[3D模组]世界",
+        "[特殊服装]DIOSP服装A"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 6,
+      "battle": "空条承太郎VS阿布德尔",
+      "video": "https://www.bilibili.com/video/BV1BjHV6sEka/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]白金之星 设定图"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 7,
+      "battle": "佩特夏VS矢安宫重清",
+      "video": "https://www.bilibili.com/video/BV1J5HV6oEpj/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]荷鲁斯神 宣传用图",
+        "[追加颜色]矢安宫重清 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第1位面",
+      "no": 8,
+      "battle": "空条承太郎VSDIO",
+      "video": "https://www.bilibili.com/video/BV1q7HV69E1M/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]压路机 设定图",
+        "[BGM]带给未来的遗产",
+        "[特殊服装]空条承太郎SP服装A"
+      ]
     }
   ]
 }
