@@ -320,6 +320,87 @@
         "[BGM]带给未来的遗产",
         "[特殊服装]空条承太郎SP服装A"
       ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 1,
+      "battle": "老乔瑟夫VSDIO",
+      "video": "https://www.bilibili.com/video/BV1HMnD6aEBG/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]老乔瑟夫·乔斯达 宣传用图",
+        "[BGM]这家伙也不招人恨了"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 2,
+      "battle": "瓦尼拉·艾斯VS卡兹",
+      "video": "https://www.bilibili.com/video/BV1v6nS6DEBw/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]亚空瘴气 设定图",
+        "[追加颜色]瓦尼拉·艾斯 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 3,
+      "battle": "阿布德尔VS玛拉雅",
+      "video": "https://www.bilibili.com/video/BV1v6nS6DEne/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]红色魔术师 宣传用图",
+        "[BGM]HELL 2U!"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 4,
+      "battle": "玛拉雅VS迪亚哥",
+      "video": "https://www.bilibili.com/video/BV1iznS6HEVv/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[3D模组]骇人恶兽 普通",
+        "[追加颜色]玛拉雅 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 5,
+      "battle": "DIOVS川尻浩作",
+      "video": "https://www.bilibili.com/video/BV1eknS6JEsf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]世界 宣传用图",
+        "[追加颜色]川尻浩作 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 6,
+      "battle": "伊奇VS广濑康一",
+      "video": "https://www.bilibili.com/video/BV1xfnS6BEfs/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]伊奇 宣传用图",
+        "[BGM]变化自如的沙之「愚者」!",
+        "[特殊服装]伊奇SP服装A"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 7,
+      "battle": "空条承太郎VS花京院典明",
+      "video": "https://www.bilibili.com/video/BV1xcnD6TEjE/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]白金之星 宣传用图"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第2位面",
+      "no": 8,
+      "battle": "波鲁纳雷夫VS瓦尼拉·艾斯",
+      "video": "https://www.bilibili.com/video/BV1SXnS6kEna/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]银色战车 宣传用图",
+        "[3D模组]银色战车",
+        "[特殊服装]波鲁纳雷夫SP服装A"
+      ]
     }
   ]
 }
