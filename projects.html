@@ -1224,7 +1224,8 @@
                 if (jojoRewardItems.length) {
                     const noteHtml = rewardsData.note ? `<div style="font-size:12px;line-height:1.6;color:var(--text-mid);background:rgba(0,0,0,0.04);border-left:3px solid var(--pink);border-radius:6px;padding:8px 12px;margin-bottom:10px;">${rewardsData.note}</div>` : '';
                     const hintHtml = `<div style="font-size:12px;color:var(--text-mid);margin-bottom:10px;">💡 打斗演示视频见上方「⭐ JOJO群星之战攻略」</div>`;
-                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}${hintHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
+                    const dioHint = `<div style="font-size:12px;color:var(--text-mid);margin-bottom:10px;">ℹ️ 命名区分：<b>DIO</b>＝有替身的版本，<b>迪奥</b>＝第一部无替身版本</div>`;
+                    html += `<details class="section-details"><summary>🎁 报酬获取预览 (${jojoRewardItems.length}个)</summary><div class="section-content">${noteHtml}${dioHint}${hintHtml}<div id="jojoRewardsTableContainer"><table class="mod-table" id="jojoRewardsTable"><thead><tr><th>获取方式</th><th>可获报酬</th></tr></thead><tbody></tbody></table><div id="jojoRewardsTable-pagination"></div></div></div></details>`;
                 }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容</div>';
 
@@ -1241,7 +1242,7 @@
                         battle: ((it.part ? it.part + ' ' : '') + (it.battle || '')).trim(),
                         rewards: (it.rewards || []).join('<br>')
                     }));
-                    renderSimpleTable('jojoRewardsTable', rewardRows, [{ key: 'battle', label: '获取方式' }, { key: 'rewards', label: '可获报酬' }], 15, { searchKeys: ['rewards'], placeholder: '搜索报酬（如 设定图 / BGM / 特殊服装）' });
+                    renderSimpleTable('jojoRewardsTable', rewardRows, [{ key: 'battle', label: '获取方式' }, { key: 'rewards', label: '可获报酬' }], 15, { searchKeys: ['battle', 'rewards'], placeholder: '搜索对战或报酬（如 第3部 / 设定图 / BGM）' });
                 }
             }
             else if (game.id === 'onlyyou') {
