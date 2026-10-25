@@ -1253,6 +1253,38 @@
                 const endingsData = endings.map(g => ({ name: g.name, url: g.url }));
                 renderSimpleTable('onlyyouEndingsTable', endingsData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
             }
+            else if (game.id === 'room') {
+                const [officialRes, prologueRes, pureLoveRes] = await Promise.all([
+                    fetch('data/ROOM/official.json').catch(() => null),
+                    fetch('data/ROOM/prologue.json').catch(() => null),
+                    fetch('data/ROOM/pure_love.json').catch(() => null)
+                ]);
+                let roomOfficial = officialRes && officialRes.ok ? await officialRes.json() : [];
+                let roomPrologue = prologueRes && prologueRes.ok ? await prologueRes.json() : [];
+                let roomPureLove = pureLoveRes && pureLoveRes.ok ? await pureLoveRes.json() : [];
+
+                let html = '';
+                if (roomOfficial.length) {
+                    html += `<details class="section-details"><summary>🔗 官方链接 (${roomOfficial.length}个)</summary><div class="section-content"><div id="roomOfficialTableContainer"><table class="mod-table" id="roomOfficialTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomOfficialTable-pagination"></div></div></div></details>`;
+                }
+                if (roomPrologue.length) {
+                    html += `<details class="section-details"><summary>🎬 序章 (${roomPrologue.length}个)</summary><div class="section-content"><div style="font-size:12px;color:var(--text-mid);margin-bottom:10px;">💡 序章单独列出，不计入纯爱线条数</div><div id="roomPrologueTableContainer"><table class="mod-table" id="roomPrologueTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomPrologueTable-pagination"></div></div></div></details>`;
+                }
+                if (roomPureLove.length) {
+                    html += `<details class="section-details"><summary>💗 纯爱线 (${roomPureLove.length}个)</summary><div class="section-content"><div id="roomPureLoveTableContainer"><table class="mod-table" id="roomPureLoveTable"><thead><tr><th>进度</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomPureLoveTable-pagination"></div></div></div></details>`;
+                }
+                detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
+
+                if (roomOfficial.length) {
+                    renderSimpleTable('roomOfficialTable', roomOfficial, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (roomPrologue.length) {
+                    renderSimpleTable('roomPrologueTable', roomPrologue, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (roomPureLove.length) {
+                    renderSimpleTable('roomPureLoveTable', roomPureLove, [{ key: 'name', label: '进度' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+            }
             else if (game.id === 'sonsoftheforest') {
                 const [modsRes, tutorialsRes, collectiblesRes, recommendationsRes, resourcesRes, modWebsitesRes] = await Promise.all([
                     fetch('data/Sons%20of%20the%20Forest/mods.json').catch(() => null),
