@@ -67,7 +67,7 @@
       "rewards": [
         "[2D美术]世界 设定图",
         "[BGM]太弱太弱 ~~!!",
-        "[特殊服装]迪奥SP服装A"
+        "[特殊服装]迪奥 SP服装A"
       ]
     },
     {
@@ -78,7 +78,7 @@
       "rewards": [
         "[2D美术]迪奥·布兰度 宣传用图",
         "[BGM]LUCK & PLUCK",
-        "[特殊服装]乔纳森SP服装A"
+        "[特殊服装]乔纳森 SP服装A"
       ]
     },
     {
@@ -147,7 +147,7 @@
       "rewards": [
         "[2D美术]威廉·A·齐贝林 设定图",
         "[BGM]奇人齐贝林",
-        "[特殊服装]瓦姆乌SP服装A"
+        "[特殊服装]瓦姆乌 SP服装A"
       ]
     },
     {
@@ -158,7 +158,7 @@
       "rewards": [
         "[2D美术]乔瑟夫·乔斯达 宣传用图",
         "[BGM]纽约的JOJO",
-        "[特殊服装]乔瑟夫SP服装A"
+        "[特殊服装]乔瑟夫 SP服装A"
       ]
     },
     {
@@ -169,7 +169,7 @@
       "rewards": [
         "[2D美术]卡兹 设定图",
         "[BGM]所作所为皆为『正义』!",
-        "[特殊服装]卡兹SP服装A"
+        "[特殊服装]卡兹 SP服装A"
       ]
     },
     {
@@ -238,7 +238,7 @@
       "rewards": [
         "[2D美术]瓦姆乌 宣传用图",
         "[BGM]真正的格斗者",
-        "[特殊服装]西撒SP服装A"
+        "[特殊服装]西撒 SP服装A"
       ]
     },
     {
@@ -288,7 +288,7 @@
       "rewards": [
         "[2D美术]DIO 宣传用图",
         "[3D模组]世界",
-        "[特殊服装]DIOSP服装A"
+        "[特殊服装]DIO SP服装A"
       ]
     },
     {
@@ -318,7 +318,7 @@
       "rewards": [
         "[2D美术]压路机 设定图",
         "[BGM]带给未来的遗产",
-        "[特殊服装]空条承太郎SP服装A"
+        "[特殊服装]空条承太郎 SP服装A"
       ]
     },
     {
@@ -379,7 +379,7 @@
       "rewards": [
         "[2D美术]伊奇 宣传用图",
         "[BGM]变化自如的沙之「愚者」!",
-        "[特殊服装]伊奇SP服装A"
+        "[特殊服装]伊奇 SP服装A"
       ]
     },
     {
@@ -399,7 +399,88 @@
       "rewards": [
         "[2D美术]银色战车 宣传用图",
         "[3D模组]银色战车",
-        "[特殊服装]波鲁纳雷夫SP服装A"
+        "[特殊服装]波鲁纳雷夫 SP服装A"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 1,
+      "battle": "阿布德尔VS波鲁纳雷夫",
+      "video": "https://www.bilibili.com/video/BV1own96AEdv/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]尚·皮耶尔·波鲁纳雷夫 设定图"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 2,
+      "battle": "玛拉雅VS乔瑟夫",
+      "video": "https://www.bilibili.com/video/BV1jNn96wEnr/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]玛拉雅 宣传用图",
+        "[追加颜色]乔瑟夫 追加颜色D"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 3,
+      "battle": "DIOVS乔鲁诺",
+      "video": "https://www.bilibili.com/video/BV1fonX6iEXX/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]黄金体验镇魂曲 宣传用图",
+        "[3D模组]黄金体验",
+        "[特殊服装]DIO SP服装B"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 4,
+      "battle": "波鲁纳雷夫VS荷尔·荷斯",
+      "video": "https://www.bilibili.com/video/BV1ndnX6MEgs/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]皇帝 宣传用图",
+        "[BGM]亮枪"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 5,
+      "battle": "花京院典明VS布加拉提",
+      "video": "https://www.bilibili.com/video/BV1fFn96eEuX/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]花京院典明 宣传用图",
+        "[追加颜色]花京院典明 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 6,
+      "battle": "老乔瑟夫VS玛拉雅",
+      "video": "https://www.bilibili.com/video/BV1ffnX6NEjE/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[3D模组]老乔瑟夫（紫色隐者）普通",
+        "[BGM]芭丝特女神"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 7,
+      "battle": "荷尔·荷斯VS瓦伦泰",
+      "video": "https://www.bilibili.com/video/BV1GVn96dE31/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]荷尔·荷斯 宣传用图",
+        "[追加颜色]荷尔·荷斯 追加颜色C"
+      ]
+    },
+    {
+      "part": "第3部 星尘远征军 第3位面",
+      "no": 8,
+      "battle": "花京院典明VSDIO",
+      "video": "https://www.bilibili.com/video/BV1eRnd6vEMN/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]绿色法皇 宣传用图",
+        "[BGM]绿色法皇",
+        "[特殊服装]花京院典明 SP服装A"
       ]
     }
   ]
