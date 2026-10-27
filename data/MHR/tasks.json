@@ -1,72 +1,49 @@
 {
-  "sectionTitle": "任务类型：收集",
-  "hint": "💡 点任一类型卡片，它会在原位展开成整行，显示该类型下的视频；再点一次收起。",
-  "types": [
+  "sections": [
     {
-      "name": "集会所任务",
-      "items": []
-    },
-    {
-      "name": "村庄任务",
-      "items": [
-        {
-          "name": "怪物猎人崛起：曙光 开端",
-          "url": "https://www.bilibili.com/video/BV1EeHc6sEkn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
-        }
+      "id": "quest",
+      "title": "📋 任务类型：收集",
+      "hint": "💡 点任一类型卡片，它会在原位展开成整行，显示该类型下的视频；再点一次收起。",
+      "types": [
+        { "name": "集会所任务", "items": [] },
+        { "name": "村庄任务", "items": [
+          { "name": "怪物猎人崛起：曙光 开端", "url": "https://www.bilibili.com/video/BV1EeHc6sEkn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0" }
+        ] },
+        { "name": "斗技大会", "items": [] },
+        { "name": "活动任务", "items": [] },
+        { "name": "自由支线任务", "items": [] },
+        { "name": "委托支线任务", "items": [] },
+        { "name": "训练任务", "items": [
+          { "name": "来复习一下狩猎的基础吧！", "url": "https://www.bilibili.com/video/BV1eAHc61END/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0" },
+          { "name": "来复习一下如何御龙吧！", "url": "https://www.bilibili.com/video/BV1q9HF6QEDD/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0" },
+          { "name": "来复习一下如何捕获吧！", "url": "https://www.bilibili.com/video/BV1r2HF64EhJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0" }
+        ] },
+        { "name": "探索之旅", "items": [] },
+        { "name": "百龙夜行", "items": [] },
+        { "name": "精选任务", "items": [] },
+        { "name": "紧急任务", "items": [] },
+        { "name": "特别许可测验", "items": [] }
       ]
     },
     {
-      "name": "斗技大会",
-      "items": []
-    },
-    {
-      "name": "活动任务",
-      "items": []
-    },
-    {
-      "name": "自由支线任务",
-      "items": []
-    },
-    {
-      "name": "委托支线任务",
-      "items": []
-    },
-    {
-      "name": "训练任务",
-      "items": [
-        {
-          "name": "来复习一下狩猎的基础吧！",
-          "url": "https://www.bilibili.com/video/BV1eAHc61END/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
-        },
-        {
-          "name": "来复习一下如何御龙吧！",
-          "url": "https://www.bilibili.com/video/BV1q9HF6QEDD/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
-        },
-        {
-          "name": "来复习一下如何捕获吧！",
-          "url": "https://www.bilibili.com/video/BV1r2HF64EhJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
-        }
+      "id": "field",
+      "title": "🗺️ 场地类型：收集",
+      "hint": "💡 点任一地图卡片，它会在原位展开成整行，显示该地图的视频（手记、素材等）；再点一次收起。",
+      "types": [
+        { "name": "废神社", "items": [] },
+        { "name": "冰封群岛", "items": [] },
+        { "name": "沙原", "items": [] },
+        { "name": "水没林", "items": [] },
+        { "name": "熔岩洞", "items": [] },
+        { "name": "斗技场", "items": [] },
+        { "name": "翡叶要塞", "items": [] },
+        { "name": "龙宫古城", "items": [] },
+        { "name": "狱泉乡", "items": [] },
+        { "name": "密林", "items": [] },
+        { "name": "城塞高地", "items": [] },
+        { "name": "渊劫地狱", "items": [] },
+        { "name": "塔之秘境", "items": [] }
       ]
-    },
-    {
-      "name": "探索之旅",
-      "items": []
-    },
-    {
-      "name": "百龙夜行",
-      "items": []
-    },
-    {
-      "name": "精选任务",
-      "items": []
-    },
-    {
-      "name": "紧急任务",
-      "items": []
-    },
-    {
-      "name": "特别许可测验",
-      "items": []
     }
   ]
 }

@@ -1334,34 +1334,41 @@
             else if (game.id === 'mhr') {
                 const mhrRes = await fetch('data/MHR/tasks.json').catch(() => null);
                 let mhrData = mhrRes && mhrRes.ok ? await mhrRes.json() : null;
-                const mhrTypes = (mhrData && mhrData.types) || [];
-                const mhrTotal = mhrTypes.reduce((s, t) => s + ((t.items || []).length), 0);
+                // 兼容两种结构：sections[]（多分区）或旧版 types[]（单分区）
+                const mhrSections = (mhrData && mhrData.sections)
+                    ? mhrData.sections
+                    : ((mhrData && mhrData.types) ? [{ title: mhrData.sectionTitle || '任务类型：收集', hint: mhrData.hint, types: mhrData.types }] : []);
+
+                const mhrCards = (types) => types.map((t, i) => {
+                    const items = t.items || [];
+                    const body = items.length
+                        ? items.map(it => `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(it.name)}</span><span class="mhr-go">🔗 详情</span></a>`).join('')
+                        : '<div class="mhr-empty">该类型下暂无内容（等待录入）</div>';
+                    return `<div class="mhr-type" data-i="${i}"><div class="mhr-type-head"><span>${escapeHtml(t.name)}</span><span class="mhr-n">${items.length || '—'}</span><span class="mhr-chev">▼</span></div><div class="mhr-type-body">${body}</div></div>`;
+                }).join('');
 
                 let html = '';
-                if (mhrTypes.length) {
-                    const tipHtml = mhrData.hint ? `<div class="mhr-tip">${mhrData.hint}</div>` : '';
-                    const cardsHtml = mhrTypes.map((t, i) => {
-                        const items = t.items || [];
-                        const body = items.length
-                            ? items.map(it => `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(it.name)}</span><span class="mhr-go">🔗 详情</span></a>`).join('')
-                            : '<div class="mhr-empty">该类型下暂无任务（等待录入）</div>';
-                        return `<div class="mhr-type" data-i="${i}"><div class="mhr-type-head"><span>${escapeHtml(t.name)}</span><span class="mhr-n">${items.length || '—'}</span><span class="mhr-chev">▼</span></div><div class="mhr-type-body">${body}</div></div>`;
-                    }).join('');
-                    html += `<details class="section-details" open><summary>📋 任务类型：收集 (${mhrTypes.length}种 / ${mhrTotal}个任务)</summary><div class="section-content">${tipHtml}<div class="mhr-grid" id="mhrTypeGrid">${cardsHtml}</div></div></details>`;
-                }
+                mhrSections.forEach((sec, si) => {
+                    const types = sec.types || [];
+                    if (!types.length) return;
+                    const total = types.reduce((s, t) => s + ((t.items || []).length), 0);
+                    const tipHtml = sec.hint ? `<div class="mhr-tip">${sec.hint}</div>` : '';
+                    html += `<details class="section-details" open><summary>${sec.title || '收集'} (${types.length}种 / ${total}个)</summary><div class="section-content">${tipHtml}<div class="mhr-grid" id="mhrGrid${si}">${mhrCards(types)}</div></div></details>`;
+                });
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
 
-                const mhrGrid = document.getElementById('mhrTypeGrid');
-                if (mhrGrid && !mhrGrid.__mhrBound) {
-                    mhrGrid.__mhrBound = true;
-                    mhrGrid.addEventListener('click', (e) => {
+                mhrSections.forEach((sec, si) => {
+                    const grid = document.getElementById('mhrGrid' + si);
+                    if (!grid || grid.__mhrBound) return;
+                    grid.__mhrBound = true;
+                    grid.addEventListener('click', (e) => {
                         const card = e.target.closest('.mhr-type');
                         if (!card) return;
                         const wasOpen = card.classList.contains('open');
-                        mhrGrid.querySelectorAll('.mhr-type.open').forEach(c => c.classList.remove('open'));
+                        grid.querySelectorAll('.mhr-type.open').forEach(c => c.classList.remove('open'));
                         if (!wasOpen) card.classList.add('open');
                     });
-                }
+                });
             }
             else if (game.id === 'sonsoftheforest') {
                 const [modsRes, tutorialsRes, collectiblesRes, recommendationsRes, resourcesRes, modWebsitesRes] = await Promise.all([
