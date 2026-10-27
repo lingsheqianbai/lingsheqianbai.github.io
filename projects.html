@@ -454,6 +454,52 @@
         @media (max-width: 768px) {
             nav .links li a { padding: 6px 20px; font-size: 12px; }
         }
+
+        /* ========== 任务类型卡片（怪物猎人） ========== */
+        .mhr-tip {
+            font-size: 12px; color: var(--text-mid);
+            background: rgba(0,0,0,0.04); border-left: 3px solid var(--pink);
+            border-radius: 6px; padding: 8px 12px; margin-bottom: 14px;
+        }
+        .mhr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 12px;
+        }
+        .mhr-type {
+            background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.08); cursor: pointer;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .mhr-type:hover { transform: translateY(-2px); box-shadow: 3px 4px 0 rgba(0,0,0,0.12); }
+        .mhr-type-head {
+            display: flex; align-items: center; gap: 8px;
+            padding: 12px 14px; font-size: 14px; font-weight: bold;
+        }
+        .mhr-n { font-size: 11px; font-weight: normal; color: var(--text-mid); margin-left: auto; }
+        .mhr-chev { font-size: 10px; color: var(--text-mid); transition: transform .2s; }
+        .mhr-type.open { grid-column: 1 / -1; box-shadow: 4px 4px 0 rgba(0,0,0,0.12); }
+        .mhr-type.open .mhr-type-head {
+            background: var(--pink-light);
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 12px 12px 0 0;
+        }
+        .mhr-type.open .mhr-chev { transform: rotate(180deg); }
+        .mhr-type-body { display: none; padding: 12px 14px; }
+        .mhr-type.open .mhr-type-body { display: block; }
+        .mhr-task {
+            display: flex; align-items: center; gap: 8px;
+            padding: 9px 12px; border: 1px solid #e5d9de; border-radius: 10px;
+            margin-bottom: 8px; font-size: 13px; text-decoration: none; color: var(--text-dark);
+            transition: background .15s;
+        }
+        .mhr-task:last-child { margin-bottom: 0; }
+        .mhr-task:hover { background: var(--pink-light); }
+        .mhr-go { margin-left: auto; color: #3B82F6; font-size: 12px; }
+        .mhr-empty { font-size: 12px; color: var(--text-light); padding: 6px 2px; }
+        @media (max-width: 800px) {
+            .mhr-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -1283,6 +1329,38 @@
                 }
                 if (roomPureLove.length) {
                     renderSimpleTable('roomPureLoveTable', roomPureLove, [{ key: 'name', label: '进度' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+            }
+            else if (game.id === 'mhr') {
+                const mhrRes = await fetch('data/MHR/tasks.json').catch(() => null);
+                let mhrData = mhrRes && mhrRes.ok ? await mhrRes.json() : null;
+                const mhrTypes = (mhrData && mhrData.types) || [];
+                const mhrTotal = mhrTypes.reduce((s, t) => s + ((t.items || []).length), 0);
+
+                let html = '';
+                if (mhrTypes.length) {
+                    const tipHtml = mhrData.hint ? `<div class="mhr-tip">${mhrData.hint}</div>` : '';
+                    const cardsHtml = mhrTypes.map((t, i) => {
+                        const items = t.items || [];
+                        const body = items.length
+                            ? items.map(it => `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(it.name)}</span><span class="mhr-go">🔗 详情</span></a>`).join('')
+                            : '<div class="mhr-empty">该类型下暂无任务（等待录入）</div>';
+                        return `<div class="mhr-type" data-i="${i}"><div class="mhr-type-head"><span>${escapeHtml(t.name)}</span><span class="mhr-n">${items.length || '—'}</span><span class="mhr-chev">▼</span></div><div class="mhr-type-body">${body}</div></div>`;
+                    }).join('');
+                    html += `<details class="section-details" open><summary>📋 任务类型：收集 (${mhrTypes.length}种 / ${mhrTotal}个任务)</summary><div class="section-content">${tipHtml}<div class="mhr-grid" id="mhrTypeGrid">${cardsHtml}</div></div></details>`;
+                }
+                detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
+
+                const mhrGrid = document.getElementById('mhrTypeGrid');
+                if (mhrGrid && !mhrGrid.__mhrBound) {
+                    mhrGrid.__mhrBound = true;
+                    mhrGrid.addEventListener('click', (e) => {
+                        const card = e.target.closest('.mhr-type');
+                        if (!card) return;
+                        const wasOpen = card.classList.contains('open');
+                        mhrGrid.querySelectorAll('.mhr-type.open').forEach(c => c.classList.remove('open'));
+                        if (!wasOpen) card.classList.add('open');
+                    });
                 }
             }
             else if (game.id === 'sonsoftheforest') {

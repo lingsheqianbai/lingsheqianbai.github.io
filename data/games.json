@@ -9,5 +9,6 @@
   { "id": "jojo", "name": "JOJO群星之战", "icon": "⭐", "description": "暂无内容，后续补充" },
   { "id": "onlyyou", "name": "仅你一人", "icon": "🌸", "description": "结局流程攻略" },
   { "id": "sonsoftheforest", "name": "森林之子", "icon": "🌲", "description": "模组汉化、教程" },
-  { "id": "room", "name": "ROOM – 24小时无死角偷窥", "icon": "👁️", "description": "官方链接、序章、纯爱线流程" }
+  { "id": "room", "name": "ROOM – 24小时无死角偷窥", "icon": "👁️", "description": "官方链接、序章、纯爱线流程" },
+  { "id": "mhr", "name": "怪物猎人崛起：曙光", "icon": "🏹", "description": "手记全收集、机制教程" }
 ]
