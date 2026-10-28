@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: "MS PGothic", "Unifont", "SimSun", "Microsoft YaHei", "ZQKNNY", sans-serif;
+            font-family: "Microsoft YaHei UI", "Microsoft YaHei", "SimHei", "黑体", "SimSun", "ZQKNNY", sans-serif;
             background: url('images/beijin1.jpg') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
@@ -553,6 +553,21 @@
         .mhr-star-body { display: none; padding: 10px 12px; }
         .mhr-star-group.open .mhr-star-body { display: block; }
         .mhr-star-group.open .mhr-chev { transform: rotate(180deg); }
+        .mhr-item { margin-bottom: 8px; }
+        .mhr-item:last-child { margin-bottom: 0; }
+        .mhr-item .mhr-task { margin-bottom: 0; }
+        .mhr-tag {
+            font-size: 11px; color: var(--pink-dark); background: #fff;
+            border: 1px solid var(--pink-dark); border-radius: 20px;
+            padding: 1px 7px; white-space: nowrap; font-weight: bold;
+        }
+        .mhr-task-todo { cursor: default; background: #fafafa; }
+        .mhr-todo { color: var(--text-light); }
+        .mhr-itemnote {
+            font-size: 12px; line-height: 1.8; color: var(--text-mid);
+            background: #fdf6f9; border-left: 3px solid var(--pink);
+            border-radius: 0 6px 6px 0; padding: 6px 10px; margin-top: 6px;
+        }
         @media (max-width: 800px) {
             .mhr-sections { grid-template-columns: 1fr; gap: 14px; }
         }
@@ -1400,7 +1415,17 @@
                     : ((mhrData && mhrData.types) ? [{ title: mhrData.sectionTitle || '任务类型：收集', hint: mhrData.hint, types: mhrData.types }] : []);
 
                 const mhrStarCls = (n) => 's' + (n >= 1 && n <= 7 ? n : 7);
-                const mhrItem = (it) => `<a class="mhr-task" data-name="${escapeHtml((it.name || '').toLowerCase())}" data-star="${it.star || ''}" href="${it.url}" target="_blank" rel="noopener noreferrer">${it.star ? `<span class="star ${mhrStarCls(it.star)}">★${it.star}</span>` : ''}<span>${escapeHtml(it.name)}</span>${it.note ? `<span class="mhr-badge">${escapeHtml(it.note)}</span>` : ''}<span class="mhr-go">🔗 详情</span></a>`;
+                const mhrItem = (it) => {
+                    const star = it.star ? `<span class="star ${mhrStarCls(it.star)}">★${it.star}</span>` : '';
+                    const tags = (it.tags || []).map(tg => `<span class="mhr-tag">${escapeHtml(tg)}</span>`).join('');
+                    const isLong = it.note && it.note.length > 16;
+                    const pill = (it.note && !isLong) ? `<span class="mhr-badge">${escapeHtml(it.note)}</span>` : '';
+                    const link = it.url
+                        ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}<span class="mhr-go">🔗 详情</span></a>`
+                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}<span class="mhr-go mhr-todo">链接待补</span></span>`;
+                    const noteLine = isLong ? `<div class="mhr-itemnote">${escapeHtml(it.note)}</div>` : '';
+                    return `<div class="mhr-item" data-name="${escapeHtml(((it.name || '') + ' ' + (it.tags || []).join(' ')).toLowerCase())}" data-star="${it.star || ''}">${link}${noteLine}</div>`;
+                };
 
                 const mhrTypeBody = (t) => {
                     const items = t.items || [];
@@ -1460,7 +1485,7 @@
                         let total = 0;
                         body.querySelectorAll('.mhr-type').forEach(tc => {
                             let hit = 0;
-                            tc.querySelectorAll('.mhr-task').forEach(a => {
+                            tc.querySelectorAll('.mhr-item').forEach(a => {
                                 const name = a.dataset.name || '';
                                 const star = a.dataset.star || '';
                                 const ok = !q || name.indexOf(q) > -1 || (star && (q === star || q === '★' + star));
@@ -1470,13 +1495,13 @@
                             const typeName = tc.dataset.name || '';
                             const typeHit = q && typeName.indexOf(q) > -1;
                             if (typeHit) {
-                                tc.querySelectorAll('.mhr-task').forEach(a => { a.style.display = ''; hit = tc.querySelectorAll('.mhr-task').length; });
+                                tc.querySelectorAll('.mhr-item').forEach(a => { a.style.display = ''; hit = tc.querySelectorAll('.mhr-item').length; });
                             }
                             total += hit;
                             tc.style.display = (!q || hit > 0) ? '' : 'none';
                             if (q && hit > 0) tc.classList.add('open');
                             tc.querySelectorAll('.mhr-star-group').forEach(g => {
-                                const vis = [...g.querySelectorAll('.mhr-task')].filter(a => a.style.display !== 'none').length;
+                                const vis = [...g.querySelectorAll('.mhr-item')].filter(a => a.style.display !== 'none').length;
                                 g.style.display = (vis > 0 || !q) ? '' : 'none';
                                 if (q && vis > 0) g.classList.add('open');
                             });

@@ -4,46 +4,50 @@
       "id": "quest",
       "icon": "📋",
       "name": "任务类型：收集",
-      "desc": "集会所 / 村庄 / 斗技大会 / 活动等任务与训练视频",
+      "desc": "村庄 / 训练 / 委托支线等已收录任务（精选·突破已标注）",
       "hint": "💡 点任一类型卡片，它会在原位展开成整行，显示该类型下的视频；再点一次收起。",
       "types": [
-        {
-          "name": "集会所任务",
-          "items": []
-        },
         {
           "name": "村庄任务",
           "items": [
             {
-              "name": "怪物猎人崛起：曙光 开端",
-              "url": "https://www.bilibili.com/video/BV1EeHc6sEkn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+              "name": "圆圆酸浆",
+              "url": "https://www.bilibili.com/video/BV1J3xL63EEf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 1,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "请给我美味的蘑菇",
+              "url": "https://www.bilibili.com/video/BV17LxL6BEcX/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 1,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "盘踞在神社的恶徒",
+              "url": "https://www.bilibili.com/video/BV16uxL6kEpJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 1,
+              "tags": [
+                "精选"
+              ]
             },
             {
               "name": "在修整前击退镰鼬龙",
               "url": "https://www.bilibili.com/video/BV1q7xL6TEcy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 1
-            }
-          ]
-        },
-        {
-          "name": "斗技大会",
-          "items": []
-        },
-        {
-          "name": "活动任务",
-          "items": []
-        },
-        {
-          "name": "自由支线任务",
-          "items": []
-        },
-        {
-          "name": "委托支线任务",
-          "items": [
+            },
             {
-              "name": "给村庄普贤跑腿",
-              "url": "https://www.bilibili.com/video/BV1BbxG6wEiZ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "note": "报酬：回复药"
+              "name": "三位一体的大镰刀",
+              "url": "",
+              "star": 2,
+              "tags": [
+                "突破",
+                "紧急"
+              ],
+              "note": "完成后获得报酬：称号：刀茎、鞘尾、冬风、刀脊、罗德娜、道标、卡娜莉诺、刀伊诺、只影、福木兔、一击、浪漫、谢谢、翡翠、腿部、害羞、大霹雳、理想乡、战争、可食用"
             }
           ]
         },
@@ -65,47 +69,14 @@
           ]
         },
         {
-          "name": "探索之旅",
-          "items": []
-        },
-        {
-          "name": "百龙夜行",
-          "items": []
-        },
-        {
-          "name": "精选任务",
+          "name": "委托支线任务",
           "items": [
             {
-              "name": "圆圆酸浆",
-              "url": "https://www.bilibili.com/video/BV1J3xL63EEf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 1
-            },
-            {
-              "name": "请给我美味的蘑菇",
-              "url": "https://www.bilibili.com/video/BV17LxL6BEcX/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 1
-            },
-            {
-              "name": "盘踞在神社的恶徒",
-              "url": "https://www.bilibili.com/video/BV16uxL6kEpJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 1
+              "name": "给村庄普贤跑腿",
+              "url": "https://www.bilibili.com/video/BV1BbxG6wEiZ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "note": "报酬：回复药"
             }
           ]
-        },
-        {
-          "name": "紧急任务",
-          "items": [
-            {
-              "name": "盘踞在神社的恶徒",
-              "url": "https://www.bilibili.com/video/BV16uxL6kEpJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 2
-            }
-          ],
-          "note": "三位一体的大镰刀的特殊奖励：（称号：刀茎、鞘尾、冬风、刀脊、罗德娜、道标、卡娜莉诺、刀伊诺、只影、福木兔、一击、浪漫、谢谢、翡翠、腿部、害羞、大霹雳、理想乡、战争、可食用）"
-        },
-        {
-          "name": "特别许可测验",
-          "items": []
         }
       ]
     },
