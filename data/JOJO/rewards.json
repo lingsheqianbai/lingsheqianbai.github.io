@@ -650,9 +650,7 @@
       "battle": "乔鲁诺VS布加拉提",
       "video": "https://www.bilibili.com/video/BV1NxxE6bEGo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
       "rewards": [
-        "[2D美术]黄金体验 宣传用图",
-        "[2D美术]布鲁诺·布加拉提 宣传用图",
-        "[追加颜色]布加拉提 追加颜色C"
+        "[2D美术]黄金体验 宣传用图"
       ]
     },
     {
@@ -688,6 +686,16 @@
     {
       "part": "第5部 黄金之风 第1位面",
       "no": 5,
+      "battle": "布加拉提VS瓦伦泰",
+      "video": "https://www.bilibili.com/video/BV1R4so67E1E/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]布鲁诺·布加拉提 宣传用图",
+        "[追加颜色]布加拉提 追加颜色C"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 6,
       "battle": "普罗修特与贝西VS米斯达",
       "video": "https://www.bilibili.com/video/BV1Znso6HEWx/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
       "rewards": [
@@ -697,7 +705,7 @@
     },
     {
       "part": "第5部 黄金之风 第1位面",
-      "no": 6,
+      "no": 7,
       "battle": "乔鲁诺VS虹村亿泰",
       "video": "https://www.bilibili.com/video/BV1KPso6PEpp/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
       "rewards": [
@@ -708,7 +716,7 @@
     },
     {
       "part": "第5部 黄金之风 第1位面",
-      "no": 7,
+      "no": 8,
       "battle": "乔鲁诺VS迪亚波罗",
       "video": "https://www.bilibili.com/video/BV1sxsd6FEnc/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
       "rewards": [
