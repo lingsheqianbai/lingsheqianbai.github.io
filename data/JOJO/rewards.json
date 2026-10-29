@@ -643,6 +643,79 @@
         "[BGM]「时间」开始流动。",
         "[特殊服装]吉良吉影 SP服装A"
       ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 1,
+      "battle": "乔鲁诺VS布加拉提",
+      "video": "https://www.bilibili.com/video/BV1NxxE6bEGo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]黄金体验 宣传用图",
+        "[2D美术]布鲁诺·布加拉提 宣传用图",
+        "[追加颜色]布加拉提 追加颜色C"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 2,
+      "battle": "普罗修特与贝西VS矢安宫重清",
+      "video": "https://www.bilibili.com/video/BV1okxE62EtV/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]贝西 宣传用图",
+        "[追加颜色]普罗修特&贝西 追加颜色C"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 3,
+      "battle": "福葛VS纳兰迦",
+      "video": "https://www.bilibili.com/video/BV15TxE6rE4F/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]潘纳科达·福葛 宣传用图",
+        "[BGM]真正的信赖"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 4,
+      "battle": "特莉休VS音石明",
+      "video": "https://www.bilibili.com/video/BV1DLxE6KEgN/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]特莉休·乌纳 宣传用图",
+        "[追加颜色]特莉休 追加颜色C"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 5,
+      "battle": "普罗修特与贝西VS米斯达",
+      "video": "https://www.bilibili.com/video/BV1Znso6HEWx/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]盖多·米斯达 设定图",
+        "[BGM]壮烈成仁"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 6,
+      "battle": "乔鲁诺VS虹村亿泰",
+      "video": "https://www.bilibili.com/video/BV1KPso6PEpp/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]虹村亿泰 宣传用图",
+        "[BGM]黄金体验",
+        "[特殊服装]虹村亿泰 SP服装A"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第1位面",
+      "no": 7,
+      "battle": "乔鲁诺VS迪亚波罗",
+      "video": "https://www.bilibili.com/video/BV1sxsd6FEnc/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]黄金体验镇魂曲 设定图",
+        "[3D模组]黄金体验镇魂曲",
+        "[特殊服装]乔鲁诺 SP服装A"
+      ]
     }
   ]
 }

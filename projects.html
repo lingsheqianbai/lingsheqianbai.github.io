@@ -1422,7 +1422,7 @@
                     const pill = (it.note && !isLong) ? `<span class="mhr-badge">${escapeHtml(it.note)}</span>` : '';
                     const link = it.url
                         ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}<span class="mhr-go">🔗 详情</span></a>`
-                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}<span class="mhr-go mhr-todo">链接待补</span></span>`;
+                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}</span>`;
                     const noteLine = isLong ? `<div class="mhr-itemnote">${escapeHtml(it.note)}</div>` : '';
                     return `<div class="mhr-item" data-name="${escapeHtml(((it.name || '') + ' ' + (it.tags || []).join(' ')).toLowerCase())}" data-star="${it.star || ''}">${link}${noteLine}</div>`;
                 };
@@ -1690,5 +1690,7 @@
 
         loadGames();
     </script>
-</body>
+    <!-- 51.la 网站统计 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>if(window.LA&&LA.init){LA.init({id:"3PEh97IIsQ2zJUR2",ck:"3PEh97IIsQ2zJUR2"})}</script></body>
 </html>
