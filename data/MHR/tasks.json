@@ -49,7 +49,7 @@
             },
             {
               "name": "弹牙，爽滑",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1D5sd6qEPT/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -61,7 +61,7 @@
             },
             {
               "name": "冰封群岛的睡梦",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1hVsd6MEA2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -69,7 +69,7 @@
             },
             {
               "name": "击败睡意！",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1vSsZ6HEyY/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -77,7 +77,7 @@
             },
             {
               "name": "别吃我，白兔兽",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV17ysZ6REV2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -85,12 +85,12 @@
             },
             {
               "name": "百虫夜行",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1LmsZ6XE2d/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2
             },
             {
               "name": "烤不好——！",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1MAsf6kE6m/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2
             },
             {
@@ -108,7 +108,7 @@
             },
             {
               "name": "鲸吞河童蛙",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1bnsZ63Eyr/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "精选"
@@ -116,7 +116,7 @@
             },
             {
               "name": "沙原里的大盗",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1tWsZ6uEjW/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "精选"
@@ -124,7 +124,7 @@
             },
             {
               "name": "幻化唐伞",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1mNsf63EnT/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "紧急",
@@ -134,6 +134,15 @@
               "rewardTypes": [
                 "称号"
               ]
+            },
+            {
+              "name": "泥沼里的土砂龙",
+              "url": "",
+              "star": 3,
+              "tags": [
+                "精选"
+              ],
+              "note": "获得报酬：背靠背、联系、同舟共济"
             }
           ]
         },
@@ -174,8 +183,8 @@
               ]
             },
             {
-              "name": "「寻找丢失的货物」之卷",
-              "url": "",
+              "name": "“寻找丢失的货物”之卷",
+              "url": "https://www.bilibili.com/video/BV1GdsZ67EVj/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "获得报酬：攀爬糯米团",
               "rewardTypes": [
                 "团子"
@@ -183,7 +192,7 @@
             },
             {
               "name": "提供开发猎犬具的素材",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV16BsZ6fEqb/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "获得报酬：守护伞",
               "rewardTypes": [
                 "随从装备"
@@ -191,7 +200,7 @@
             },
             {
               "name": "环境生物：石守蜥蜴",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1J6sZ6tEjg/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "获得报酬：大翔虫",
               "rewardTypes": [
                 "道具"

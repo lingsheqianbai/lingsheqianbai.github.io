@@ -724,6 +724,87 @@
         "[3D模组]黄金体验镇魂曲",
         "[特殊服装]乔鲁诺 SP服装A"
       ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 1,
+      "battle": "迪亚波罗VS岸边露伴",
+      "video": "https://www.bilibili.com/video/BV1PhsZ6vECU/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]迪亚波罗 设定图",
+        "[BGM]粉红黑少年",
+        "[特殊服装]岸边露伴 SP服装A"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 2,
+      "battle": "布加拉提VS普罗修特与贝西",
+      "video": "https://www.bilibili.com/video/BV1HisZ6cEq1/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]普罗修特 宣传用图"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 3,
+      "battle": "加丘VS荷尔·荷斯",
+      "video": "https://www.bilibili.com/video/BV1BwsZ6WEKc/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]加丘 宣传用图",
+        "[追加颜色]加丘 追加颜色C"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 4,
+      "battle": "布加拉提VS迪亚波罗",
+      "video": "https://www.bilibili.com/video/BV1zFsZ6RELS/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]钢链手指 宣传用图",
+        "[BGM]Arrivederci（再见）"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 5,
+      "battle": "纳兰迦VS乔瑟夫",
+      "video": "https://www.bilibili.com/video/BV1qAsZ6XErb/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]纳兰迦·吉尔卡 宣传用图",
+        "[追加颜色]纳兰迦 追加颜色C"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 6,
+      "battle": "米斯达VS加丘",
+      "video": "https://www.bilibili.com/video/BV1wRso6FEt1/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]盖多·米斯达 宣传用图",
+        "[3D模组]性感手枪"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 7,
+      "battle": "乔鲁诺VS山岸由花子",
+      "video": "https://www.bilibili.com/video/BV1roso6ZEFM/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]黄金体验 设定图",
+        "[追加颜色]乔鲁诺 追加颜色D"
+      ]
+    },
+    {
+      "part": "第5部 黄金之风 第2位面",
+      "no": 8,
+      "battle": "特莉休VS迪亚波罗",
+      "video": "https://www.bilibili.com/video/BV1YGsZ62EEA/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]辣妹 宣传用图",
+        "[BGM]老板下达的第一道指令",
+        "[特殊服装]特莉休 SP服装A"
+      ]
     }
   ]
 }
