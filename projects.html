@@ -563,7 +563,23 @@
         }
         .mhr-task-todo { cursor: default; background: #fafafa; }
         .mhr-todo { color: var(--text-light); }
-        .mhr-itemnote {
+        .mhr-chips {
+            display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
+        }
+        .mhr-chip {
+            font-family: inherit; font-size: 12px; line-height: 1.6;
+            padding: 3px 12px; border-radius: 20px; cursor: pointer;
+            border: 1px solid #eadde3; background: #fff; color: var(--text-mid);
+            transition: background .15s, color .15s, border-color .15s;
+        }
+        .mhr-chip:hover { background: var(--pink-light); }
+        .mhr-chip.active { background: var(--pink-dark); border-color: var(--pink-dark); color: #fff; font-weight: bold; }
+        .mhr-chip .n { margin-left: 4px; font-size: 11px; opacity: .75; }
+        .mhr-rtag {
+            font-size: 11px; color: #6b4c8a; background: #f3ecfa;
+            border: 1px solid #ddd0ee; border-radius: 20px;
+            padding: 1px 7px; white-space: nowrap;
+        }        .mhr-itemnote {
             font-size: 12px; line-height: 1.8; color: var(--text-mid);
             background: #fdf6f9; border-left: 3px solid var(--pink);
             border-radius: 0 6px 6px 0; padding: 6px 10px; margin-top: 6px;
@@ -1418,15 +1434,16 @@
                 const mhrItem = (it) => {
                     const star = it.star ? `<span class="star ${mhrStarCls(it.star)}">★${it.star}</span>` : '';
                     const tags = (it.tags || []).map(tg => `<span class="mhr-tag">${escapeHtml(tg)}</span>`).join('');
+                    const rtags = (it.rewardTypes || []).map(rt => `<span class="mhr-rtag">${escapeHtml(rt)}</span>`).join('');
                     const isLong = it.note && it.note.length > 16;
                     const pill = (it.note && !isLong) ? `<span class="mhr-badge">${escapeHtml(it.note)}</span>` : '';
                     const link = it.url
-                        ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}<span class="mhr-go">🔗 详情</span></a>`
-                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}</span>`;
+                        ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${rtags}${pill}<span class="mhr-go">🔗 详情</span></a>`
+                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${rtags}${pill}</span>`;
                     const noteLine = isLong ? `<div class="mhr-itemnote">${escapeHtml(it.note)}</div>` : '';
-                    // 搜索索引：名称 + 标签 + 报酬/备注（这样搜「回复药」「称号」也能命中）
-                    const searchText = ((it.name || '') + ' ' + (it.tags || []).join(' ') + ' ' + (it.note || '')).toLowerCase();
-                    return `<div class="mhr-item" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}">${link}${noteLine}</div>`;
+                    // 搜索索引：名称 + 标签 + 报酬类型 + 报酬/备注文本
+                    const searchText = ((it.name || '') + ' ' + (it.tags || []).join(' ') + ' ' + (it.rewardTypes || []).join(' ') + ' ' + (it.note || '')).toLowerCase();
+                    return `<div class="mhr-item" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}" data-rt="${escapeHtml((it.rewardTypes || []).join(' '))}">${link}${noteLine}</div>`;
                 };
 
                 const mhrTypeBody = (t) => {
@@ -1459,7 +1476,14 @@
                     const secIcon = sec.icon || '📁';
                     const secDesc = sec.desc || '';
                     const ph = sec.searchPlaceholder || '搜索本类内容（名称 / 报酬 / 星级，如 回复药、称号、★2、手记 3）';
-                    return `<div class="mhr-sec" data-si="${si}"><div class="mhr-sec-head"><div class="mhr-sec-icon">${secIcon}</div><div class="mhr-sec-title">${escapeHtml(secName)}<span class="mhr-sec-count">${types.length}种 · ${total}个</span><span class="mhr-sec-chev">▼</span></div>${secDesc ? `<div class="mhr-sec-desc">${escapeHtml(secDesc)}</div>` : ''}</div><div class="mhr-sec-body"><div class="mhr-search"><input type="text" class="mhr-search-input" placeholder="${escapeHtml(ph)}"><span class="mhr-search-count"></span></div><div class="mhr-noresult">没有匹配的内容</div><div class="mhr-grid" id="mhrGrid${si}">${mhrCards(types)}</div></div></div>`;
+                    // 报酬类型筛选（数据里标了 rewardTypes 才有）
+                    const rtCount = {};
+                    types.forEach(t => (t.items || []).forEach(it => (it.rewardTypes || []).forEach(rt => { rtCount[rt] = (rtCount[rt] || 0) + 1; })));
+                    const rtList = Object.keys(rtCount).sort((a, b) => rtCount[b] - rtCount[a]);
+                    const chips = rtList.length
+                        ? `<div class="mhr-chips" data-rt=""><button type="button" class="mhr-chip active" data-rt="">全部<span class="n">${total}</span></button>${rtList.map(rt => `<button type="button" class="mhr-chip" data-rt="${escapeHtml(rt)}">${escapeHtml(rt)}<span class="n">${rtCount[rt]}</span></button>`).join('')}</div>`
+                        : '';
+                    return `<div class="mhr-sec" data-si="${si}"><div class="mhr-sec-head"><div class="mhr-sec-icon">${secIcon}</div><div class="mhr-sec-title">${escapeHtml(secName)}<span class="mhr-sec-count">${types.length}种 · ${total}个</span><span class="mhr-sec-chev">▼</span></div>${secDesc ? `<div class="mhr-sec-desc">${escapeHtml(secDesc)}</div>` : ''}</div><div class="mhr-sec-body"><div class="mhr-search"><input type="text" class="mhr-search-input" placeholder="${escapeHtml(ph)}"><span class="mhr-search-count"></span></div>${chips}<div class="mhr-noresult">没有匹配的内容</div><div class="mhr-grid" id="mhrGrid${si}">${mhrCards(types)}</div></div></div>`;
                 }).join('');
                 if (mhrSecCards) html = `<div class="mhr-sections">${mhrSecCards}</div>`;
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
@@ -1478,40 +1502,56 @@
                         if (secHead) { secHead.parentElement.classList.toggle('open'); return; }
                     });
 
-                    // 搜索：分区内精准过滤（名称 / 星级 / 类型名）
-                    mhrSecWrap.addEventListener('input', (e) => {
-                        const inp = e.target.closest('.mhr-search-input');
-                        if (!inp) return;
-                        const body = inp.closest('.mhr-sec-body');
-                        const q = inp.value.trim().toLowerCase();
+                    // 搜索 + 报酬类型筛选：共用一套过滤
+                    const mhrApplyFilter = (body) => {
+                        const inp = body.querySelector('.mhr-search-input');
+                        const q = inp ? inp.value.trim().toLowerCase() : '';
+                        const chipsBox = body.querySelector('.mhr-chips');
+                        const rt = chipsBox ? (chipsBox.dataset.rt || '') : '';
+                        const on = !!(q || rt);
                         let total = 0;
                         body.querySelectorAll('.mhr-type').forEach(tc => {
+                            const typeName = tc.dataset.name || '';
+                            const typeHit = q && !rt && typeName.indexOf(q) > -1;
                             let hit = 0;
                             tc.querySelectorAll('.mhr-item').forEach(a => {
                                 const name = a.dataset.name || '';
                                 const star = a.dataset.star || '';
-                                const ok = !q || name.indexOf(q) > -1 || (star && (q === star || q === '★' + star));
+                                const rts = a.dataset.rt || '';
+                                const okQ = !q || typeHit || name.indexOf(q) > -1 || (star && (q === star || q === '★' + star));
+                                const okR = !rt || rts.split(' ').indexOf(rt) > -1;
+                                const ok = okQ && okR;
                                 a.style.display = ok ? '' : 'none';
                                 if (ok) hit++;
                             });
-                            const typeName = tc.dataset.name || '';
-                            const typeHit = q && typeName.indexOf(q) > -1;
-                            if (typeHit) {
-                                tc.querySelectorAll('.mhr-item').forEach(a => { a.style.display = ''; hit = tc.querySelectorAll('.mhr-item').length; });
-                            }
                             total += hit;
-                            tc.style.display = (!q || hit > 0) ? '' : 'none';
-                            if (q && hit > 0) tc.classList.add('open');
+                            tc.style.display = (!on || hit > 0) ? '' : 'none';
+                            if (on && hit > 0) tc.classList.add('open');
                             tc.querySelectorAll('.mhr-star-group').forEach(g => {
                                 const vis = [...g.querySelectorAll('.mhr-item')].filter(a => a.style.display !== 'none').length;
-                                g.style.display = (vis > 0 || !q) ? '' : 'none';
-                                if (q && vis > 0) g.classList.add('open');
+                                g.style.display = (vis > 0 || !on) ? '' : 'none';
+                                if (on && vis > 0) g.classList.add('open');
                             });
                         });
                         const nores = body.querySelector('.mhr-noresult');
-                        if (nores) nores.style.display = (q && total === 0) ? 'block' : 'none';
+                        if (nores) nores.style.display = (on && total === 0) ? 'block' : 'none';
                         const cnt = body.querySelector('.mhr-search-count');
-                        if (cnt) cnt.textContent = q ? ('找到 ' + total + ' 条') : '';
+                        if (cnt) cnt.textContent = on ? ((rt ? '[' + rt + '] ' : '') + '找到 ' + total + ' 条') : '';
+                    };
+
+                    mhrSecWrap.addEventListener('input', (e) => {
+                        const inp = e.target.closest('.mhr-search-input');
+                        if (inp) mhrApplyFilter(inp.closest('.mhr-sec-body'));
+                    });
+
+                    mhrSecWrap.addEventListener('click', (e) => {
+                        const chip = e.target.closest('.mhr-chip');
+                        if (!chip) return;
+                        const box = chip.closest('.mhr-chips');
+                        box.querySelectorAll('.mhr-chip').forEach(c => c.classList.remove('active'));
+                        chip.classList.add('active');
+                        box.dataset.rt = chip.dataset.rt || '';
+                        mhrApplyFilter(chip.closest('.mhr-sec-body'));
                     });
                 }
             }
