@@ -1424,7 +1424,9 @@
                         ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}<span class="mhr-go">🔗 详情</span></a>`
                         : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${pill}</span>`;
                     const noteLine = isLong ? `<div class="mhr-itemnote">${escapeHtml(it.note)}</div>` : '';
-                    return `<div class="mhr-item" data-name="${escapeHtml(((it.name || '') + ' ' + (it.tags || []).join(' ')).toLowerCase())}" data-star="${it.star || ''}">${link}${noteLine}</div>`;
+                    // 搜索索引：名称 + 标签 + 报酬/备注（这样搜「回复药」「称号」也能命中）
+                    const searchText = ((it.name || '') + ' ' + (it.tags || []).join(' ') + ' ' + (it.note || '')).toLowerCase();
+                    return `<div class="mhr-item" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}">${link}${noteLine}</div>`;
                 };
 
                 const mhrTypeBody = (t) => {
@@ -1456,7 +1458,7 @@
                     const secName = sec.name || sec.title || '收集';
                     const secIcon = sec.icon || '📁';
                     const secDesc = sec.desc || '';
-                    const ph = sec.searchPlaceholder || '搜索本类内容（名称 / 星级，如 ★2 或 手记 3）';
+                    const ph = sec.searchPlaceholder || '搜索本类内容（名称 / 报酬 / 星级，如 回复药、称号、★2、手记 3）';
                     return `<div class="mhr-sec" data-si="${si}"><div class="mhr-sec-head"><div class="mhr-sec-icon">${secIcon}</div><div class="mhr-sec-title">${escapeHtml(secName)}<span class="mhr-sec-count">${types.length}种 · ${total}个</span><span class="mhr-sec-chev">▼</span></div>${secDesc ? `<div class="mhr-sec-desc">${escapeHtml(secDesc)}</div>` : ''}</div><div class="mhr-sec-body"><div class="mhr-search"><input type="text" class="mhr-search-input" placeholder="${escapeHtml(ph)}"><span class="mhr-search-count"></span></div><div class="mhr-noresult">没有匹配的内容</div><div class="mhr-grid" id="mhrGrid${si}">${mhrCards(types)}</div></div></div>`;
                 }).join('');
                 if (mhrSecCards) html = `<div class="mhr-sections">${mhrSecCards}</div>`;
