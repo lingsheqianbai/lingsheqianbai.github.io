@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -594,6 +594,7 @@
             font-size: 12px; background: #f7f1f4; border: 1px solid #ece0e6;
             border-radius: 20px; padding: 2px 10px; white-space: nowrap;
         }
+        .mhr-chipitem em { font-style: normal; font-size: 11px; color: var(--text-light); margin-left: 4px; }
         .mhr-go { text-decoration: none; }
         a.mhr-go { color: #3B82F6; }
         a.mhr-go:hover { text-decoration: underline; }        .mhr-task-todo { cursor: default; background: #fafafa; }
@@ -1478,14 +1479,20 @@
                 const mhrStarCls = (n) => 's' + (n >= 1 && n <= 7 ? n : 7);
                 // 锚点表：条目名 / 胶囊名 → 该行真正的 data-item 锚点
                 // （称号系列不算，免得「回复药」这种称号名被当成道具）
+                const mhrChipName = (c) => (c && typeof c === 'object') ? (c.name || '') : (c || '');
+                const mhrChipHtml = (c) => {
+                    const nm = mhrChipName(c);
+                    const sub = (c && typeof c === 'object' && c.sub) ? `<em>${escapeHtml(c.sub)}</em>` : '';
+                    return `<span class="mhr-chipitem">${escapeHtml(nm)}${sub}</span>`;
+                };
                 const mhrAnchor = new Map();
                 mhrSections.forEach(sec => {
                     if (sec.id === 'title') return;
                     (sec.types || []).forEach(t => (t.items || []).forEach(it => {
-                        const key = it.target || ((it.chips || []).join('、')) || it.name;
+                        const key = it.target || ((it.chips || []).map(mhrChipName).join('、')) || it.name;
                         if (!key) return;
                         mhrAnchor.set(key, key);
-                        (it.chips || []).forEach(c => { if (c && !mhrAnchor.has(c)) mhrAnchor.set(c, key); });
+                        (it.chips || []).forEach(c => { const nm = mhrChipName(c); if (nm && !mhrAnchor.has(nm)) mhrAnchor.set(nm, key); });
                     }));
                 });
                 const mhrItem = (it) => {
@@ -1528,7 +1535,7 @@
                     const jumpBtn = it.jumpTo ? `<button type="button" class="mhr-jump" data-jump="${escapeHtml(it.jumpTo)}" title="跳到：${escapeHtml(it.jumpTo)}">↗ ${escapeHtml(it.jumpTo)}</button>` : '';
                     // 名称区：可以是单个名称，也可以是一组胶囊（chips）
                     const names = Array.isArray(it.chips) && it.chips.length
-                        ? it.chips.map(c => `<span class="mhr-chipitem">${escapeHtml(c)}</span>`).join('')
+                        ? it.chips.map(mhrChipHtml).join('')
                         : `<span class="mhr-name">${escapeHtml(it.name)}</span>`;
                     // 整行不可点；详情：有链接=蓝色可点，无链接=灰色占位（团子为 false 不显示）
                     const detail = it.url
@@ -1539,7 +1546,7 @@
                     // 搜索索引：名称 + 标签 + 报酬类型 + 前置 + 解锁内容 + 备注
                     const nameText = ((it.chips || []).join(' ') || it.name || '');
                     const searchText = (nameText + ' ' + (it.tags || []).join(' ') + ' ' + (it.rewardTypes || []).join(' ') + ' ' + (it.require || '') + ' ' + (it.unlocks || []).map(u => (typeof u === 'string' ? u : u.text)).join(' ') + ' ' + (it.note || '')).toLowerCase();
-                    return `<div class="mhr-item" data-item="${escapeHtml(it.target || (it.chips || []).join('、') || it.name || '')}" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}" data-rt="${escapeHtml((it.rewardTypes || []).join(' '))}">${rowHtml}${noteLine}</div>`;
+                    return `<div class="mhr-item" data-item="${escapeHtml(it.target || (it.chips || []).map(mhrChipName).join('、') || it.name || '')}" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}" data-rt="${escapeHtml((it.rewardTypes || []).join(' '))}">${rowHtml}${noteLine}</div>`;
                 };
 
                 const mhrTypeBody = (t) => {
