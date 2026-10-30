@@ -553,7 +553,15 @@
         .mhr-star-body { display: none; padding: 10px 12px; }
         .mhr-star-group.open .mhr-star-body { display: block; }
         .mhr-star-group.open .mhr-chev { transform: rotate(180deg); }
-        .mhr-item { margin-bottom: 8px; }
+        .mhr-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .mhr-item.mhr-ttag { margin-bottom: 0; }
+        .mhr-ttag {
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: 12px; padding: 3px 10px; border-radius: 20px;
+            background: #fdf6f9; border: 1px solid #eadde3; color: var(--text-dark);
+            cursor: default;
+        }
+        .mhr-ttag em { font-style: normal; font-size: 11px; color: var(--text-light); }        .mhr-item { margin-bottom: 8px; }
         .mhr-item:last-child { margin-bottom: 0; }
         .mhr-item .mhr-task { margin-bottom: 0; }
         .mhr-tag {
@@ -1455,6 +1463,11 @@
                     const items = t.items || [];
                     const noteHtml = (t.note || t.desc) ? `<div class="mhr-typenote">${escapeHtml(t.note || t.desc)}</div>` : '';
                     if (!items.length) return noteHtml + '<div class="mhr-empty">该类型下暂无内容（等待录入）</div>';
+                    // 称号/团子这类：一排小标签，不做星级折叠
+                    if (t.layout === 'tags') {
+                        const tags = items.map(it => `<span class="mhr-item mhr-ttag" data-name="${escapeHtml(((it.name || '') + ' ' + (it.sub || '')).toLowerCase())}" data-star="" data-rt="">${escapeHtml(it.name)}${it.sub ? `<em>${escapeHtml(it.sub)}</em>` : ''}</span>`).join('');
+                        return noteHtml + `<div class="mhr-tags">${tags}</div>`;
+                    }
                     if (!items.some(it => it.star)) return noteHtml + items.map(mhrItem).join('');
                     const groups = {};
                     items.forEach(it => { const k = it.star || 0; (groups[k] = groups[k] || []).push(it); });
