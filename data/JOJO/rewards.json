@@ -805,6 +805,86 @@
         "[BGM]老板下达的第一道指令",
         "[特殊服装]特莉休 SP服装A"
       ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 1,
+      "battle": "FFVS卡兹",
+      "video": "https://www.bilibili.com/video/BV1dhxY6nEpq/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]斗魂骇客 宣传用图",
+        "[追加颜色]F·F 追加颜色C"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 2,
+      "battle": "艾梅斯VS波鲁纳雷夫",
+      "video": "https://www.bilibili.com/video/BV1Goxa6yEA2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]艾梅斯·克斯提洛 宣传用图",
+        "[特殊服装]艾梅斯 SP服装A",
+        "[3D模组]亲吻"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 3,
+      "battle": "安娜苏VS空条承太郎",
+      "video": "https://www.bilibili.com/video/BV13FxY6kEPP/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]怒海潜将 宣传用图",
+        "[BGM]其名为安娜苏"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 4,
+      "battle": "空条徐伦VS特莉休",
+      "video": "https://www.bilibili.com/video/BV1vDxa6UEDw/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]空条徐伦 宣传用图"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 5,
+      "battle": "普奇VSDIO",
+      "video": "https://www.bilibili.com/video/BV1x3xY6NEpu/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]恩里克·普奇 宣传用图",
+        "[追加颜色]普奇 追加颜色C"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 6,
+      "battle": "艾梅斯VS音石明",
+      "video": "https://www.bilibili.com/video/BV1KuxY6iE3i/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]亲吻 宣传用图",
+        "[追加颜色]艾梅斯 追加颜色C"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 7,
+      "battle": "空条徐伦VS空条承太郎",
+      "video": "https://www.bilibili.com/video/BV14MxY6TE9x/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]空条徐伦 设定图"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第1位面",
+      "no": 8,
+      "battle": "空条徐伦VS普奇",
+      "video": "https://www.bilibili.com/video/BV1tKxY6BEiw/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]石之自由 设定图",
+        "[BGM]想要一直看着这道星光",
+        "[特殊服装]空条徐伦 SP服装A"
+      ]
     }
   ]
 }
