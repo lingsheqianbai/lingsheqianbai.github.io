@@ -14,7 +14,10 @@
             {
               "name": "怪物猎人崛起：曙光 开端",
               "url": "https://www.bilibili.com/video/BV1EeHc6sEkn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "note": "获得剧情动画[炎火村]"
+              "note": "获得剧情动画[炎火村]",
+              "unlocks": [
+                "动画：炎火村"
+              ]
             }
           ]
         },
@@ -51,11 +54,27 @@
               "star": 1
             },
             {
+              "name": "三位一体的大镰刀",
+              "url": "https://www.bilibili.com/video/BV175xL6uE9H/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 2,
+              "tags": [
+                "突破",
+                "紧急"
+              ],
+              "unlocks": [
+                "动画：镰鼬龙王",
+                "称号：2★系列"
+              ]
+            },
+            {
               "name": "食欲旺盛的青熊兽",
               "url": "https://www.bilibili.com/video/BV14Fx764Eaz/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：青熊兽"
               ]
             },
             {
@@ -80,6 +99,9 @@
               "star": 2,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：眠狗龙王"
               ]
             },
             {
@@ -88,6 +110,9 @@
               "star": 2,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：白兔兽"
               ]
             },
             {
@@ -101,12 +126,42 @@
               "star": 2
             },
             {
-              "name": "三位一体的大镰刀",
-              "url": "https://www.bilibili.com/video/BV175xL6uE9H/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 2,
+              "name": "幻化唐伞",
+              "url": "https://www.bilibili.com/video/BV1mNsf63EnT/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 3,
               "tags": [
-                "突破",
+                "紧急",
+                "突破"
+              ],
+              "unlocks": [
+                "动画：伞鸟",
+                "团子 ×5",
+                "称号：3★系列"
+              ]
+            },
+            {
+              "url": "",
+              "name": "山林武僧",
+              "star": 3,
+              "tags": [
+                "紧急",
+                "突破"
+              ],
+              "unlocks": [
+                "动画：天狗兽",
+                "团子 ×7"
+              ]
+            },
+            {
+              "url": "",
+              "name": "百龙夜行，来袭",
+              "star": 3,
+              "tags": [
                 "紧急"
+              ],
+              "unlocks": [
+                "动画：百龙吞噬者",
+                "福木兔服装：吉祥如意"
               ]
             },
             {
@@ -115,6 +170,9 @@
               "star": 3,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：河童蛙"
               ]
             },
             {
@@ -123,6 +181,9 @@
               "star": 3,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：搔鸟"
               ]
             },
             {
@@ -131,6 +192,9 @@
               "star": 3,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：土砂龙"
               ]
             },
             {
@@ -139,6 +203,9 @@
               "star": 3,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：毒狗龙王"
               ]
             },
             {
@@ -147,12 +214,18 @@
               "star": 3,
               "tags": [
                 "精选"
+              ],
+              "unlocks": [
+                "动画：水兽"
               ]
             },
             {
               "url": "",
               "name": "击退无脸怪物？",
-              "star": 3
+              "star": 3,
+              "unlocks": [
+                "动画：奇怪龙"
+              ]
             },
             {
               "url": "",
@@ -173,32 +246,6 @@
               "url": "",
               "name": "水灵灵的好女人",
               "star": 3
-            },
-            {
-              "name": "幻化唐伞",
-              "url": "https://www.bilibili.com/video/BV1mNsf63EnT/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 3,
-              "tags": [
-                "紧急",
-                "突破"
-              ]
-            },
-            {
-              "url": "",
-              "name": "山林武僧",
-              "star": 3,
-              "tags": [
-                "紧急",
-                "突破"
-              ]
-            },
-            {
-              "url": "",
-              "name": "百龙夜行，来袭",
-              "star": 3,
-              "tags": [
-                "紧急"
-              ]
             }
           ]
         },
@@ -305,7 +352,11 @@
             {
               "name": "废神社 手记全收集 合集向",
               "url": "https://www.bilibili.com/video/BV1kyHF6ZEFQ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "note": "这个是主合集"
+              "note": "这个是主合集",
+              "unlocks": [
+                "报酬：怨虎龙木雕",
+                "报酬：青熊兽木雕"
+              ]
             },
             {
               "name": "废神社 手记 1",
@@ -1368,7 +1419,7 @@
         {
           "name": "同伴同行（需曙光DLC）",
           "layout": "tags",
-          "desc": "与村庄接待员一起完成任务的次数",
+          "desc": "与盟友或者伙伴一起完成任务（部分紧急任务不算）",
           "items": [
             {
               "name": "老熟人",
@@ -1575,9 +1626,6 @@
           "desc": "一开始就能用",
           "items": [
             {
-              "name": "名产·炎火团子"
-            },
-            {
               "name": "糖掷大福"
             },
             {
@@ -1603,7 +1651,7 @@
         {
           "name": "每日团子",
           "layout": "tags",
-          "desc": "每日特供",
+          "desc": "每日特供 / 概率刷新",
           "items": [
             {
               "name": "金团栗糯米团"
@@ -1613,6 +1661,9 @@
             },
             {
               "name": "采采葡萄干团子"
+            },
+            {
+              "name": "迸碎玫瑰团子"
             }
           ]
         },

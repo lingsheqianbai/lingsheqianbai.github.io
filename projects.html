@@ -569,7 +569,11 @@
             border: 1px solid var(--pink-dark); border-radius: 20px;
             padding: 1px 7px; white-space: nowrap; font-weight: bold;
         }
-        .mhr-req {
+        .mhr-unlock {
+            font-size: 11px; color: #1f6f52; background: #e8f7f0;
+            border: 1px solid #b9e2d2; border-radius: 20px;
+            padding: 1px 7px; white-space: nowrap;
+        }        .mhr-req {
             font-size: 11px; color: #7a5c2e; background: #fdf6e3;
             border: 1px solid #ecd9a8; border-radius: 20px;
             padding: 1px 7px; white-space: nowrap;
@@ -1447,15 +1451,16 @@
                     const star = it.star ? `<span class="star ${mhrStarCls(it.star)}">★${it.star}</span>` : '';
                     const tags = (it.tags || []).map(tg => `<span class="mhr-tag">${escapeHtml(tg)}</span>`).join('');
                     const rtags = (it.rewardTypes || []).map(rt => `<span class="mhr-rtag">${escapeHtml(rt)}</span>`).join('');
+                    const unlocks = (it.unlocks || []).map(u => `<span class="mhr-unlock">${escapeHtml(u)}</span>`).join('');
                     const isLong = it.note && it.note.length > 16;
                     const pill = (it.note && !isLong) ? `<span class="mhr-badge">${escapeHtml(it.note)}</span>` : '';
                     const req = it.require ? `<span class="mhr-req">前置：${escapeHtml(it.require)}</span>` : '';
                     const link = it.url
-                        ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${req}${rtags}${pill}<span class="mhr-go">🔗 详情</span></a>`
-                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${req}${rtags}${pill}</span>`;
+                        ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${req}${rtags}${unlocks}${pill}<span class="mhr-go">🔗 详情</span></a>`
+                        : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${req}${rtags}${unlocks}${pill}</span>`;
                     const noteLine = isLong ? `<div class="mhr-itemnote">${escapeHtml(it.note)}</div>` : '';
-                    // 搜索索引：名称 + 标签 + 报酬类型 + 前置条件 + 报酬/备注文本
-                    const searchText = ((it.name || '') + ' ' + (it.tags || []).join(' ') + ' ' + (it.rewardTypes || []).join(' ') + ' ' + (it.require || '') + ' ' + (it.note || '')).toLowerCase();
+                    // 搜索索引：名称 + 标签 + 报酬类型 + 前置 + 解锁内容 + 备注
+                    const searchText = ((it.name || '') + ' ' + (it.tags || []).join(' ') + ' ' + (it.rewardTypes || []).join(' ') + ' ' + (it.require || '') + ' ' + (it.unlocks || []).join(' ') + ' ' + (it.note || '')).toLowerCase();
                     return `<div class="mhr-item" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}" data-rt="${escapeHtml((it.rewardTypes || []).join(' '))}">${link}${noteLine}</div>`;
                 };
 
