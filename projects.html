@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -576,7 +576,19 @@
         }
         .mhr-task-todo { cursor: default; background: #fafafa; }
         .mhr-todo { color: var(--text-light); }
-        .mhr-chips {
+        .mhr-jump {
+            font-family: inherit; font-size: 11px; line-height: 1.5;
+            color: var(--pink-dark); background: #fff;
+            border: 1px dashed var(--pink-dark); border-radius: 20px;
+            padding: 1px 8px; cursor: pointer; white-space: nowrap;
+        }
+        .mhr-jump:hover { background: var(--pink-light); }
+        @keyframes mhrFlash {
+            0% { box-shadow: 0 0 0 0 rgba(196,69,105,.55); }
+            55% { box-shadow: 0 0 0 10px rgba(196,69,105,0); }
+            100% { box-shadow: 0 0 0 0 rgba(196,69,105,0); }
+        }
+        .mhr-item.flash { animation: mhrFlash .85s ease-out 3; border-color: var(--pink-dark) !important; background: #fff4f8 !important; border-radius: 10px; }        .mhr-chips {
             display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
         }
         .mhr-chip {
@@ -1452,9 +1464,10 @@
                         ? `<a class="mhr-task" href="${it.url}" target="_blank" rel="noopener noreferrer">${star}${tags}<span>${escapeHtml(it.name)}</span>${req}${rtags}${unlocks}${pill}<span class="mhr-go">🔗 详情</span></a>`
                         : `<span class="mhr-task mhr-task-todo">${star}${tags}<span>${escapeHtml(it.name)}</span>${req}${rtags}${unlocks}${pill}</span>`;
                     const noteLine = isLong ? `<div class="mhr-itemnote">${escapeHtml(it.note)}</div>` : '';
+                    const jumpBtn = it.jumpTo ? `<button type="button" class="mhr-jump" data-jump="${escapeHtml(it.jumpTo)}" title="跳到：${escapeHtml(it.jumpTo)}">↗ ${escapeHtml(it.jumpTo)}</button>` : '';
                     // 搜索索引：名称 + 标签 + 报酬类型 + 前置 + 解锁内容 + 备注
                     const searchText = ((it.name || '') + ' ' + (it.tags || []).join(' ') + ' ' + (it.rewardTypes || []).join(' ') + ' ' + (it.require || '') + ' ' + (it.unlocks || []).join(' ') + ' ' + (it.note || '')).toLowerCase();
-                    return `<div class="mhr-item" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}" data-rt="${escapeHtml((it.rewardTypes || []).join(' '))}">${link}${noteLine}</div>`;
+                    return `<div class="mhr-item" data-item="${escapeHtml(it.name || '')}" data-name="${escapeHtml(searchText)}" data-star="${it.star || ''}" data-rt="${escapeHtml((it.rewardTypes || []).join(' '))}">${link}${jumpBtn}${noteLine}</div>`;
                 };
 
                 const mhrTypeBody = (t) => {
@@ -1463,7 +1476,10 @@
                     if (!items.length) return noteHtml + '<div class="mhr-empty">该类型下暂无内容（等待录入）</div>';
                     // 称号/团子这类：一排小标签，不做星级折叠
                     if (t.layout === 'tags') {
-                        const tags = items.map(it => `<span class="mhr-item mhr-ttag" data-name="${escapeHtml(((it.name || '') + ' ' + (it.sub || '')).toLowerCase())}" data-star="" data-rt="">${escapeHtml(it.name)}${it.sub ? `<em>${escapeHtml(it.sub)}</em>` : ''}</span>`).join('');
+                        const tags = items.map(it => {
+                            const jb = it.jumpTo ? `<button type="button" class="mhr-jump" data-jump="${escapeHtml(it.jumpTo)}">↗ ${escapeHtml(it.jumpTo)}</button>` : '';
+                            return `<span class="mhr-item mhr-ttag" data-item="${escapeHtml(it.name || '')}" data-name="${escapeHtml(((it.name || '') + ' ' + (it.sub || '')).toLowerCase())}" data-star="" data-rt="">${escapeHtml(it.name)}${it.sub ? `<em>${escapeHtml(it.sub)}</em>` : ''}${jb}</span>`;
+                        }).join('');
                         return noteHtml + `<div class="mhr-tags">${tags}</div>`;
                     }
                     if (!items.some(it => it.star)) return noteHtml + items.map(mhrItem).join('');
@@ -1481,7 +1497,8 @@
                     const stars = items.map(it => it.star).filter(Boolean);
                     const range = stars.length ? (Math.min(...stars) === Math.max(...stars) ? ('★' + stars[0]) : ('★' + Math.min(...stars) + '–★' + Math.max(...stars))) : '';
                     const meta = range ? (range + ' · ' + items.length) : (items.length || '—');
-                    return `<div class="mhr-type" data-i="${i}" data-name="${escapeHtml((t.name || '').toLowerCase())}"><div class="mhr-type-head"><span>${escapeHtml(t.name)}</span><span class="mhr-n">${meta}</span><span class="mhr-chev">▼</span></div><div class="mhr-type-body">${mhrTypeBody(t)}</div></div>`;
+                    const jumpBtn = t.jumpTo ? `<button type="button" class="mhr-jump" data-jump="${escapeHtml(t.jumpTo)}" title="跳到：${escapeHtml(t.jumpTo)}">↗ ${escapeHtml(t.jumpTo)}</button>` : '';
+                    return `<div class="mhr-type" data-i="${i}" data-name="${escapeHtml((t.name || '').toLowerCase())}"><div class="mhr-type-head"><span>${escapeHtml(t.name)}</span>${jumpBtn}<span class="mhr-n">${meta}</span><span class="mhr-chev">▼</span></div><div class="mhr-type-body">${mhrTypeBody(t)}</div></div>`;
                 }).join('');
 
                 let html = '';
@@ -1508,8 +1525,25 @@
                 if (mhrSecWrap && !mhrSecWrap.__mhrBound) {
                     mhrSecWrap.__mhrBound = true;
 
-                    // 点击：只有「卡片头」才展开/收起；点内容区不收起任何东西
+                    // 卡片间跳转：展开目标所在的分区/卡片/星级组，滚动过去并闪烁
+                    const mhrJumpTo = (name) => {
+                        const list = [...document.querySelectorAll('.mhr-sections [data-item]')];
+                        const target = list.find(el => el.dataset.item === name);
+                        if (!target) { alert('没有找到：' + name); return; }
+                        const sec = target.closest('.mhr-sec'); if (sec) sec.classList.add('open');
+                        const type = target.closest('.mhr-type'); if (type) type.classList.add('open');
+                        const grp = target.closest('.mhr-star-group'); if (grp) grp.classList.add('open');
+                        setTimeout(() => {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash');
+                            setTimeout(() => target.classList.remove('flash'), 3000);
+                        }, 60);
+                    };
+
+                    // 点击：跳转按钮 > 星级头 > 卡片头 > 分区头
                     mhrSecWrap.addEventListener('click', (e) => {
+                        const jump = e.target.closest('[data-jump]');
+                        if (jump) { e.preventDefault(); e.stopPropagation(); mhrJumpTo(jump.dataset.jump); return; }
                         const starHead = e.target.closest('.mhr-star-head');
                         if (starHead) { starHead.parentElement.classList.toggle('open'); return; }
                         const typeHead = e.target.closest('.mhr-type-head');
