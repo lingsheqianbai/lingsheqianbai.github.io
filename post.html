@@ -169,7 +169,31 @@
             nav .links li a:after { font-size: 11px; }
         }
     </style>
-</head>
+<script>/* 站点版本标记 + 数据请求不吃缓存 */
+(function () {
+  var _fetch = window.fetch;
+  if (_fetch) {
+    window.fetch = function (u, o) {
+      o = o || {};
+      if (!('cache' in o)) o.cache = 'no-store';
+      return _fetch.call(this, u, o);
+    };
+  }
+  function paint() {
+    var st = document.createElement('style');
+    st.textContent = '#siteVersion{position:fixed;right:10px;bottom:8px;z-index:60;font-size:11px;line-height:1.6;color:rgba(0,0,0,.42);background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:1px 8px;pointer-events:none;font-family:inherit}';
+    document.head.appendChild(st);
+    fetch('data/version.json').then(function (r) { return r.json(); }).then(function (v) {
+      var d = document.createElement('div');
+      d.id = 'siteVersion';
+      d.textContent = 'v' + v.version;
+      d.title = '主站 ' + v.commitsMain + ' 次 + 子站 ' + v.commitsSub + ' 次 = ' + (v.commitsMain + v.commitsSub) + ' 次提交';
+      document.body.appendChild(d);
+    }).catch(function () {});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paint);
+  else paint();
+})();</script></head>
 <body>
     <nav>
         <ul class="links">
