@@ -893,7 +893,7 @@
       "video": "https://www.bilibili.com/video/BV1k6xe6PExj/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
       "rewards": [
         "[2D美术]白蛇 宣传用图",
-        "[BGM]这才是「智慧"
+        "[BGM]这才是「智慧」"
       ]
     },
     {
@@ -966,6 +966,167 @@
         "[3D模组]天堂制造",
         "[特殊服装]空条徐伦 SP服装F"
       ]
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "乔尼VS杰洛",
+      "video": "https://www.bilibili.com/video/BV1ugxq6HEYU/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]乔尼·乔斯达（骑乘） 宣传用图"
+      ],
+      "no": 1
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "乔尼VSFF",
+      "video": "https://www.bilibili.com/video/BV1yzxi6kEmA/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]SLOW·DANCER 设定图",
+        "[追加颜色]乔尼 追加颜色D"
+      ],
+      "no": 2
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "迪亚哥VSDIO",
+      "video": "https://www.bilibili.com/video/BV12ixi6yE3d/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]迪亚哥·布兰度 宣传用图",
+        "[追加颜色]迪亚哥 追加颜色C"
+      ],
+      "no": 3
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "杰洛VS瓦伦泰",
+      "video": "https://www.bilibili.com/video/BV1dCxz6iEga/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]重锤 宣传用图",
+        "[3D模组]重锤"
+      ],
+      "no": 4
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "乔尼VS加丘",
+      "video": "https://www.bilibili.com/video/BV1Bpxk6mEWo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]爪ACT1 宣传用图",
+        "[追加颜色]乔尼 追加颜色C"
+      ],
+      "no": 5
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "乔尼VS迪亚哥",
+      "video": "https://www.bilibili.com/video/BV16Exk6nEzA/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]乔尼·乔斯达 宣传用图",
+        "[BGM]『饥渴者』!"
+      ],
+      "no": 6
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "杰洛VS齐贝林",
+      "video": "https://www.bilibili.com/video/BV1hqxk6MEkb/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]杰洛·齐贝林（骑乘） 宣传用图",
+        "[BGM]GO! GO! ZEPPELI",
+        "[特殊服装]杰洛 SP服装A"
+      ],
+      "no": 7
+    },
+    {
+      "part": "第7部 STEEL BALL RUN",
+      "battle": "乔尼VS瓦伦泰",
+      "video": "https://www.bilibili.com/video/BV1mwxk6wEDD/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]爪ACT4 宣传用图",
+        "[BGM]爪",
+        "[特殊服装]乔尼 SP服装A"
+      ],
+      "no": 8
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS乔鲁诺",
+      "video": "https://www.bilibili.com/video/BV1Q9xr6qEUR/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]乔鲁诺·乔巴纳 设定图"
+      ],
+      "no": 1
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS乔尼",
+      "video": "https://www.bilibili.com/video/BV1ygxk6dET1/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]乔尼·乔斯达 设定图"
+      ],
+      "no": 2
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS乔纳森",
+      "video": "https://www.bilibili.com/video/BV1kVxk69ETB/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]东方定助 宣传用图",
+        "[追加颜色]乔纳森 追加颜色C"
+      ],
+      "no": 3
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS乔瑟夫",
+      "video": "https://www.bilibili.com/video/BV1AGxk6xExE/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]SOFT & WET 宣传用图",
+        "[追加颜色]乔瑟夫 追加颜色C"
+      ],
+      "no": 4
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS东方仗助",
+      "video": "https://www.bilibili.com/video/BV1wexr6HEp4/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]疯狂钻石 设定图",
+        "[追加颜色]东方仗助 追加颜色C"
+      ],
+      "no": 5
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS空条承太郎",
+      "video": "https://www.bilibili.com/video/BV1nqxr6JE3S/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]空条承太郎 宣传用图",
+        "[3D模组]白金之星",
+        "[特殊服装]东方定助 SP服装A"
+      ],
+      "no": 6
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS空条徐伦",
+      "video": "https://www.bilibili.com/video/BV1cvxr6DE5k/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]东方定助 设定图",
+        "[3D模组]SOFT& WET"
+      ],
+      "no": 7
+    },
+    {
+      "part": "第8部 JOJO Lion",
+      "battle": "东方定助VS桥津育朗",
+      "video": "https://www.bilibili.com/video/BV1jyxr6yEDH/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]巴欧 设定图",
+        "[BGM]最终兵器巴欧",
+        "[特殊服装]桥泽育朗 SP服装A"
+      ],
+      "no": 8
     }
   ]
 }
