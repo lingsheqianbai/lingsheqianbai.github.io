@@ -885,6 +885,87 @@
         "[BGM]想要一直看着这道星光",
         "[特殊服装]空条徐伦 SP服装A"
       ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 1,
+      "battle": "FFVS普奇",
+      "video": "https://www.bilibili.com/video/BV1k6xe6PExj/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]白蛇 宣传用图",
+        "[BGM]这才是「智慧"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 2,
+      "battle": "天气预报VS加丘",
+      "video": "https://www.bilibili.com/video/BV11exe6MExo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]天气·预报（替身） 宣传用图",
+        "[追加颜色]天气预报 追加颜色D"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 3,
+      "battle": "普奇VS空条承太郎",
+      "video": "https://www.bilibili.com/video/BV17Dxe64En3/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]恩里克·普奇（最终） 设定图",
+        "[BGM]命运的黎明",
+        "[特殊服装]普奇（最终） SP服装A"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 4,
+      "battle": "空条徐伦VSDIO",
+      "video": "https://www.bilibili.com/video/BV1Lzxq6aE7m/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]石之自由 宣传用图",
+        "[追加颜色]空条徐伦 追加颜色D"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 5,
+      "battle": "普奇VS乔鲁诺",
+      "video": "https://www.bilibili.com/video/BV1Zvxq6PEsA/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]C-MOON 设定图",
+        "[追加颜色]普奇（最终） 追加颜色C"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 6,
+      "battle": "安娜苏VS普奇",
+      "video": "https://www.bilibili.com/video/BV1gTxq6WE1y/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]纳鲁西索·安娜苏 宣传用图"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 7,
+      "battle": "天气预报VS普奇",
+      "video": "https://www.bilibili.com/video/BV1ioxi6cEmg/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]天气预报 宣传用图",
+        "[BGM]发布集中豪雨警报令"
+      ]
+    },
+    {
+      "part": "第6部 石之海 第2位面",
+      "no": 8,
+      "battle": "空条徐伦VS普奇",
+      "video": "https://www.bilibili.com/video/BV1Kjxq67EdC/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+      "rewards": [
+        "[2D美术]恩里克·普奇（最终） 宣传用图",
+        "[3D模组]天堂制造",
+        "[特殊服装]空条徐伦 SP服装F"
+      ]
     }
   ]
 }
