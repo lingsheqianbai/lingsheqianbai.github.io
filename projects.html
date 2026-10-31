@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -251,6 +251,31 @@
             display: inline-block;
         }
         .back-btn:hover { background: var(--pink); }
+        .detail-topbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+        .detail-topbar .back-btn { margin-bottom: 0; }
+        /* 全站搜索（详情页顶部） */
+        .mhr-global { position: relative; flex: 1; min-width: 240px; max-width: 460px; }
+        .mhr-global input {
+            width: 100%; padding: 7px 14px; font-family: inherit; font-size: 13px;
+            border: 1px solid var(--border-color); border-radius: 24px; background: #fff;
+        }
+        .mhr-global input:focus { outline: none; border-color: var(--pink-dark); box-shadow: 0 0 0 2px var(--pink-light); }
+        .mhr-global-results {
+            display: none; position: absolute; z-index: 30; left: 0; right: 0; top: 110%;
+            max-height: 340px; overflow-y: auto; background: #fff;
+            border: 1px solid var(--border-color); border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.16); padding: 6px;
+        }
+        .mhr-global-results.on { display: block; }
+        .mgr-head { font-size: 11px; color: var(--text-light); padding: 6px 8px 4px; }
+        .mgr-item {
+            display: flex; align-items: center; gap: 8px; width: 100%;
+            text-align: left; font-family: inherit; font-size: 12px; color: var(--text-dark);
+            background: none; border: 0; border-radius: 8px; padding: 6px 8px; cursor: pointer;
+        }
+        .mgr-item:hover { background: var(--pink-light); }
+        .mgr-where { font-size: 11px; color: var(--text-light); margin-left: auto; white-space: nowrap; }
+        .mgr-empty { font-size: 12px; color: var(--text-mid); padding: 10px; }
 
         .section-details {
             margin-bottom: 20px;
@@ -692,7 +717,10 @@
         <!-- 游戏详情视图（初始隐藏） -->
         <div id="gameDetailView" style="display: none;">
             <div class="detail-view">
-                <button class="back-btn" id="backToGridBtn">← 返回游戏列表</button>
+                <div class="detail-topbar">
+                    <button class="back-btn" id="backToGridBtn">← 返回游戏列表</button>
+                    <div id="detailToolbar"></div>
+                </div>
                 <div id="detailContent"></div>
             </div>
         </div>
@@ -1212,6 +1240,9 @@
         async function loadGameDetail(game) {
             const detailDiv = document.getElementById('detailContent');
             detailDiv.innerHTML = '<div class="empty-tip">加载中...</div>';
+            // 顶部工具栏（全站搜索）每个详情页重置
+            const tb = document.getElementById('detailToolbar');
+            if (tb) tb.innerHTML = '';
 
             if (game.id === 'pz') {
                 // 加载三个数据源
@@ -1603,27 +1634,28 @@
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
 
                 const mhrSecWrap = document.querySelector('.mhr-sections');
+                // 卡片间跳转：展开目标所在的分区/卡片/星级组，滚动过去并闪烁
+                // （提到这里是因为顶部全站搜索也要用）
+                const mhrJumpTo = (name) => {
+                    const list = [...document.querySelectorAll('.mhr-sections [data-item]')];
+                    let target = list.find(el => el.dataset.item === name);
+                    if (!target) {
+                        // 也支持跳到某张卡片（如称号系列的三星卡）
+                        target = [...document.querySelectorAll('.mhr-sections [data-typename]')].find(el => el.dataset.typename === name);
+                    }
+                    if (!target) { alert('没有找到：' + name); return; }
+                    const sec = target.closest('.mhr-sec'); if (sec) sec.classList.add('open');
+                    const type = target.closest('.mhr-type'); if (type) type.classList.add('open');
+                    const grp = target.closest('.mhr-star-group'); if (grp) grp.classList.add('open');
+                    setTimeout(() => {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash');
+                        setTimeout(() => target.classList.remove('flash'), 3000);
+                    }, 60);
+                };
+
                 if (mhrSecWrap && !mhrSecWrap.__mhrBound) {
                     mhrSecWrap.__mhrBound = true;
-
-                    // 卡片间跳转：展开目标所在的分区/卡片/星级组，滚动过去并闪烁
-                    const mhrJumpTo = (name) => {
-                        const list = [...document.querySelectorAll('.mhr-sections [data-item]')];
-                        let target = list.find(el => el.dataset.item === name);
-                        if (!target) {
-                            // 也支持跳到某张卡片（如称号系列的三星卡）
-                            target = [...document.querySelectorAll('.mhr-sections [data-typename]')].find(el => el.dataset.typename === name);
-                        }
-                        if (!target) { alert('没有找到：' + name); return; }
-                        const sec = target.closest('.mhr-sec'); if (sec) sec.classList.add('open');
-                        const type = target.closest('.mhr-type'); if (type) type.classList.add('open');
-                        const grp = target.closest('.mhr-star-group'); if (grp) grp.classList.add('open');
-                        setTimeout(() => {
-                            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash');
-                            setTimeout(() => target.classList.remove('flash'), 3000);
-                        }, 60);
-                    };
 
                     // 点击：跳转按钮 > 星级头 > 卡片头 > 分区头
                     mhrSecWrap.addEventListener('click', (e) => {
@@ -1688,6 +1720,59 @@
                         box.dataset.rt = chip.dataset.rt || '';
                         mhrApplyFilter(chip.closest('.mhr-sec-body'));
                     });
+                }
+
+                // ===== 顶部「全站搜索」：跨分区，且带关系扩展 =====
+                const mhrToolbar = document.getElementById('detailToolbar');
+                if (mhrToolbar) {
+                    const chipName = (c) => (c && typeof c === 'object') ? (c.name || '') : (c || '');
+                    const idx = [];
+                    mhrSections.forEach(sec => (sec.types || []).forEach(t => (t.items || []).forEach(it => {
+                        const chips = (it.chips || []).map(chipName);
+                        const key = it.target || (chips.length ? chips.join('、') : (it.name || ''));
+                        if (!key) return;
+                        idx.push({
+                            key,
+                            label: chips.length ? chips.join(' / ') : (it.name || ''),
+                            sec: sec.name || sec.title || '',
+                            type: t.name || '',
+                            links: [it.jumpTo || ''].concat((it.unlocks || []).map(u => (typeof u === 'string' ? '' : (u.jump || '')))).filter(Boolean)
+                        });
+                    })));
+
+                    mhrToolbar.innerHTML = `<div class="mhr-global"><input type="text" id="mhrGlobalInput" placeholder="搜索全部内容：任务 / 称号 / 团子 / 动画 / 道具…"><div class="mhr-global-results" id="mhrGlobalResults"></div></div>`;
+                    const gin = document.getElementById('mhrGlobalInput');
+                    const gbox = document.getElementById('mhrGlobalResults');
+
+                    const renderGlobal = () => {
+                        const q = gin.value.trim().toLowerCase();
+                        if (!q) { gbox.classList.remove('on'); gbox.innerHTML = ''; return; }
+                        let hits = idx.filter(x => (x.label + ' ' + x.key).toLowerCase().indexOf(q) > -1);
+                        const keys = new Set(hits.map(h => h.key));
+                        // 关系扩展：跳到命中项的行 / 解锁到命中项的行，也一起列出
+                        idx.forEach(x => { if (hits.indexOf(x) < 0 && x.links.some(l => keys.has(l))) hits.push(x); });
+                        hits = hits.slice(0, 40);
+                        if (!hits.length) { gbox.innerHTML = '<div class="mgr-empty">没有匹配的内容</div>'; gbox.classList.add('on'); return; }
+                        gbox.innerHTML = '<div class="mgr-head">找到 ' + hits.length + ' 项（含关联条目）</div>' +
+                            hits.map(x => `<button type="button" class="mgr-item" data-key="${escapeHtml(x.key)}"><span>${escapeHtml(x.label)}</span><span class="mgr-where">${escapeHtml(x.sec.replace('系列：收集', ''))} › ${escapeHtml(x.type)}</span></button>`).join('');
+                        gbox.classList.add('on');
+                    };
+
+                    gin.addEventListener('input', renderGlobal);
+                    gin.addEventListener('focus', renderGlobal);
+                    gbox.addEventListener('click', (e) => {
+                        const b = e.target.closest('.mgr-item');
+                        if (!b) return;
+                        mhrJumpTo(b.dataset.key);
+                        gbox.classList.remove('on');
+                    });
+                    if (!window.__mhrGlobalBound) {
+                        window.__mhrGlobalBound = true;
+                        document.addEventListener('click', (e) => {
+                            const box2 = document.getElementById('mhrGlobalResults');
+                            if (box2 && !e.target.closest('.mhr-global')) box2.classList.remove('on');
+                        });
+                    }
                 }
             }
             else if (game.id === 'sonsoftheforest') {
