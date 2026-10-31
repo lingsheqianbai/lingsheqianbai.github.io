@@ -411,12 +411,6 @@
             </div>
         </div>
         <div id="momentsContainer"></div>
-        <div class="sponsor-block" id="sponsorBlock">
-            <div class="sponsor-summary">💖 支持一下</div>
-            <div class="sponsor-content">
-                <img src="sponsor.png" alt="赞赏码" class="sponsor-img" id="sponsorImg" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'color:var(--text-mid);\'>请放置 sponsor.png 到根目录</span>'">
-            </div>
-        </div>
     </div>
 
     <audio id="audioPlayer" preload="auto"></audio>
@@ -582,18 +576,6 @@
             modal.appendChild(img); modal.addEventListener('click', () => modal.remove()); document.body.appendChild(modal);
         };
         loadMoments();
-
-        // 支持一下折叠
-        const sponsorBlock = document.getElementById('sponsorBlock');
-        const sponsorSummary = document.querySelector('.sponsor-summary');
-        sponsorSummary.addEventListener('click', (e) => {
-            e.stopPropagation();
-            sponsorBlock.classList.toggle('open');
-        });
-        const sponsorImg = document.getElementById('sponsorImg');
-        if (sponsorImg) {
-            sponsorImg.addEventListener('click', () => showImageModal(sponsorImg.src));
-        }
 
         // 导航平滑滚动
         document.querySelectorAll('nav .links li a[href="#"]').forEach(link => {
