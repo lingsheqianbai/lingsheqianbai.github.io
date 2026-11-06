@@ -313,7 +313,7 @@
             },
             {
               "url": "https://www.bilibili.com/video/BV1aRxX6iELf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "name": "沙漠中蠢蠢欲动的神秘群体",
+              "name": "沙原中蠢蠢欲动的神秘群体",
               "star": 3
             },
             {
@@ -413,10 +413,7 @@
             {
               "name": "医生孤独的毒研究",
               "url": "",
-              "star": 4,
-              "tags": [
-                "精选"
-              ]
+              "star": 4
             }
           ]
         },
@@ -1636,7 +1633,7 @@
             {
               "chips": [
                 "轻弩炮",
-                "扇旋移动"
+                "4 扇旋移动"
               ],
               "detail": false,
               "jumpTo": "幻化唐伞"
