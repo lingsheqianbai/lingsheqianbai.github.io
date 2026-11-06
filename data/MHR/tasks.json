@@ -12,7 +12,7 @@
           "items": [
             {
               "name": "怪物猎人崛起：曙光 木雕玩偶立轴的使用",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1fnx962EnU/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "detail": false
             }
           ]
@@ -23,7 +23,7 @@
       "id": "quest",
       "icon": "📋",
       "name": "任务系列：收集",
-      "desc": "村庄 / 训练 / 委托支线等已收录任务（精选·突破已标注）",
+      "desc": "村庄任务与集会所的等级并不等同：同一个任务可能在集会所 1★ 解锁，在村庄却要 3★。本页以村庄任务为准。",
       "hint": "💡 点任一类型卡片，它会在原位展开成整行，显示该类型下的视频；再点一次收起。",
       "types": [
         {
@@ -32,7 +32,7 @@
           "items": [
             {
               "name": "怪物猎人崛起：曙光 开端",
-              "url": "https://www.bilibili.com/video/BV1EeHc6sEkn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1fpx967EJE/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "unlocks": [
                 {
                   "text": "动画：炎火村",
@@ -51,7 +51,7 @@
           "items": [
             {
               "name": "圆圆酸浆",
-              "url": "https://www.bilibili.com/video/BV1J3xL63EEf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1Myx96AE7a/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 1,
               "tags": [
                 "精选"
@@ -59,7 +59,7 @@
             },
             {
               "name": "请给我美味的蘑菇",
-              "url": "https://www.bilibili.com/video/BV17LxL6BEcX/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1zzxX62EvW/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 1,
               "tags": [
                 "精选"
@@ -67,7 +67,7 @@
             },
             {
               "name": "盘踞在神社的恶徒",
-              "url": "https://www.bilibili.com/video/BV16uxL6kEpJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1sMx96oEx4/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 1,
               "tags": [
                 "精选"
@@ -75,12 +75,12 @@
             },
             {
               "name": "在修整前击退镰鼬龙",
-              "url": "https://www.bilibili.com/video/BV1q7xL6TEcy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1ukx96eE3U/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 1
             },
             {
               "name": "三位一体的大镰刀",
-              "url": "https://www.bilibili.com/video/BV175xL6uE9H/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1WTxQ6SEUU/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "突破",
@@ -99,7 +99,7 @@
             },
             {
               "name": "食欲旺盛的青熊兽",
-              "url": "https://www.bilibili.com/video/BV14Fx764Eaz/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1wYxX6QESz/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -113,7 +113,7 @@
             },
             {
               "name": "弹牙，爽滑",
-              "url": "https://www.bilibili.com/video/BV1D5sd6qEPT/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV17xx96LEVy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -121,7 +121,7 @@
             },
             {
               "name": "冰封群岛的睡梦",
-              "url": "https://www.bilibili.com/video/BV1hVsd6MEA2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1sKxQ6nEJu/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -129,7 +129,7 @@
             },
             {
               "name": "击败睡意！",
-              "url": "https://www.bilibili.com/video/BV1vSsZ6HEyY/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1xUx968Esf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -143,7 +143,7 @@
             },
             {
               "name": "别吃我，白兔兽",
-              "url": "https://www.bilibili.com/video/BV17ysZ6REV2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1sQx96tEbk/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2,
               "tags": [
                 "精选"
@@ -157,17 +157,17 @@
             },
             {
               "name": "百虫夜行",
-              "url": "https://www.bilibili.com/video/BV1LmsZ6XE2d/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1Wgx96xESm/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2
             },
             {
               "name": "烤不好——！",
-              "url": "https://www.bilibili.com/video/BV1MAsf6kE6m/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1H5x96XEdJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 2
             },
             {
               "name": "幻化唐伞",
-              "url": "https://www.bilibili.com/video/BV1mNsf63EnT/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1ZNxR62ET2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "紧急",
@@ -227,7 +227,7 @@
             },
             {
               "name": "鲸吞河童蛙",
-              "url": "https://www.bilibili.com/video/BV1bnsZ63Eyr/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1CaxX6HEMy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "精选"
@@ -241,7 +241,7 @@
             },
             {
               "name": "沙原里的大盗",
-              "url": "https://www.bilibili.com/video/BV1tWsZ6uEjW/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV18ZxX6eEbM/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "精选"
@@ -255,7 +255,7 @@
             },
             {
               "name": "泥沼里的土砂龙",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1hoxX6NEgx/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 3,
               "tags": [
                 "精选"
@@ -268,7 +268,7 @@
               ]
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1zzxX62EnG/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "被毒雾侵蚀的水没林",
               "star": 3,
               "tags": [
@@ -282,7 +282,7 @@
               ]
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV14Nx96fE7Z/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "用海绵质素材开拓沙漠的未来",
               "star": 3,
               "tags": [
@@ -296,7 +296,7 @@
               ]
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1AXx96oEov/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "击退无脸怪物？",
               "star": 3,
               "unlocks": [
@@ -307,22 +307,22 @@
               ]
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1Kmx96cEiz/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "大吃一惊！仙人掌造就完美身材",
               "star": 3
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1aRxX6iELf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "沙漠中蠢蠢欲动的神秘群体",
               "star": 3
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV141x96aEU1/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "太古的气息",
               "star": 3
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1tAx96cEjo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "水灵灵的好女人",
               "star": 3
             },
@@ -425,7 +425,7 @@
           "items": [
             {
               "name": "来复习一下狩猎的基础吧！",
-              "url": "https://www.bilibili.com/video/BV1eAHc61END/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1MAx96wER8/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "tags": [
                 "紧急"
               ],
@@ -438,11 +438,11 @@
             },
             {
               "name": "来复习一下如何御龙吧！",
-              "url": "https://www.bilibili.com/video/BV1q9HF6QEDD/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+              "url": "https://www.bilibili.com/video/BV1gzx96iEvV/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "name": "来复习一下如何捕获吧！",
-              "url": "https://www.bilibili.com/video/BV1r2HF64EhJ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+              "url": "https://www.bilibili.com/video/BV1L8x96kEF1/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             }
           ]
         },
@@ -451,7 +451,7 @@
           "items": [
             {
               "name": "给村庄普贤跑腿",
-              "url": "https://www.bilibili.com/video/BV1BbxG6wEiZ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV16ixX6UEy5/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "报酬：回复药",
               "rewardTypes": [
                 "道具"
@@ -460,7 +460,7 @@
             },
             {
               "name": "培育随从牙猎犬吧！",
-              "url": "https://www.bilibili.com/video/BV1Wxxj6DEnF/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1Tmx96cEgd/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "报酬：药刃卷轴、佯动卷轴",
               "rewardTypes": [
                 "随从装备"
@@ -469,7 +469,7 @@
             },
             {
               "name": "“寻找丢失的货物”之卷",
-              "url": "https://www.bilibili.com/video/BV1GdsZ67EVj/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV11PxQ6QEqG/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "报酬：攀爬糯米团",
               "rewardTypes": [
                 "团子"
@@ -478,7 +478,7 @@
             },
             {
               "name": "提供开发猎犬具的素材",
-              "url": "https://www.bilibili.com/video/BV16BsZ6fEqb/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1hBx96TEzj/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "报酬：守护伞",
               "rewardTypes": [
                 "随从装备"
@@ -487,7 +487,7 @@
             },
             {
               "name": "环境生物：石守蜥蜴",
-              "url": "https://www.bilibili.com/video/BV1J6sZ6tEjg/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1xTx96tEek/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "报酬：大翔虫",
               "rewardTypes": [
                 "道具"
@@ -538,7 +538,7 @@
           "items": [
             {
               "name": "废神社 手记全收集 合集向",
-              "url": "https://www.bilibili.com/video/BV1kyHF6ZEFQ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "url": "https://www.bilibili.com/video/BV1cZx96WEv8/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "note": "这个是主合集",
               "unlocks": [
                 {
@@ -1186,12 +1186,14 @@
               "chips": [
                 "[炎火村]"
               ],
-              "jumpTo": "怪物猎人崛起：曙光 开端"
+              "jumpTo": "怪物猎人崛起：曙光 开端",
+              "url": "https://www.bilibili.com/video/BV1Hjx96HE49/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[猎人集结之地]"
-              ]
+              ],
+              "url": "https://www.bilibili.com/video/BV1xTx96tEQF/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             }
           ]
         },
@@ -1324,7 +1326,8 @@
                 "随从广场"
               ],
               "note": "非保存类型",
-              "noteBelow": true
+              "noteBelow": true,
+              "url": "https://www.bilibili.com/video/BV1NbxX6sEPy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
@@ -1373,6 +1376,292 @@
       ]
     },
     {
+      "id": "skill",
+      "icon": "⚔️",
+      "name": "替换技系列：收集",
+      "desc": "每把武器 5 个替换技位置：4、5 为翔虫技，1、2、3 为非翔虫技",
+      "types": [
+        {
+          "name": "直接拥有",
+          "desc": "初始就能用的替换技（按游戏内 1–5 位置排列）",
+          "items": [
+            {
+              "chips": [
+                "大剑",
+                "1 冲撞攻击",
+                "2 真•蓄力斩",
+                "3 蓄力斩连段",
+                "4 狩猎锋刃",
+                "5 强化纳刀"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "太刀",
+                "1 踏步斩",
+                "2 气刃大回旋斩连段",
+                "3 特殊纳刀连段",
+                "4 飞翔踢",
+                "5 水月架势"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "单手剑",
+                "1 突进斩",
+                "2 奋力强锤连段",
+                "3 剑盾连击",
+                "4 风车",
+                "5 飞影"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "双剑",
+                "1 鬼人突进连斩",
+                "2 鬼人化",
+                "3 回旋斩连段",
+                "4 铁虫斩丝",
+                "5 胧翔"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "长枪",
+                "1 防御",
+                "2 突进",
+                "3 防御冲刺",
+                "4 锚泊蓄能",
+                "5 决斗缠绕"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "铳枪",
+                "1 蓄力炮击",
+                "2 迅速装填",
+                "3 龙杭炮",
+                "4 冷却斩",
+                "5 防御锋刃"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "大锤",
+                "1 横挥",
+                "2 蓄力变化：武",
+                "3 回旋攻击",
+                "4 铁虫回旋攻击",
+                "5 天地大冲撞"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "狩猎笛",
+                "1 敲打",
+                "2旋律模式：奏",
+                "3 下挥攻击连段",
+                "4 震打",
+                "5 滑弦冲击"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "斩击斧",
+                "1 突进斩",
+                "2 属性解放终结",
+                "3 斧：横扫斩",
+                "4 金刚连斧",
+                "5 斩击充能"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "盾斧",
+                "1 变形斩",
+                "2 高压属性斩",
+                "3 瓶追击",
+                "4 完全充能反击",
+                "5 变形前进"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "操虫棍",
+                "1 飞身跃入斩",
+                "2飞圆斩",
+                "3 跳跃突进斩",
+                "4 猎虫回归",
+                "5 铁虫丝跳跃"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "轻弩炮",
+                "1 前滚回避",
+                "2 装填",
+                "3 射击",
+                "4 扇旋跳跃",
+                "5 铁虫丝滑行"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "重弩炮",
+                "1 近身攻击",
+                "2 机关·狙击龙弹",
+                "3 蓄力射击",
+                "4 反制射击",
+                "5 铁虫丝任意行"
+              ],
+              "detail": false
+            },
+            {
+              "chips": [
+                "弓",
+                "1 蓄力步",
+                "2 刚射",
+                "3 近身攻击",
+                "4 弓息法",
+                "5 刚力挽弓"
+              ],
+              "detail": false
+            }
+          ]
+        },
+        {
+          "name": "完成「幻化唐伞」后解锁",
+          "desc": "完成「幻化唐伞」后替换对应位置的技能",
+          "items": [
+            {
+              "chips": [
+                "大剑",
+                "1 防御冲撞"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "太刀",
+                "4 樱花铁虫气刃斩"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "单手剑",
+                "1 滑行斩"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "双剑",
+                "1 鬼人空舞"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "长枪",
+                "2 盾牌冲锋"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "铳枪",
+                "4 地裂斩"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "大锤",
+                "4 冲刺破击"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "狩猎笛",
+                "2旋律模式：响"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "斩击斧",
+                "4 飞翔龙剑"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "盾斧",
+                "2 高压回填斩"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "操虫棍",
+                "2四连印斩"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "轻弩炮",
+                "扇旋移动"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "重弩炮",
+                "2 回复机关·狙击龙弹"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            },
+            {
+              "chips": [
+                "弓",
+                "1 闪身箭斩"
+              ],
+              "detail": false,
+              "jumpTo": "幻化唐伞"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "props",
       "icon": "🎁",
       "name": "道具系列：收集",
@@ -1395,6 +1684,12 @@
               "name": "机关蛙模型",
               "note": "杂货店抽奖获得",
               "noteBelow": true
+            },
+            {
+              "name": "圆滚滚牙猎犬",
+              "note": "杂货店抽奖获得",
+              "noteBelow": true,
+              "detail": false
             }
           ]
         },
@@ -1509,7 +1804,8 @@
                 "名产·炎火团子",
                 "采采葡萄干团子",
                 "迸碎玫瑰团子",
-                "好运花生糯米团"
+                "好运花生糯米团",
+                "兔团子"
               ],
               "detail": false
             }
