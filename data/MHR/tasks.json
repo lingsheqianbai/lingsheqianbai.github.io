@@ -1804,10 +1804,15 @@
                 "名产·炎火团子",
                 "采采葡萄干团子",
                 "迸碎玫瑰团子",
-                "好运花生糯米团",
-                "兔团子"
+                "好运花生糯米团"
               ],
               "detail": false
+            },
+            {
+              "name": "兔团子",
+              "url": "https://www.bilibili.com/video/BV1sKxQ6nEaM/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "note": "每日特供 / 概率刷新",
+              "noteBelow": true
             }
           ]
         },
