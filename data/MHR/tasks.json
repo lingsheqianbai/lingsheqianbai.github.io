@@ -1316,7 +1316,7 @@
         },
         {
           "name": "场景任务 · 首次进入",
-          "desc": "第一次进入地图时播放（昼 / 夜各一）",
+          "desc": "第一次进入地图或场景时播放（昼 / 夜各一）",
           "items": [
             {
               "chips": [
@@ -1367,6 +1367,13 @@
               ],
               "note": "昼 / 夜",
               "noteBelow": true
+            },
+            {
+              "chips": [
+                "兔团子"
+              ],
+              "url": "https://www.bilibili.com/video/BV1sKxQ6nEaM/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "detail": true
             }
           ]
         }
@@ -1804,12 +1811,6 @@
                 "好运花生糯米团"
               ],
               "detail": false
-            },
-            {
-              "name": "兔团子",
-              "url": "https://www.bilibili.com/video/BV1sKxQ6nEaM/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "note": "每日特供 / 概率刷新",
-              "noteBelow": true
             }
           ]
         },
