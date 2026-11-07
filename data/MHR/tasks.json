@@ -185,30 +185,15 @@
                 {
                   "text": "称号：3★系列",
                   "jump": "可承接村庄 3★ 任务时解锁"
-                }
-              ]
-            },
-            {
-              "url": "",
-              "name": "山林武僧",
-              "star": 3,
-              "tags": [
-                "紧急",
-                "突破"
-              ],
-              "unlocks": [
-                {
-                  "text": "动画：天狗兽",
-                  "jump": "[天狗兽]"
                 },
                 {
-                  "text": "团子 ×7",
-                  "jump": "山林武僧系列团子"
+                  "text": "替换技 ×14",
+                  "jump": "完成「幻化唐伞」后解锁"
                 }
               ]
             },
             {
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1Bi4p6cEb5/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "百龙夜行，来袭",
               "star": 3,
               "tags": [
@@ -325,6 +310,29 @@
               "url": "https://www.bilibili.com/video/BV1tAx96cEjo/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "name": "水灵灵的好女人",
               "star": 3
+            },
+            {
+              "url": "https://www.bilibili.com/video/BV1Bi4p6cEEW/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "name": "山林武僧",
+              "star": 4,
+              "tags": [
+                "紧急",
+                "突破"
+              ],
+              "unlocks": [
+                {
+                  "text": "动画：天狗兽",
+                  "jump": "[天狗兽]"
+                },
+                {
+                  "text": "团子 ×7",
+                  "jump": "山林武僧系列团子"
+                },
+                {
+                  "text": "称号：4★系列",
+                  "jump": "可承接村庄 4★ 任务时解锁"
+                }
+              ]
             },
             {
               "name": "通往黄泉路的歌声",
@@ -1166,6 +1174,77 @@
               ]
             }
           ]
+        },
+        {
+          "name": "可承接村庄 4★ 任务时解锁",
+          "desc": "能承接村庄四星任务后解锁",
+          "items": [
+            {
+              "chips": [
+                {
+                  "name": "火焰"
+                },
+                {
+                  "name": "业火"
+                },
+                {
+                  "name": "谷满仓"
+                },
+                {
+                  "name": "谷千粒"
+                },
+                {
+                  "name": "善岐黄"
+                },
+                {
+                  "name": "天天"
+                },
+                {
+                  "name": "阿鲈"
+                },
+                {
+                  "name": "春菜"
+                },
+                {
+                  "name": "去糠"
+                },
+                {
+                  "name": "阿梁"
+                },
+                {
+                  "name": "旋律"
+                },
+                {
+                  "name": "剑圣"
+                },
+                {
+                  "name": "居合"
+                },
+                {
+                  "name": "强力"
+                },
+                {
+                  "name": "忍者"
+                },
+                {
+                  "name": "武者"
+                },
+                {
+                  "name": "娇羞"
+                },
+                {
+                  "name": "战士"
+                },
+                {
+                  "name": "痛"
+                },
+                {
+                  "name": "禁止"
+                }
+              ],
+              "detail": false
+            }
+          ]
         }
       ]
     },
@@ -1191,6 +1270,13 @@
                 "[猎人集结之地]"
               ],
               "url": "https://www.bilibili.com/video/BV1xTx96tEQF/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            },
+            {
+              "chips": [
+                "[百龙吞噬者]"
+              ],
+              "jumpTo": "百龙夜行，来袭",
+              "url": "https://www.bilibili.com/video/BV1ch4p6vE5v/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             }
           ]
         },
@@ -1202,13 +1288,15 @@
               "chips": [
                 "[镰鼬龙王]"
               ],
-              "jumpTo": "三位一体的大镰刀"
+              "jumpTo": "三位一体的大镰刀",
+              "url": "https://www.bilibili.com/video/BV16h4p6eEtr/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[眠狗龙王]"
               ],
-              "jumpTo": "击败睡意！"
+              "jumpTo": "击败睡意！",
+              "url": "https://www.bilibili.com/video/BV1Bi4p6cEvu/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
@@ -1263,12 +1351,6 @@
                 "[奇怪龙]"
               ],
               "jumpTo": "击退无脸怪物？"
-            },
-            {
-              "chips": [
-                "[百龙吞噬者]"
-              ],
-              "jumpTo": "百龙夜行，来袭"
             },
             {
               "chips": [
