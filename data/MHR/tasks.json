@@ -336,7 +336,7 @@
             },
             {
               "name": "通往黄泉路的歌声",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV18RW469E1u/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4,
               "tags": [
                 "精选"
@@ -350,7 +350,7 @@
             },
             {
               "name": "狂风大作的银白世界",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1GiW86eEqm/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4,
               "tags": [
                 "精选"
@@ -364,7 +364,7 @@
             },
             {
               "name": "女王大驾光临",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1aiW86YEPs/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4,
               "tags": [
                 "精选"
@@ -378,7 +378,7 @@
             },
             {
               "name": "空中飞驰的白影",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1hBW86wE9F/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4,
               "tags": [
                 "精选"
@@ -392,7 +392,7 @@
             },
             {
               "name": "赤热的圆舞曲",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1tSWu6PENw/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4,
               "tags": [
                 "精选"
@@ -406,7 +406,7 @@
             },
             {
               "name": "夜泣岩石",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV14SWu6PEe4/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4,
               "tags": [
                 "精选"
@@ -419,9 +419,136 @@
               ]
             },
             {
+              "name": "下酒菜果然还是肝脏最好",
+              "url": "https://www.bilibili.com/video/BV1KDWu6YEk5/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 4,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "燃石炭连铁都能熔化",
+              "url": "https://www.bilibili.com/video/BV1TSWu6PETN/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 4,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "父女之丝",
+              "url": "https://www.bilibili.com/video/BV1BXWG6ZEn6/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 4,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "三强争霸",
+              "url": "https://www.bilibili.com/video/BV1qXWG6ZERf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "star": 4,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
               "name": "医生孤独的毒研究",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1mSWu6PEMY/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "star": 4
+            },
+            {
+              "name": "恶逆无道",
+              "url": "",
+              "star": 5,
+              "tags": [
+                "精选",
+                "紧急",
+                "突破"
+              ],
+              "unlocks": [
+                {
+                  "text": "动画：怨虎龙",
+                  "jump": "[怨虎龙]"
+                },
+                {
+                  "text": "动画：灯火相连",
+                  "jump": "灯火相连"
+                },
+                {
+                  "text": "动画：工作人员名单",
+                  "jump": "工作人员名单"
+                },
+                {
+                  "text": "武器：传承太刀【无铭】I",
+                  "jump": "传承太刀【无铭】I"
+                },
+                {
+                  "text": "团子：怨虎龙毅力团子",
+                  "jump": "怨虎龙毅力团子"
+                },
+                {
+                  "text": "立轴：怨虎龙图",
+                  "jump": "立轴【怨虎龙图】"
+                },
+                {
+                  "text": "称号：4★系列",
+                  "jump": "可承接村庄 4★ 任务时解锁"
+                }
+              ]
+            },
+            {
+              "name": "疾风迅龙",
+              "url": "",
+              "star": 5,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "带电雷狼龙",
+              "url": "",
+              "star": 5,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "夜晚沙漠的追踪者",
+              "url": "",
+              "star": 5,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "月夜起舞",
+              "url": "",
+              "star": 5,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "火龙警报发布中",
+              "url": "",
+              "star": 5,
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "酥麻or安眠？",
+              "url": "",
+              "star": 5
+            },
+            {
+              "name": "沙原骚然",
+              "url": "",
+              "star": 5
+            },
+            {
+              "name": "灼热大战",
+              "url": "",
+              "star": 5
             }
           ]
         },
@@ -501,19 +628,19 @@
             },
             {
               "name": "“恐怖的寻物！”之卷",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1qRWG64EMq/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "require": "可承接村庄 4★ 任务后解锁",
               "note": "报酬：好运花生糯米团"
             },
             {
               "name": "用特产来促进异国文化交流",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1ZXWG6ZE3Q/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "require": "可承接村庄 3★ 任务后解锁",
               "note": "报酬：追加潜水艇"
             },
             {
               "name": "帮忙量产猎犬具",
-              "url": "",
+              "url": "https://www.bilibili.com/video/BV1BXWG6ZEuy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
               "require": "可承接村庄 4★ 任务后解锁",
               "note": "报酬：大手里剑"
             }
@@ -525,7 +652,150 @@
           "items": [
             {
               "name": "特别许可测验·其一",
-              "url": ""
+              "url": "https://www.bilibili.com/video/BV1aiW86YEym/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            }
+          ]
+        },
+        {
+          "name": "集会所一星任务",
+          "desc": "集会所下位一星",
+          "items": [
+            {
+              "name": "唐伞妖怪",
+              "url": "https://www.bilibili.com/video/BV1d7W26SEG3/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "半夜三更击退搔鸟",
+              "url": "https://www.bilibili.com/video/BV1d7W26SEiQ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "冰封群岛的镰鼬",
+              "url": "https://www.bilibili.com/video/BV1i7W26DE35/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "眠狗龙王，现身冰封群岛",
+              "url": "https://www.bilibili.com/video/BV1d7W26SEBn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "请小心迫近的雪球",
+              "url": "https://www.bilibili.com/video/BV1d7W26SEvZ/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "奔跑于废神社的毒狗龙王",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "蜂蜜争夺战！",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "还废神社以夜晚的宁静",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "集会所二星任务",
+          "desc": "集会所下位二星",
+          "items": [
+            {
+              "name": "鲸吞力士",
+              "url": "",
+              "tags": [
+                "精选",
+                "紧急",
+                "突破"
+              ]
+            },
+            {
+              "name": "用尾巴转圈圈",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "认真观察毒鸟妖",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "水没林被水淹没",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "土砂龙的硬脑袋",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "迫近的白影",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            },
+            {
+              "name": "沙原中滚动的赤甲兽",
+              "url": "",
+              "tags": [
+                "精选"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "活动任务",
+          "desc": "活动任务重点看报酬",
+          "items": [
+            {
+              "name": "称号·武士之心",
+              "url": "",
+              "note": "下位3★；报酬：勇气之证 ×1",
+              "noteBelow": true,
+              "rewardTypes": [
+                "道具"
+              ]
+            },
+            {
+              "name": "毁灭之鸟龙？",
+              "url": "",
+              "note": "下位1★；报酬：秘密变装道具 ×1",
+              "noteBelow": true,
+              "rewardTypes": [
+                "道具"
+              ]
             }
           ]
         }
@@ -1157,11 +1427,11 @@
                 },
                 {
                   "name": "联系",
-                  "sub": "水荟 · 5 次"
+                  "sub": "水芸 · 5 次"
                 },
                 {
                   "name": "同舟共济",
-                  "sub": "水荟 · 15 次"
+                  "sub": "水芸 · 15 次"
                 },
                 {
                   "name": "职责",
@@ -1178,6 +1448,22 @@
                 {
                   "name": "同盟",
                   "sub": "罗德娜 · 15 次"
+                },
+                {
+                  "name": "明媚",
+                  "sub": "火芽 · 50 次"
+                },
+                {
+                  "name": "沉静",
+                  "sub": "水芸 · 50 次"
+                },
+                {
+                  "name": "真挚",
+                  "sub": "菲奥莱娜 · 50 次"
+                },
+                {
+                  "name": "活跃",
+                  "sub": "罗德娜 · 50 次"
                 }
               ]
             }
@@ -1253,6 +1539,118 @@
               "detail": false
             }
           ]
+        },
+        {
+          "name": "活动任务",
+          "desc": "完成活动任务「称号·武士之心」解锁",
+          "items": [
+            {
+              "chips": [
+                {
+                  "name": "一马当先"
+                },
+                {
+                  "name": "一刀两断"
+                },
+                {
+                  "name": "了不得"
+                },
+                {
+                  "name": "壮士"
+                },
+                {
+                  "name": "猛士"
+                },
+                {
+                  "name": "甲胄"
+                },
+                {
+                  "name": "强者"
+                },
+                {
+                  "name": "战国"
+                },
+                {
+                  "name": "乱世"
+                },
+                {
+                  "name": "战役"
+                }
+              ],
+              "detail": false
+            }
+          ]
+        },
+        {
+          "name": "猎人等级达到 2 级",
+          "desc": "完成「鲸吞力士」后获得",
+          "items": [
+            {
+              "chips": [
+                {
+                  "name": "帝国"
+                },
+                {
+                  "name": "宿命"
+                },
+                {
+                  "name": "世纪末"
+                },
+                {
+                  "name": "新疆界"
+                },
+                {
+                  "name": "顽固不化"
+                },
+                {
+                  "name": "全要素通关"
+                },
+                {
+                  "name": "命"
+                },
+                {
+                  "name": "冒险"
+                },
+                {
+                  "name": "悸动"
+                },
+                {
+                  "name": "探险队"
+                },
+                {
+                  "name": "不会背叛"
+                },
+                {
+                  "name": "打赌"
+                },
+                {
+                  "name": "漂泊"
+                },
+                {
+                  "name": "一见钟情"
+                },
+                {
+                  "name": "一起"
+                },
+                {
+                  "name": "教官"
+                },
+                {
+                  "name": "开拓者"
+                },
+                {
+                  "name": "水陆两用"
+                },
+                {
+                  "name": "全"
+                },
+                {
+                  "name": "健步"
+                }
+              ],
+              "detail": false
+            }
+          ]
         }
       ]
     },
@@ -1285,6 +1683,18 @@
               ],
               "jumpTo": "百龙夜行，来袭",
               "url": "https://www.bilibili.com/video/BV1ch4p6vE5v/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            },
+            {
+              "chips": [
+                "灯火相连"
+              ],
+              "jumpTo": "恶逆无道"
+            },
+            {
+              "chips": [
+                "工作人员名单"
+              ],
+              "jumpTo": "恶逆无道"
             }
           ]
         },
@@ -1310,61 +1720,71 @@
               "chips": [
                 "[白兔兽]"
               ],
-              "jumpTo": "别吃我，白兔兽"
+              "jumpTo": "别吃我，白兔兽",
+              "url": "https://www.bilibili.com/video/BV1wU4H6PEAn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[青熊兽]"
               ],
-              "jumpTo": "食欲旺盛的青熊兽"
+              "jumpTo": "食欲旺盛的青熊兽",
+              "url": "https://www.bilibili.com/video/BV1cS4H6YEu3/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[伞鸟]"
               ],
-              "jumpTo": "幻化唐伞"
+              "jumpTo": "幻化唐伞",
+              "url": "https://www.bilibili.com/video/BV1HU4H6PEE2/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[河童蛙]"
               ],
-              "jumpTo": "鲸吞河童蛙"
+              "jumpTo": "鲸吞河童蛙",
+              "url": "https://www.bilibili.com/video/BV1X3W76wEoH/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[搔鸟]"
               ],
-              "jumpTo": "沙原里的大盗"
+              "jumpTo": "沙原里的大盗",
+              "url": "https://www.bilibili.com/video/BV1cS4H6YEGv/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[土砂龙]"
               ],
-              "jumpTo": "泥沼里的土砂龙"
+              "jumpTo": "泥沼里的土砂龙",
+              "url": "https://www.bilibili.com/video/BV1cS4H6YE7G/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[毒狗龙王]"
               ],
-              "jumpTo": "被毒雾侵蚀的水没林"
+              "jumpTo": "被毒雾侵蚀的水没林",
+              "url": "https://www.bilibili.com/video/BV1cS4H6YEEz/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[水兽]"
               ],
-              "jumpTo": "用海绵质素材开拓沙漠的未来"
+              "jumpTo": "用海绵质素材开拓沙漠的未来",
+              "url": "https://www.bilibili.com/video/BV1wU4H6PEAb/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[奇怪龙]"
               ],
-              "jumpTo": "击退无脸怪物？"
+              "jumpTo": "击退无脸怪物？",
+              "url": "https://www.bilibili.com/video/BV1Y3W76wEYn/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
                 "[天狗兽]"
               ],
-              "jumpTo": "山林武僧"
+              "jumpTo": "山林武僧",
+              "url": "https://www.bilibili.com/video/BV1Y3W76wE4P/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
             },
             {
               "chips": [
@@ -1401,69 +1821,120 @@
                 "[岩龙]"
               ],
               "jumpTo": "夜泣岩石"
+            },
+            {
+              "chips": [
+                "[毒妖鸟]"
+              ],
+              "jumpTo": "医生孤独的毒研究"
+            },
+            {
+              "chips": [
+                "[怨虎龙]"
+              ],
+              "jumpTo": "恶逆无道"
+            },
+            {
+              "chips": [
+                "[迅龙]"
+              ],
+              "jumpTo": "疾风迅龙"
+            },
+            {
+              "chips": [
+                "[雷狼龙]"
+              ],
+              "jumpTo": "带电雷狼龙"
+            },
+            {
+              "chips": [
+                "[蛮颚龙]"
+              ],
+              "jumpTo": "夜晚沙漠的追踪者"
+            },
+            {
+              "chips": [
+                "[泡狐龙]"
+              ],
+              "jumpTo": "月夜起舞"
+            },
+            {
+              "chips": [
+                "[火龙]"
+              ],
+              "jumpTo": "火龙警报发布中"
             }
           ]
         },
         {
           "name": "场景任务 · 首次进入",
-          "desc": "第一次进入地图或场景时播放（昼 / 夜各一）",
+          "desc": "第一次进入地图 / 场景时播放，昼与夜分别记录",
           "items": [
+            {
+              "chips": [
+                "废神社（昼）"
+              ],
+              "url": "https://www.bilibili.com/video/BV18RW469EoP/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            },
+            {
+              "chips": [
+                "废神社（夜）"
+              ],
+              "url": "https://www.bilibili.com/video/BV1SRW46XEZi/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            },
+            {
+              "chips": [
+                "冰封群岛（昼）"
+              ],
+              "url": "https://www.bilibili.com/video/BV18RW469EmW/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            },
+            {
+              "chips": [
+                "冰封群岛（夜）"
+              ],
+              "url": "https://www.bilibili.com/video/BV1DRW46XENp/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+            },
             {
               "chips": [
                 "随从广场"
               ],
-              "note": "非保存类型",
-              "noteBelow": true,
-              "url": "https://www.bilibili.com/video/BV1NbxX6sEPy/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0"
+              "url": "",
+              "note": "非保存类型"
             },
             {
               "chips": [
-                "废神社"
+                "随从隐秘队"
               ],
-              "note": "昼 / 夜",
-              "noteBelow": true
-            },
-            {
-              "chips": [
-                "冰封群岛"
-              ],
-              "note": "昼 / 夜",
-              "noteBelow": true
-            },
-            {
-              "chips": [
-                "沙原"
-              ],
-              "note": "昼 / 夜",
-              "noteBelow": true
-            },
-            {
-              "chips": [
-                "水没林"
-              ],
-              "note": "昼 / 夜",
-              "noteBelow": true
-            },
-            {
-              "chips": [
-                "翡叶要塞"
-              ],
-              "note": "昼 / 夜",
-              "noteBelow": true
-            },
-            {
-              "chips": [
-                "斗技场"
-              ],
-              "note": "昼 / 夜",
-              "noteBelow": true
+              "url": "",
+              "note": "非保存类型"
             },
             {
               "chips": [
                 "兔团子"
               ],
-              "url": "https://www.bilibili.com/video/BV1sKxQ6nEaM/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "detail": true
+              "url": ""
+            },
+            {
+              "chips": [
+                "杂货商阳炎 · 神秘炼金壶"
+              ],
+              "note": "非保存类型"
+            },
+            {
+              "chips": [
+                "开始界面 · 水芸"
+              ]
+            },
+            {
+              "chips": [
+                "开始界面 · 火芽"
+              ]
+            },
+            {
+              "chips": [
+                "修炼场"
+              ],
+              "note": "非保存类型"
             }
           ]
         }
@@ -1784,6 +2255,12 @@
               "note": "杂货店抽奖获得",
               "noteBelow": true,
               "detail": false
+            },
+            {
+              "name": "云羊鹿玩偶",
+              "note": "杂货店抽奖获得",
+              "noteBelow": true,
+              "detail": false
             }
           ]
         },
@@ -1796,6 +2273,20 @@
               "jumpTo": "百龙夜行，来袭",
               "note": "完成「百龙夜行，来袭」后获得",
               "noteBelow": true
+            },
+            {
+              "name": "炎火装束【喉轮】",
+              "note": "直接拥有",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": ""
+            },
+            {
+              "name": "威武大铠",
+              "note": "完成「恶逆无道」后在炎火村 炼铁坊前找加工商刀幅获取",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": "恶逆无道"
             }
           ]
         },
@@ -1813,6 +2304,13 @@
               "note": "直接购买；前置：与随从达到一定等级解锁",
               "noteBelow": true,
               "detail": false
+            },
+            {
+              "name": "立轴【怨虎龙图】",
+              "note": "完成「恶逆无道」后解锁",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": "恶逆无道"
             }
           ]
         },
@@ -1858,6 +2356,39 @@
               "jumpTo": "用特产来促进异国文化交流",
               "note": "完成「用特产来促进异国文化交流」后获得",
               "noteBelow": true
+            }
+          ]
+        },
+        {
+          "name": "武器",
+          "desc": "任务奖励武器",
+          "items": [
+            {
+              "name": "传承太刀【无铭】I",
+              "note": "完成「恶逆无道」动画结束后自动获得",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": "恶逆无道"
+            }
+          ]
+        },
+        {
+          "name": "图纸",
+          "desc": "与 NPC 对话获得",
+          "items": [
+            {
+              "name": "忍团子【睡蜜玉】",
+              "note": "集会所找茶点店店主点茶对话获取",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": "恶逆无道"
+            },
+            {
+              "name": "糯米团盾斧猫杵",
+              "note": "炎火村集会所前找茶点店店员糯米团对话获取",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": "恶逆无道"
             }
           ]
         }
@@ -1949,6 +2480,13 @@
               "jumpTo": "“恐怖的寻物！”之卷",
               "target": "「恐怖的寻物！」团子",
               "detail": false
+            },
+            {
+              "chips": [
+                "怨虎龙毅力团子"
+              ],
+              "jumpTo": "恶逆无道",
+              "detail": false
             }
           ]
         }
@@ -1961,8 +2499,8 @@
       "desc": "完成特定任务获得的勋章",
       "types": [
         {
-          "name": "勋章",
-          "desc": "训练任务与主线相关",
+          "name": "任务勋章",
+          "desc": "完成特定任务获得",
           "items": [
             {
               "name": "炎火村护符",
@@ -1975,6 +2513,25 @@
                   "jump": "来复习一下狩猎的基础吧！"
                 }
               ]
+            },
+            {
+              "name": "炎火村宝刀",
+              "note": "完成「恶逆无道」获得",
+              "noteBelow": true,
+              "detail": false,
+              "jumpTo": "恶逆无道"
+            }
+          ]
+        },
+        {
+          "name": "收集勋章",
+          "desc": "累计类成就",
+          "items": [
+            {
+              "name": "豪华的钱箱",
+              "note": "累计赚取 100 万金币获得",
+              "noteBelow": true,
+              "detail": false
             }
           ]
         }
