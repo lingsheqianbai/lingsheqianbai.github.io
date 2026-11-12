@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -1492,14 +1492,18 @@
                 renderSimpleTable('onlyyouEndingsTable', endingsData, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
             }
             else if (game.id === 'room') {
-                const [officialRes, prologueRes, pureLoveRes] = await Promise.all([
+                const [officialRes, prologueRes, pureLoveRes, weddingRes, endingsRes] = await Promise.all([
                     fetch('data/ROOM/official.json').catch(() => null),
                     fetch('data/ROOM/prologue.json').catch(() => null),
-                    fetch('data/ROOM/pure_love.json').catch(() => null)
+                    fetch('data/ROOM/pure_love.json').catch(() => null),
+                    fetch('data/ROOM/pure_love_wedding.json').catch(() => null),
+                    fetch('data/ROOM/endings.json').catch(() => null)
                 ]);
                 let roomOfficial = officialRes && officialRes.ok ? await officialRes.json() : [];
                 let roomPrologue = prologueRes && prologueRes.ok ? await prologueRes.json() : [];
                 let roomPureLove = pureLoveRes && pureLoveRes.ok ? await pureLoveRes.json() : [];
+                let roomWedding = weddingRes && weddingRes.ok ? await weddingRes.json() : [];
+                let roomEndings = endingsRes && endingsRes.ok ? await endingsRes.json() : [];
 
                 let html = '';
                 if (roomOfficial.length) {
@@ -1509,7 +1513,18 @@
                     html += `<details class="section-details"><summary>🎬 序章 (${roomPrologue.length}个)</summary><div class="section-content"><div style="font-size:12px;color:var(--text-mid);margin-bottom:10px;">💡 序章单独列出，不计入纯爱线条数</div><div id="roomPrologueTableContainer"><table class="mod-table" id="roomPrologueTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomPrologueTable-pagination"></div></div></div></details>`;
                 }
                 if (roomPureLove.length) {
-                    html += `<details class="section-details"><summary>💗 纯爱线 (${roomPureLove.length}个)</summary><div class="section-content"><div id="roomPureLoveTableContainer"><table class="mod-table" id="roomPureLoveTable"><thead><tr><th>进度</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomPureLoveTable-pagination"></div></div></div></details>`;
+                    html += `<details class="section-details"><summary>💗 纯爱线：「一切归于黑暗」和「幸福的形式」 (${roomPureLove.length}个)</summary><div class="section-content"><div id="roomPureLoveTableContainer"><table class="mod-table" id="roomPureLoveTable"><thead><tr><th>进度</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomPureLoveTable-pagination"></div></div></div></details>`;
+                }
+                {
+                    const wLen = roomWedding.length;
+                    html += `<details class="section-details"><summary>💗 纯爱独立线：「纯白婚礼」 (${wLen}个)</summary><div class="section-content">` +
+                        (wLen
+                            ? `<div id="roomWeddingTableContainer"><table class="mod-table" id="roomWeddingTable"><thead><tr><th>进度</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomWeddingTable-pagination"></div></div>`
+                            : `<div class="empty-tip">暂无内容，后续补充~</div>`) +
+                        `</div></details>`;
+                }
+                if (roomEndings.length) {
+                    html += `<details class="section-details"><summary>🎬 结局收集 (${roomEndings.length}个)</summary><div class="section-content"><div id="roomEndingsTableContainer"><table class="mod-table" id="roomEndingsTable"><thead><tr><th>名称</th><th>链接</th></tr></thead><tbody></tbody></table><div id="roomEndingsTable-pagination"></div></div></div></details>`;
                 }
                 detailDiv.innerHTML = html || '<div class="empty-tip">暂无内容，后续补充~</div>';
 
@@ -1521,6 +1536,12 @@
                 }
                 if (roomPureLove.length) {
                     renderSimpleTable('roomPureLoveTable', roomPureLove, [{ key: 'name', label: '进度' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (roomWedding.length) {
+                    renderSimpleTable('roomWeddingTable', roomWedding, [{ key: 'name', label: '进度' }, { key: 'url', type: 'url', label: '链接' }], 15);
+                }
+                if (roomEndings.length) {
+                    renderSimpleTable('roomEndingsTable', roomEndings, [{ key: 'name', label: '名称' }, { key: 'url', type: 'url', label: '链接' }], 15);
                 }
             }
             else if (game.id === 'mhr') {

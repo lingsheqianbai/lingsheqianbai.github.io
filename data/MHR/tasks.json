@@ -421,34 +421,22 @@
             {
               "name": "下酒菜果然还是肝脏最好",
               "url": "https://www.bilibili.com/video/BV1KDWu6YEk5/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 4,
-              "tags": [
-                "精选"
-              ]
+              "star": 4
             },
             {
               "name": "燃石炭连铁都能熔化",
               "url": "https://www.bilibili.com/video/BV1TSWu6PETN/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 4,
-              "tags": [
-                "精选"
-              ]
+              "star": 4
             },
             {
               "name": "父女之丝",
               "url": "https://www.bilibili.com/video/BV1BXWG6ZEn6/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 4,
-              "tags": [
-                "精选"
-              ]
+              "star": 4
             },
             {
               "name": "三强争霸",
               "url": "https://www.bilibili.com/video/BV1qXWG6ZERf/?share_source=copy_web&vd_source=1495e3db97f679fb6930b30dec5b0de0",
-              "star": 4,
-              "tags": [
-                "精选"
-              ]
+              "star": 4
             },
             {
               "name": "医生孤独的毒研究",
@@ -490,8 +478,8 @@
                   "jump": "立轴【怨虎龙图】"
                 },
                 {
-                  "text": "称号：4★系列",
-                  "jump": "可承接村庄 4★ 任务时解锁"
+                  "text": "称号：5★系列",
+                  "jump": "可承接村庄 5★ 任务时解锁"
                 }
               ]
             },
@@ -697,24 +685,15 @@
             },
             {
               "name": "奔跑于废神社的毒狗龙王",
-              "url": "",
-              "tags": [
-                "精选"
-              ]
+              "url": ""
             },
             {
               "name": "蜂蜜争夺战！",
-              "url": "",
-              "tags": [
-                "精选"
-              ]
+              "url": ""
             },
             {
               "name": "还废神社以夜晚的宁静",
-              "url": "",
-              "tags": [
-                "精选"
-              ]
+              "url": ""
             }
           ]
         },
@@ -1542,7 +1521,7 @@
         },
         {
           "name": "活动任务",
-          "desc": "完成活动任务「称号·武士之心」解锁",
+          "desc": "完成与强者们交锋的任务后获得；第一次记录到的任务名为「称号·武士之心」",
           "items": [
             {
               "chips": [
@@ -1646,6 +1625,77 @@
                 },
                 {
                   "name": "健步"
+                }
+              ],
+              "detail": false
+            }
+          ]
+        },
+        {
+          "name": "可承接村庄 5★ 任务时解锁",
+          "desc": "能承接村庄五星任务后解锁（完成「恶逆无道」）",
+          "items": [
+            {
+              "chips": [
+                {
+                  "name": "行千里"
+                },
+                {
+                  "name": "飞蝗"
+                },
+                {
+                  "name": "果蜜"
+                },
+                {
+                  "name": "犬饲"
+                },
+                {
+                  "name": "阿樯"
+                },
+                {
+                  "name": "阿锚"
+                },
+                {
+                  "name": "诗歌"
+                },
+                {
+                  "name": "大志"
+                },
+                {
+                  "name": "糯米团"
+                },
+                {
+                  "name": "黄豆粉"
+                },
+                {
+                  "name": "不愧是你啊!"
+                },
+                {
+                  "name": "最大"
+                },
+                {
+                  "name": "龙"
+                },
+                {
+                  "name": "年轻人"
+                },
+                {
+                  "name": "游击"
+                },
+                {
+                  "name": "绝望"
+                },
+                {
+                  "name": "模仿"
+                },
+                {
+                  "name": "最喜欢"
+                },
+                {
+                  "name": "活力"
+                },
+                {
+                  "name": "吃饱了"
                 }
               ],
               "detail": false
